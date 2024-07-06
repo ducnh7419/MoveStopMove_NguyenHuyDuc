@@ -27,7 +27,6 @@ public class Player : Character
             StopMoving();
             Debug.Log(IsAttacking);
         }
-        
     }
 
     protected override void StopMoving()

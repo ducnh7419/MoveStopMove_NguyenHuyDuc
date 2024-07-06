@@ -36,7 +36,7 @@ public class Bot : Character
     protected override void Update()
     {
         base.Update();
-        currentState?.OnExecute(this);
+        // currentState?.OnExecute(this);
     }
 
     public void ChangeState(IState<Bot> state)

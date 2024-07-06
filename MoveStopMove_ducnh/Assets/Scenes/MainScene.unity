@@ -501,13 +501,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!114 &961739754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   smoothSpeed: 20
-  offset: {x: 0, y: 5, z: -20}
+  offset: {x: 0.03, y: 20.4, z: -24.9}
 --- !u!1 &1297747264
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
   Joystick: {fileID: 1495423138}
   m_camera: {fileID: 961739754}
   levels:
-  - {fileID: 5893916055524087714, guid: 4627752fd652a0044903495a8f35ee20, type: 3}
+  - {fileID: 4301835232899504538, guid: bc724b2902d210345a322a0d76bfa3ad, type: 3}
 --- !u!114 &1495423138 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8135886326569738823, guid: 56fae09712773584fb63896d473a98ee,

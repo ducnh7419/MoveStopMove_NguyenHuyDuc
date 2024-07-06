@@ -13,11 +13,12 @@ public class Character : GameUnit
     private int score;
     public UnityAction UnityAction;
     public AttackArea attackArea;
+    [SerializeField]private SpriteRenderer navigatorRenderer;
     [SerializeField] private  Animator animator;
     [SerializeField] private WeaponHolder weaponHolder;
 
     private List<Character> targets = new List<Character>();
-    private Character target;
+    private Character target=null;
     private bool isAttackInCoolDown;
     private string currentAnim="idle";
 
@@ -42,6 +43,7 @@ public class Character : GameUnit
     private IEnumerator DelayAttack()
     {
         yield return new WaitForSeconds(1f);
+        if(isMoving) yield break;
         ChangeAnim("attack");
         weaponHolder.Weapon.Fire(target);
         weaponHolder.Weapon.Hide();      
@@ -64,16 +66,17 @@ public class Character : GameUnit
         targets.Remove(target);
     }
 
-    public void RemoveTarget(Character character){
-        if(targets.Contains(character))
-            targets.Remove(character);
+    public void RemoveTarget(Character target){
+        if(targets.Contains(target))        
+            target.UnityAction-=()=>Untarget(target);
+            targets.Remove(target);
     }
 
-    private void Untarget(Character character){
-        RemoveTarget(target);
-        if(target==character){
-            target = null;
+    private void Untarget(Character target){
+        if(this.target.id== target.id){
+            this.target = null;
         }
+        
     }
 
 
@@ -111,8 +114,8 @@ public class Character : GameUnit
     protected virtual void StopMoving()
     {
         isMoving = false;
-        if(!IsAttacking)
-            ChangeAnim("idle");
+        // if(!IsAttacking)
+        ChangeAnim("idle");
     }
 
     protected virtual void ChangeAnim(string anim){
@@ -136,6 +139,14 @@ public class Character : GameUnit
         IsAttacking=true;
         isAttackInCoolDown =true;
         StartCoroutine(CoolDownAttack());
+    }
+
+    public void TurnOnNavigator(){
+        navigatorRenderer.enabled=true;
+    }
+
+    public void TurnOffNavigator(){
+        navigatorRenderer.enabled=false;
     }
 
     public void OnDespawn(){

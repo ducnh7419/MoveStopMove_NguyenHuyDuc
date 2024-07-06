@@ -21,7 +21,10 @@ public class AttackArea : MonoBehaviour
       if (other.CompareTag(GlobalConstants.Tag.CHARACTER))
       {
          Character target = CacheCollider<Character>.GetCollider(other);
+         character.TurnOffNavigator();
          character.RemoveTarget(target);
+         
+
       }
    }
 
@@ -46,6 +49,7 @@ public class AttackArea : MonoBehaviour
    {
       Debug.Log(String.Format("{0} attack {1}", this.tag, enemy.tag));
       Character target = CacheCollider<Character>.GetCollider(enemy);
+      target.TurnOnNavigator();
       character.AddTarget(target);
    }
 }

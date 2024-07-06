@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PatrolState : IState<Bot>
 {
+    private float randomTime;
+    private float timer;
+
     public void OnEnter(Bot bot)
     {
-        int rdn=Random.Range(0, bot.NumberOfTrackedEnemies);
-        bot.SetDestination(bot.TrackedEnemy[rdn]);
+       randomTime=Random.Range(2f, 4f);
     }
 
     public void OnExecute(Bot bot)
     {
-        throw new System.NotImplementedException();
+        timer+=randomTime;
+        if(timer>60f){
+            
+        }
     }
 
     public void OnExit(Bot bot)

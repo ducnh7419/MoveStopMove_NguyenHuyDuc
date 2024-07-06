@@ -20,8 +20,7 @@ public class WeaponHolder : GameUnit
         int index=(int)GloabalEnum.WeaponEnum.Boomerang;
         Weapon WeaponPrefab= WeaponDataSO.GetWeaponByEnum(index);
         Weapon=SimplePool.Spawn<Weapon>(WeaponPrefab,TF);
-        Weapon.TF.localPosition=Vector3.zero;
-        Weapon.TF.rotation=WeaponPrefab.TF.rotation*Quaternion.Euler(new Vector3(0,0,-35f));
-        Weapon.Owner=Owner;
+        Weapon.SetPositionAndRotation(WeaponPrefab);
+        Weapon.OnInit(this);
     }
 }

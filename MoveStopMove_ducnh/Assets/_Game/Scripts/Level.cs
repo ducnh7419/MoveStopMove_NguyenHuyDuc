@@ -66,16 +66,17 @@ public class Level : MonoBehaviour
 
         while (spawnPositions.Count < maximumNoExistedBot)
         {
-            // pos_x = Random.Range(min_x, max_x);
-            // pos_z = Random.Range(min_z, max_z);
-            // pos_x=(pos_x<max_x&&pos_x>min_x)?pos_x:pos_x*(-2)*sign_x*offset;
-            // pos_z=(pos_z<max_z&&pos_z>min_z)?pos_z:pos_z*(-2)*sign_z*offset;   
+            float offset=Random.Range(-40f,40f);
+            pos_x = Random.Range(min_x, max_x);
+            pos_z = Random.Range(min_z, max_z);
+            // pos_x -= sign_x * offset;
+            // pos_z -= sign_z * offset;
+            // pos_x=(pos_x<max_x&&pos_x>min_x)?pos_x:pos_x-(-2)*sign_x*offset;
+            // pos_z=(pos_z<max_z&&pos_z>min_z)?pos_z:pos_z-(-2)*sign_z*offset;        
             Vector3 pos = new Vector3(pos_x, pos_y, pos_z);
             if (HasObtacle(pos)) continue;
             spawnPositions.Add(pos);
-            float offset=Random.Range(10f,20f);
-            pos_x -= sign_x * offset;
-            pos_z -= sign_z * offset;
+            
         }
     }
 
@@ -90,6 +91,7 @@ public class Level : MonoBehaviour
         LevelManager.Ins.SetCameraTarget(player);
         totalCharacter--;
         NumberOfExistedBots++;
+        spawnPositions.RemoveAt(rdn);
     }
 
     public void SpawnBotAtRandomPos()
