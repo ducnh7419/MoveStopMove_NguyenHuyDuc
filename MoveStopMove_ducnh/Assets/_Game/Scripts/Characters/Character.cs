@@ -8,29 +8,32 @@ using UnityEngine.Events;
 public class Character : GameUnit
 {
     private int id;
-    
+    [SerializeField] private CharacterConfigSO characterConfig;
+    protected float speed;
     protected bool isMoving;
+    protected float attackSpeed=1f;
     private int score;
     public UnityAction UnityAction;
     public AttackArea attackArea;
     [SerializeField]private SpriteRenderer navigatorRenderer;
     [SerializeField] private  Animator animator;
     [SerializeField] private WeaponHolder weaponHolder;
+    [SerializeField] private HairSkinHolder hairSkinHolder;
 
     private List<Character> targets = new List<Character>();
     private Character target=null;
     private bool isAttackInCoolDown;
     private string currentAnim="idle";
 
+    
+
     public bool IsMoving { get => isMoving; }
     public bool IsAttacking;
     public int Score { get => score; set => score = value; }
     public int Id { get => id; set => id = value; }
 
-    private void Start()
-    {
-        OnInit();
-    }
+   
+
 
     protected virtual void Update()
     {
@@ -38,15 +41,18 @@ public class Character : GameUnit
         {
             Attack();
         }
+        
     }
 
     private IEnumerator DelayAttack()
     {
-        yield return new WaitForSeconds(1f);
-        if(isMoving) yield break;
+        yield return new WaitForSeconds(attackSpeed);
+        IsAttacking=false;
+        if(target==null) yield break;
         ChangeAnim("attack");
         weaponHolder.Weapon.Fire(target);
-        weaponHolder.Weapon.Hide();      
+        isAttackInCoolDown =true;
+        StartCoroutine(CoolDownAttack());
     }
 
     // public void ResetTargets()
@@ -56,27 +62,25 @@ public class Character : GameUnit
     // }
 
     private IEnumerator CoolDownAttack(){
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         isAttackInCoolDown=false;
-        IsAttacking=false;
-    }
-
-    public void RemoveDespawnTarget()
-    {
-        targets.Remove(target);
     }
 
     public void RemoveTarget(Character target){
         if(targets.Contains(target))        
-            target.UnityAction-=()=>Untarget(target);
             targets.Remove(target);
     }
 
-    private void Untarget(Character target){
+    public void DropUnityActionEvent(Character target){
+        target.UnityAction-=()=>Untarget(target);
+    }
+
+    public void Untarget(Character target){
+        RemoveTarget(target);
+        if(this.target==null) return;
         if(this.target.id== target.id){
             this.target = null;
         }
-        
     }
 
 
@@ -84,7 +88,7 @@ public class Character : GameUnit
     {
         if(!targets.Contains(target)){
             targets.Add(target);
-            target.UnityAction +=()=> Untarget(target);
+            target.UnityAction+=()=>Untarget(target);
         }
     }
 
@@ -98,7 +102,6 @@ public class Character : GameUnit
             if (Vector3.Distance(TF.position, targets[i].TF.position) < minDist)
             {
                     target = targets[i];
-
             }
         }
     }
@@ -108,10 +111,10 @@ public class Character : GameUnit
         isMoving = true;
         ChangeAnim("run");
         // ResetTargets();
-        attackArea.TurnOnCollider();
+        target=null;
     }
 
-    protected virtual void StopMoving()
+    public virtual void StopMoving()
     {
         isMoving = false;
         // if(!IsAttacking)
@@ -125,20 +128,36 @@ public class Character : GameUnit
         }
     }
 
-    protected virtual void OnInit()
+    public virtual void OnInit(int id)
     {
+        Id=id;
+        UnityAction=null;
         targets = new List<Character>();
+        speed=characterConfig.Speed;
+        StopMoving();
+        
+    }
+
+    public void IncreaseScore(int score){
+        Score+=score;
+        attackArea.SetAttackAreaSize(Score);
     }
 
     protected virtual void Attack()
     {
+        if(IsAttacking) return;
         if(isAttackInCoolDown) return;
         LockTarget();   
         if (target == null) return;
         StartCoroutine(DelayAttack());
         IsAttacking=true;
-        isAttackInCoolDown =true;
-        StartCoroutine(CoolDownAttack());
+    }
+
+    public void SetHairSkin(Skin skin){
+        if(skin!=null){
+            hairSkinHolder.SetHairSkin(skin);
+        }
+            
     }
 
     public void TurnOnNavigator(){

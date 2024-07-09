@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -13,6 +14,7 @@ public class Level : MonoBehaviour
     /// 3. Bot Right conner
     /// </summary>
     [SerializeField] private List<Transform> characterSpawnLocations;
+    [SerializeField] private HairDataConfigSO hairDataConfigSO;
 
     [SerializeField] private Player playerPrefab;
     [SerializeField] private Bot botPrefab;
@@ -64,7 +66,7 @@ public class Level : MonoBehaviour
         float sign_x = Mathf.Sign(pos_x);
         float sign_z = Mathf.Sign(pos_z);
 
-        while (spawnPositions.Count < maximumNoExistedBot)
+        while (spawnPositions.Count < maximumNoExistedBot+1)
         {
             float offset=Random.Range(-40f,40f);
             pos_x = Random.Range(min_x, max_x);
@@ -85,8 +87,10 @@ public class Level : MonoBehaviour
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
         Player player = SimplePool.Spawn<Player>(playerPrefab, spawnPos, playerPrefab.TF.rotation);
-        player.Joystick = LevelManager.Ins.Joystick;
-        player.Id = id;
+        player.SetJoyStickController(LevelManager.Ins.Joystick);
+        // Skin hairSkin=hairDataConfigSO.GetHairSkinByEnum(HairSkinEnum.Horn);
+        // player.SetHairSkin(hairSkin);
+        player.OnInit(id);
         id++;
         LevelManager.Ins.SetCameraTarget(player);
         totalCharacter--;
@@ -109,7 +113,9 @@ public class Level : MonoBehaviour
         {
             Vector3 spawnPos = spawnPositions[i];
             Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
-            bot.Id = id;
+            Skin hairSkin=hairDataConfigSO.GetRandomHairSkin();
+            bot.SetHairSkin(hairSkin);
+            bot.OnInit(id);
             id++;
             totalCharacter--;
             NumberOfExistedBots++;

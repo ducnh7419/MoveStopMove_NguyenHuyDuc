@@ -6,13 +6,7 @@ using UnityEngine;
 public class Player : Character
 {
     public DynamicJoystick Joystick;
-    [SerializeField] private float speed;
     [SerializeField] private Rigidbody rb;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 
     // Update is called once per frame
@@ -29,7 +23,18 @@ public class Player : Character
         }
     }
 
-    protected override void StopMoving()
+    public override void OnInit(int id)
+    {
+        base.OnInit(id);
+        Score=0;
+        attackArea.SetAttackAreaSize(Score);
+    }
+
+    public void SetJoyStickController(DynamicJoystick joystick){
+        this.Joystick=joystick;
+    }
+
+    public override void StopMoving()
     {
         base.StopMoving();
         rb.velocity=Vector3.zero;

@@ -24,6 +24,7 @@ public class Weapon : GameUnit
     {
         Bullet bullet=SimplePool.Spawn<Bullet>(BulletPrefab, TF.position, TF.rotation);
         bullet.OnInit(this,target);
+        Hide();
     }
 
     public void Hide(){

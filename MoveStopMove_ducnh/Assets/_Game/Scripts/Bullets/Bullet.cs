@@ -34,8 +34,7 @@ namespace Bullets
             if (character == null) return;
             if (character.TF != target) return;
             character.OnDespawn();
-            OnDespawn();
-            weapon.Owner.Score+=character.Score;
+            weapon.Owner.IncreaseScore(character.Score);
         }
 
         private void FixedUpdate()
@@ -50,6 +49,9 @@ namespace Bullets
         protected virtual void Moving()
         {
             if (target == null) return;
+            if(Vector3.Distance(TF.position,destPos)<=0.01f){
+                OnDespawn();
+            }
             float step = speed * Time.fixedDeltaTime;
             TF.position = Vector3.MoveTowards(TF.position, destPos, step);
         }
