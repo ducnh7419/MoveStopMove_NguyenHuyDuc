@@ -7,11 +7,13 @@ public class Player : Character
 {
     public DynamicJoystick Joystick;
     [SerializeField] private Rigidbody rb;
+    public AttackArea attackArea;
 
 
     // Update is called once per frame
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         if (Joystick.Horizontal != 0 || Joystick.Vertical != 0)
         {
             rb.velocity = new Vector3(Joystick.Horizontal * speed * Time.fixedDeltaTime, 0, Joystick.Vertical * speed * Time.fixedDeltaTime);
@@ -38,5 +40,11 @@ public class Player : Character
     {
         base.StopMoving();
         rb.velocity=Vector3.zero;
+    }
+
+    public override void IncreaseScore(int score)
+    {
+        base.IncreaseScore(score);
+        attackArea.SetAttackAreaSize(Score);
     }
 }

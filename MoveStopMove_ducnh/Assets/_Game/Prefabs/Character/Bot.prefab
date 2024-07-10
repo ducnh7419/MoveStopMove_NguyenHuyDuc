@@ -149,12 +149,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 4
   characterConfig: {fileID: 11400000, guid: 860b605248672234a826187428b5cc54, type: 2}
-  attackArea: {fileID: 7062386981026221656}
   navigatorRenderer: {fileID: 3720041577558518874}
   animator: {fileID: 6066288507882763316}
   weaponHolder: {fileID: 230664222591984641}
   hairSkinHolder: {fileID: 7760074568127296224}
   IsAttacking: 0
+  botAttackArea: {fileID: 3979167361065973436}
   Agent: {fileID: 4238481982141773456}
   destination: {x: 0, y: 0, z: 0}
 --- !u!195 &4238481982141773456
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 5612708512583502435}
   - component: {fileID: 5225695425695882860}
   - component: {fileID: 8012695059069016803}
-  - component: {fileID: 7062386981026221656}
+  - component: {fileID: 3979167361065973436}
   m_Layer: 0
   m_Name: AttackArea
   m_TagString: Untagged
@@ -371,7 +371,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &7062386981026221656
+--- !u!114 &3979167361065973436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,13 +380,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3985841964750291747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3c02008231d6a242a6edf9016d6caa3, type: 3}
+  m_Script: {fileID: 11500000, guid: fa4ff50877bba9b41b915c4cf6c8dc42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterConfigSO: {fileID: 11400000, guid: 860b605248672234a826187428b5cc54, type: 2}
   areaCollider: {fileID: 8012695059069016803}
   TF: {fileID: 4797815925195069665}
   character: {fileID: -2071778296372906726}
+  bot: {fileID: -2071778296372906726}
 --- !u!1 &8576663302795911603
 GameObject:
   m_ObjectHideFlags: 0

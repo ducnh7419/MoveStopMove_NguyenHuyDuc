@@ -14,7 +14,6 @@ public class Character : GameUnit
     protected float attackSpeed=1f;
     private int score;
     public UnityAction UnityAction;
-    public AttackArea attackArea;
     [SerializeField]private SpriteRenderer navigatorRenderer;
     [SerializeField] private  Animator animator;
     [SerializeField] private WeaponHolder weaponHolder;
@@ -31,11 +30,9 @@ public class Character : GameUnit
     public bool IsAttacking;
     public int Score { get => score; set => score = value; }
     public int Id { get => id; set => id = value; }
+    public Character Target => target;
 
-   
-
-
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         if (!isMoving)
         {
@@ -48,9 +45,9 @@ public class Character : GameUnit
     {
         yield return new WaitForSeconds(attackSpeed);
         IsAttacking=false;
-        if(target==null) yield break;
+        if(Target==null) yield break;
         ChangeAnim("attack");
-        weaponHolder.Weapon.Fire(target);
+        weaponHolder.Weapon.Fire(Target);
         isAttackInCoolDown =true;
         StartCoroutine(CoolDownAttack());
     }
@@ -138,9 +135,9 @@ public class Character : GameUnit
         
     }
 
-    public void IncreaseScore(int score){
+    public virtual void IncreaseScore(int score){
         Score+=score;
-        attackArea.SetAttackAreaSize(Score);
+        
     }
 
     protected virtual void Attack()
@@ -148,7 +145,9 @@ public class Character : GameUnit
         if(IsAttacking) return;
         if(isAttackInCoolDown) return;
         LockTarget();   
-        if (target == null) return;
+        if (Target == null) return;
+        Vector3 direction=Target.TF.position-TF.position;
+        TF.rotation=Quaternion.LookRotation(direction);
         StartCoroutine(DelayAttack());
         IsAttacking=true;
     }

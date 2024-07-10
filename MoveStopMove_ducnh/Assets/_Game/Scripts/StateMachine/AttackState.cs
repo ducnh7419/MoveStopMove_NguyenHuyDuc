@@ -2,24 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HuntingState : IState<Bot>
+public class AttackState : IState<Bot>
 {
-    private float  timer;
-    private float  randomTime;
     public void OnEnter(Bot bot)
     {
-       bot.Hunting();
+       bot.StopMoving();
     }
 
     public void OnExecute(Bot bot)
     {
-       if(bot.IsReachingDestination&&bot.Target){
-
+       if(bot.Target==null){
+            bot.ChangeState(new PatrolState());
        }
     }
 
     public void OnExit(Bot bot)
     {
-        
+       
     }
 }

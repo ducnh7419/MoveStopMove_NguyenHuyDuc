@@ -10,7 +10,7 @@ public class AttackArea : MonoBehaviour
    [SerializeField] private Transform TF;
    [SerializeField] private Character character;
 
-   private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
    {
       
       if (other.CompareTag(GlobalConstants.Tag.CHARACTER))
@@ -43,7 +43,7 @@ public class AttackArea : MonoBehaviour
    }
 
 
-   private void CollideWithEnemy(Collider enemy)
+   protected virtual void CollideWithEnemy(Collider enemy)
    {
       Debug.Log(String.Format("{0} attack {1}", this.tag, enemy.tag));
       Character target = CacheCollider<Character>.GetCollider(enemy);

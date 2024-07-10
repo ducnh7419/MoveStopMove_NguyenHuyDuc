@@ -17,12 +17,11 @@ public class IdleState : IState<Bot>
         timer+=Time.fixedDeltaTime;
         if(timer>randomTime){
             bot.ChangeState(new PatrolState());
-            
         }
     }
 
     public void OnExit(Bot bot)
     {
-        
+        bot.SetTotalTimeInCurrState(timer);
     }
 }

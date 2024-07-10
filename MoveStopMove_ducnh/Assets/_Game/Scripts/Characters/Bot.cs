@@ -6,55 +6,51 @@ using UnityEngine.AI;
 
 public class Bot : Character
 {
+    public BotAttackArea botAttackArea;
     private IState<Bot> currentState;
     private float totalTimeInCurrentState;
-    private List<Character> trackedEnemy;
-    public int NumberOfTrackedEnemies=>TrackedEnemy.Count;
 
-    public List<Character> TrackedEnemy => trackedEnemy;
 
     [Header("NavMesh Agent")]
     public NavMeshAgent Agent;
     public Vector3 destination;
-    public bool IsReachingDestination => Vector3.Distance(TF.position, destination)< .01f;
+    public bool IsReachingDestination => Vector3.Distance(TF.position, destination)< 0.01f;
 
     public float TotalTimeInCurrentState => totalTimeInCurrentState;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
 
     public override void OnInit(int id){
         base.OnInit(id);
         ChangeState(new IdleState());
         Score=Random.Range(10,51);
-        attackArea.SetAttackAreaSize(Score);
-        Agent.stoppingDistance=2f;
+        botAttackArea.SetAttackAreaSize(Score);
+        Agent.speed=speed*Time.deltaTime;
     }
 
-    public void TrackEnemy(Character character){
-        TrackedEnemy.Add(character);
-    }
+   public override void StopMoving(){
+        base.StopMoving();
+        Agent.velocity=Vector3.zero;
+        ClearDestination();
+   }
 
     public void SetDestination(Vector3 dest){
+        Moving();
+        destination=dest;
         Agent.SetDestination(dest);
     }
     
 
     // Update is called once per frame
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
         currentState?.OnExecute(this);
+        
     }
 
     public void ChangeState(IState<Bot> state)
     {
         currentState?.OnExit(this);
-        if(currentState.GetType() != state.GetType()){
+        if(currentState!=null&&currentState.GetType() != state.GetType()){
             totalTimeInCurrentState=0;
         }
         currentState = state;
@@ -65,8 +61,23 @@ public class Bot : Character
         totalTimeInCurrentState+=time;
     }
 
+    public override void IncreaseScore(int score)
+    {
+        base.IncreaseScore(score);
+        botAttackArea.SetAttackAreaSize(Score);
+    }
+
+    public void Hunting(){
+        Character target=GameManager.Ins.GetCharacterHaveHighestScore();
+        destination=target.TF.position;
+        SetDestination(destination);
+    }
+
+    
+
     public void ClearDestination()
     {
         Agent.ResetPath();
+        destination=Vector3.zero;
     }
 }
