@@ -12,8 +12,7 @@ public class SetFullScrollView : ScrollView
         for(int i=1;i<skins.Count;i++){
             ScrollViewItem item=Instantiate(scrollViewItem,parentContent);
             item.SetImageIcon(skins[i].icon);
-            item.SetID(id);
-            id++;
+            item.SetID("SF"+i);
             list.Add(item);
             item.Button.onClick.AddListener(()=>SelectItem(item.ID));
         }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ScrollViewItem : MonoBehaviour
 {
-    public int ID;
+    public string ID;
     public Button Button;
     public Image ImgSelect;
     public Image ImgIcon;
@@ -36,7 +36,7 @@ public class ScrollViewItem : MonoBehaviour
         ImgSelect.gameObject.SetActive(selected);
     }
 
-    public void SetID(int id){
+    public void SetID(string id){
         ID = id;
     }
 }

@@ -11,10 +11,10 @@ public class ScrollView : UICanvas
    
    
 
-   public void SelectItem(int id){
+   public void SelectItem(string id){
         Debug.Log("Clicked");
         for (int i=0;i<list.Count;i++){
-            if(list[i].ID==id){
+            if(list[i].ID.CompareTo(id)==0){
                 list[i].ChangeSelectedStatus(true);
             }else{
                 list[i].ChangeSelectedStatus(false);
