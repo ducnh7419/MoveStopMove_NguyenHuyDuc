@@ -10,7 +10,7 @@ public class PantDataConfig : ScriptableObject
 
     public List<PantSkin> PantSkin => pantSkin;
 
-    public Skin GetPantsSkinByEnum(PantSkinEnum pantSkinEnum)
+    public PantSkin GetPantsSkinByEnum(PantSkinEnum pantSkinEnum)
     {
         int index = (int)pantSkinEnum;
         for (int i = 0; i < PantSkin.Count; i++)
@@ -23,7 +23,7 @@ public class PantDataConfig : ScriptableObject
         return PantSkin[0];
     }
 
-    public Skin GetRandomPantSkin()
+    public PantSkin GetRandomPantSkin()
     {
         int rdn = Random.Range(0, PantSkin.Count);
         return PantSkin[rdn];

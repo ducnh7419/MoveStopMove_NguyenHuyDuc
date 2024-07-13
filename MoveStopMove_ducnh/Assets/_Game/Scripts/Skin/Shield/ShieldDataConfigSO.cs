@@ -10,7 +10,7 @@ public class ShieldDataConfigSO : ScriptableObject
 
     public List<ShieldSkin> ShieldSkin => shieldSkin;
 
-    public Skin GetShieldSkinByEnum(ShieldEnum shieldEnum)
+    public ShieldSkin GetShieldSkinByEnum(ShieldEnum shieldEnum)
     {
         int index = (int)shieldEnum;
         for (int i = 0; i < ShieldSkin.Count; i++)
@@ -23,7 +23,7 @@ public class ShieldDataConfigSO : ScriptableObject
         return ShieldSkin[0];
     }
 
-    public Skin GetRandomShieldSkin()
+    public ShieldSkin GetRandomShieldSkin()
     {
         int rdn = Random.Range(0, ShieldSkin.Count);
         return ShieldSkin[rdn];

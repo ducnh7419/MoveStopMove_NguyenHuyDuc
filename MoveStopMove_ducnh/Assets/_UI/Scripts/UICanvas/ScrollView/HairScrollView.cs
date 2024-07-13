@@ -12,7 +12,7 @@ public class HairScrollView : ScrollView
         for(int i=1;i<skins.Count;i++){
             ScrollViewItem item=Instantiate(scrollViewItem,parentContent);
             item.SetImageIcon(skins[i].icon);
-            item.SetID("H"+i);
+            item.SetID("H-"+i);
             list.Add(item);
             item.Button.onClick.AddListener(()=>SelectItem(item.ID));
         }

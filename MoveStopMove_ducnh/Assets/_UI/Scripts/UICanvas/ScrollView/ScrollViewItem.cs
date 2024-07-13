@@ -17,7 +17,7 @@ public class ScrollViewItem : MonoBehaviour
 
     public void Setup()
     {
-        if (UserDataManager.Ins.CheckPurchasedItem())
+        if (UserDataManager.Ins.CheckPurchasedItem(ID))
         {
             ImgLock.gameObject.SetActive(false);
         }

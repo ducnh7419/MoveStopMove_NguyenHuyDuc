@@ -19,6 +19,7 @@ public class Character : GameUnit
     [SerializeField] private WeaponHolder weaponHolder;
     [SerializeField] private SkinHolder hairSkinHolder;
     [SerializeField] private SkinHolder shieldHolder;
+    [SerializeField] private SkinnedMeshRenderer pantRenderer;
 
     private List<Character> targets = new List<Character>();
     private Character target=null;
@@ -162,11 +163,18 @@ public class Character : GameUnit
 
     public void SetHairSkin(Skin skin){
         if(skin!=null){
-            hairSkinHolder.SetSkin(skin);
+            
         }           
     }
 
-    public void SetShieldSkin(Skin skin){
+    public void SetPantSkin(PantSkin pantSkin)
+    {
+        if(pantSkin!=null){
+            pantRenderer.material=pantSkin.Material;
+        }           
+    }
+
+    public void SetShieldSkin(ShieldSkin skin){
         if(skin!=null){
             shieldHolder.SetSkin(skin);
         }       

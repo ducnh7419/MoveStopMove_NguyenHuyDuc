@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -25,11 +26,6 @@ public class Player : Character
         }
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        
-    }
 
     public override void OnInit(int id)
     {
@@ -53,4 +49,6 @@ public class Player : Character
         base.IncreaseScore(score);
         attackArea.SetAttackAreaSize(Score);
     }
+
+    
 }

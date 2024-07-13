@@ -11,7 +11,7 @@ public class PantsScrollView : ScrollView
         for(int i=1;i<skins.Count;i++){
             ScrollViewItem item=Instantiate(scrollViewItem,parentContent);
             item.SetImageIcon(skins[i].icon);
-            item.SetID("P"+i);
+            item.SetID("P-"+i);
             list.Add(item);
             item.Button.onClick.AddListener(()=>SelectItem(item.ID));
         }
