@@ -87,12 +87,13 @@ public class Level : MonoBehaviour
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
         Player player = SimplePool.Spawn<Player>(playerPrefab, spawnPos, playerPrefab.TF.rotation);
-        player.SetJoyStickController(LevelManager.Ins.Joystick);
+        player.SetJoyStickController(GameManager.Ins.Joystick);
         // Skin hairSkin=hairDataConfigSO.GetHairSkinByEnum(HairSkinEnum.Horn);
         // player.SetHairSkin(hairSkin);
         player.OnInit(id);
         id++;
-        LevelManager.Ins.SetCameraTarget(player);
+        GameManager.Ins.SetCameraTarget(player);
+        // UserDataManager.Ins.Player=player;
         totalCharacter--;
         NumberOfExistedBots++;
         spawnPositions.RemoveAt(rdn);

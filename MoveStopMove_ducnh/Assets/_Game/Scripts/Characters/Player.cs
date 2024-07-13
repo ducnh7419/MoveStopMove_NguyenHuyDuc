@@ -25,6 +25,12 @@ public class Player : Character
         }
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        
+    }
+
     public override void OnInit(int id)
     {
         base.OnInit(id);

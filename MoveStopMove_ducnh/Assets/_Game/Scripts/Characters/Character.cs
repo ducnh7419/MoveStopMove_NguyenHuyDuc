@@ -17,7 +17,8 @@ public class Character : GameUnit
     [SerializeField]private SpriteRenderer navigatorRenderer;
     [SerializeField] private  Animator animator;
     [SerializeField] private WeaponHolder weaponHolder;
-    [SerializeField] private HairSkinHolder hairSkinHolder;
+    [SerializeField] private SkinHolder hairSkinHolder;
+    [SerializeField] private SkinHolder shieldHolder;
 
     private List<Character> targets = new List<Character>();
     private Character target=null;
@@ -32,14 +33,21 @@ public class Character : GameUnit
     public int Id { get => id; set => id = value; }
     public Character Target => target;
 
+    protected virtual void Update(){
+        if(GameManager.Ins.CurrState<GameManager.State.StartGame) return;
+        GameManager.Ins.SetCharacterScore(this,score);
+    }
+
     protected virtual void FixedUpdate()
     {
+        if(GameManager.Ins.CurrState<GameManager.State.StartGame) return;
         if (!isMoving)
         {
             Attack();
         }
         
     }
+
 
     private IEnumerator DelayAttack()
     {
@@ -154,9 +162,14 @@ public class Character : GameUnit
 
     public void SetHairSkin(Skin skin){
         if(skin!=null){
-            hairSkinHolder.SetHairSkin(skin);
-        }
-            
+            hairSkinHolder.SetSkin(skin);
+        }           
+    }
+
+    public void SetShieldSkin(Skin skin){
+        if(skin!=null){
+            shieldHolder.SetSkin(skin);
+        }       
     }
 
     public void TurnOnNavigator(){

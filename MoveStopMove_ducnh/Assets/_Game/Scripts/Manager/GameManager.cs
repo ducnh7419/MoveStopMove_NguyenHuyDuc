@@ -9,7 +9,12 @@ public class GameManager : MonoBehaviour
     private static GameManager ins;
     private State currState;
 
+    
+
+    [SerializeField] private CameraFollow m_Camera;
+
     private Dictionary<Character,int> leaderboard=new Dictionary<Character,int>();
+    public DynamicJoystick Joystick;
 
     private GameResult currentResult;
 
@@ -17,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public GameResult CurrentResult { get => currentResult; set => currentResult = value; }
     public State CurrState { get => currState; }
+    
 
     public enum State{
         None=0,
@@ -50,10 +56,10 @@ public class GameManager : MonoBehaviour
         }
         
         OnInit();
-        ChangeState(State.StartGame);
+        ChangeState(State.MainMenu);
     }
 
-    public void GetCharacterScore(Character character ,int score){
+    public void SetCharacterScore(Character character ,int score){
         leaderboard[character]=score;
     }
 
@@ -83,15 +89,19 @@ public class GameManager : MonoBehaviour
                 // OnStartScreen();
                 break;
             case State.MainMenu:
-                // OnMainMenu();
+                currState=State.MainMenu;
+                OnMainMenu();
                 break;
-            case State.LevelSelection:
-                // OnLevelSelectionMenu();
+            case State.SkinShop:
+                currState=State.SkinShop;
+                OnSkinShop();
                 break;
             case State.StartGame:
+                currState=State.StartGame;
                 OnStartGame();
                 break;
             case State.OngoingGame:
+                currState=State.OngoingGame;
                 // OnGoingGame();
                 break;
             case State.EndGame:
@@ -100,15 +110,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnSkinShop()
+    {
+        UIManager.Ins.CloseAll();
+        m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,1.31f,-10.2f),Quaternion.Euler(0,0,0));
+        UIManager.Ins.OpenUI<UICShopSkin>();
+    }
+
     // private void OnLevelSelectionMenu()
     // {
     //     UIManager.Ins.OpenUI<LevelSelection>();
     // }
 
-    // private void OnMainMenu()
-    // {
-    //     UIManager.Ins.OpenUI<MainMenu>();
-    // }
+    private void OnMainMenu()
+    {
+        m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,2.45f,-10.2f),Quaternion.Euler(0,0,0));
+        Joystick=UIManager.Ins.OpenUI<UICJoystick>().dynamicJoystick;
+        LevelManager.Ins.GenerateLevel();
+        Joystick.enabled=false;
+        UIManager.Ins.OpenUI<UICMainMenu>();
+
+    }
 
     // private void OnStartScreen(){
     //     UIManager.Ins.OpenUI<OpeningScreen>();
@@ -120,10 +142,16 @@ public class GameManager : MonoBehaviour
     // }
 
     private void OnStartGame(){
-        Time.timeScale=1;
-        UIManager.Ins.OpenUI<UICJoystick>();
-        GameManager.Ins.ChangeState(State.OngoingGame);
+        SetCameraPositionAndRotation(new Vector3(0.03f,20.4f,-24.9f),Quaternion.Euler(40f,0,0));
+        UIManager.Ins.CloseUI<UICMainMenu>();
+        Joystick.enabled=true;
+        StartCoroutine(DelayChangeState(State.OngoingGame));
         
+    }
+
+    IEnumerator DelayChangeState(State state){
+        yield return new WaitForSeconds(1f);
+        GameManager.Ins.ChangeState(state);
     }
 
     // IEnumerator DelayShowingEndGameCanvas(){
@@ -160,6 +188,13 @@ public class GameManager : MonoBehaviour
         //ChangeState(GameState.MainMenu);
 
         // OnStartScreen();
+    }
+
+    public void SetCameraTarget(Character target){
+        m_Camera.SetCameraTarget(target);
+    }
+    public void SetCameraPositionAndRotation(Vector3 offset, Quaternion rotation){
+        m_Camera.SetCameraPositionAndRotation(offset,rotation);
     }
 
     public void GoBackward()

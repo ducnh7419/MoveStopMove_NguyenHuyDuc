@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UICMainMenu : MonoBehaviour
+public class UICMainMenu : UICanvas
 {
    public Button BtnPlay;
    public Button BtnShopWeapon;

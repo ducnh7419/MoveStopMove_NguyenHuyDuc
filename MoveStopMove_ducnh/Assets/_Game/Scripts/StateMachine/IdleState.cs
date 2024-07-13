@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class IdleState : IState<Bot>
 {
-    private float  timer;
-    private float  randomTime;
     public void OnEnter(Bot bot)
     {
-        timer=0;
-        randomTime=Random.Range(1f, 3f);
+        bot.StopMoving();
     }
 
     public void OnExecute(Bot bot)
     {
-        timer+=Time.fixedDeltaTime;
-        if(timer>randomTime){
+        if(GameManager.Ins.CurrState==GameManager.State.StartGame)
+        {
             bot.ChangeState(new PatrolState());
         }
     }
 
     public void OnExit(Bot bot)
     {
-        bot.SetTotalTimeInCurrState(timer);
     }
 }

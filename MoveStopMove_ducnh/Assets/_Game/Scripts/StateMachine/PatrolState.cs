@@ -17,8 +17,6 @@ public class PatrolState : IState<Bot>
         Vector3 rdnPoint = Random.insideUnitCircle * radius;
         Vector3 dest = bot.TF.position + new Vector3(rdnPoint.x, 0, rdnPoint.z);
         bot.SetDestination(dest);
-
-
     }
 
     public void OnExecute(Bot bot)

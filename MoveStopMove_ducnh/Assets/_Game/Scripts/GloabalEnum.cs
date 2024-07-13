@@ -35,8 +35,21 @@ namespace GloabalEnum
         Mustache=10
     }
 
+    public enum ShieldEnum{
+        None=0,
+        Shield1=1,
+        Shield2=2,
+    }
+
+    public enum SetFullEnum{
+        None=0,
+        Devil=1
+
+    }
+
     public enum WeaponSkin
     {
         None = 0
     }
+    
 }

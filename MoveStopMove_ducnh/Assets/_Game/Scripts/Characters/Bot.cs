@@ -18,13 +18,20 @@ public class Bot : Character
 
     public float TotalTimeInCurrentState => totalTimeInCurrentState;
 
+    protected override void Update(){
+        base.Update();
+    }
+
     public override void OnInit(int id){
         base.OnInit(id);
         ChangeState(new IdleState());
         Score=Random.Range(10,51);
         botAttackArea.SetAttackAreaSize(Score);
-        Agent.speed=speed*Time.deltaTime;
+        Agent.speed=speed/2;
     }
+
+    
+
 
    public override void StopMoving(){
         base.StopMoving();

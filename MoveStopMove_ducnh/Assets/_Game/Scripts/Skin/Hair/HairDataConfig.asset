@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb19db0aea8a204b92dd48c7711abc7, type: 3}
+  m_Name: HairDataConfig
+  m_EditorClassIdentifier: 
+  hairSkins:
+  - {fileID: 0}
+  - {fileID: -1643088874124178677, guid: 950858e8c60ca024188a5ea89483169b, type: 3}
+  - {fileID: 2723486994500153408, guid: 49eb6325c11d0974893882d2a2f9df7c, type: 3}
+  - {fileID: -802424287060612466, guid: f4abbc8ba3468254ea2598a20140b071, type: 3}
+  - {fileID: -316553476803894615, guid: 7a33c807cf6b9ae438e2a743aa1b5802, type: 3}
+  - {fileID: 3258470838554196918, guid: 681d917b4e818084e9624bdf7f606f17, type: 3}
+  - {fileID: -4358594395102613173, guid: 6809e0444c7e2fa46b542a86c3324f35, type: 3}
+  - {fileID: -1470333244519360095, guid: ae7cf8dab2aeb6443bc96fe75612019b, type: 3}
+  - {fileID: -2554638802613858628, guid: 75192c14921b5c8419467b4210551500, type: 3}
+  - {fileID: -2893785382731463827, guid: 659cf97aada921941a45b2a980cbc9be, type: 3}
+  - {fileID: 8661961574501645054, guid: e6c73aec7102feb4eb98d2b329badb60, type: 3}

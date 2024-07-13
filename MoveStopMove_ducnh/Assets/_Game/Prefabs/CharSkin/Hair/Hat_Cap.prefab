@@ -100,7 +100,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 72e9b270471e48a479051d3b196a7e06,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3874525032695096739}
+      addedObject: {fileID: -4358594395102613173}
   m_SourcePrefab: {fileID: 100100000, guid: 72e9b270471e48a479051d3b196a7e06, type: 3}
 --- !u!1 &7234721549937433691 stripped
 GameObject:
@@ -108,7 +108,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1677320369774331218}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-3874525032695096739
+--- !u!114 &-4358594395102613173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,10 +117,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7234721549937433691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c80d08a70cca7144bd64a2c7ac2f1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 5% Range
-  attackRangeBuff: 0.05
-  moveSpeedBuff: 0
-  goldBuff: 0
+  icon: {fileID: 21300000, guid: 272199ec36d8f174eb997ad25166c786, type: 3}
+  Description: 5% Range Buff
+  GoldBuff: 0
+  AttackRangeBuff: 0.05
