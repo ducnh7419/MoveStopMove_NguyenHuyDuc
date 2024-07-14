@@ -1,27 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GloabalEnum;
 using UnityEngine;
 
 public class PantsScrollView : ScrollView
 {
-    [SerializeField]private PantDataConfig pantDataConfig;
-    
-    protected void GenerateScrollViewItem(List<PantSkin> skins){
-        for(int i=1;i<skins.Count;i++){
-            ScrollViewItem item=Instantiate(scrollViewItem,parentContent);
-            item.SetImageIcon(skins[i].icon);
-            item.SetID("P-"+i);
-            list.Add(item);
-            item.Button.onClick.AddListener(()=>SelectItem(item.ID));
-        }
+
+    private void Awake() {
+        eItemType=EItemType.Pant;
     }
 
-    private void Start()
+    protected override void Start()
     {
-        List<PantSkin> pantSkins=pantDataConfig.PantSkin;
-        GenerateScrollViewItem(pantSkins);
+        base.Start();
+        List<ItemData> items = GameManager.Ins.ItemDataConfigSO.PantDataConfig;
+        GenerateScrollViewItem(items);
     }
-
-    
 }

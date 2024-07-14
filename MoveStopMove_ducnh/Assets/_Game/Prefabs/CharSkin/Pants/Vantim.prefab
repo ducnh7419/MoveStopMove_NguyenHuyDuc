@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6653797869642908783}
-  - component: {fileID: 6456979119348042092}
-  - component: {fileID: -6031391411733500133}
+  - component: {fileID: 2283775323888329421}
+  - component: {fileID: 5151621048886264680}
   m_Layer: 0
   m_Name: Vantim
   m_TagString: Untagged
@@ -33,14 +33,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &6456979119348042092
-MeshRenderer:
+--- !u!137 &2283775323888329421
+SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2647783366902467622}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -48,7 +48,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
+  m_RayTracingMode: 3
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
@@ -74,8 +74,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-6031391411733500133
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 7666266049737368757, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
+--- !u!114 &5151621048886264680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,11 +95,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2647783366902467622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbbb7238bc81e7043821d44cfe012923, type: 3}
+  m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 5
   icon: {fileID: 1840894354, guid: b4c94ccdb7b1b0f459375e7984db3839, type: 3}
-  Description: 8% Move Speed
-  GoldBuff: 0
-  renderers: {fileID: 6456979119348042092}
-  MoveSpeedBuff: 0.08
+  TfWeaponHolder: {fileID: 0}
+  TfHairHolder: {fileID: 0}
+  mrPant: {fileID: 2283775323888329421}

@@ -90,7 +90,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 2ee369d216e98bf45893a44990eae264,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2893785382731463827}
+      addedObject: {fileID: 7872671843984403325}
   m_SourcePrefab: {fileID: 100100000, guid: 2ee369d216e98bf45893a44990eae264, type: 3}
 --- !u!1 &5342703801693194951 stripped
 GameObject:
@@ -98,7 +98,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4108679082861007822}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-2893785382731463827
+--- !u!114 &7872671843984403325
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,10 +107,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5342703801693194951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c80d08a70cca7144bd64a2c7ac2f1cf, type: 3}
+  m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 5
   icon: {fileID: 21300000, guid: 4206c79f4f0e7fc4d9c9805aa1de030b, type: 3}
-  Description: 5% Range Buff
-  GoldBuff: 0
-  AttackRangeBuff: 0.05
+  TfWeaponHolder: {fileID: 0}
+  TfHairHolder: {fileID: 0}
+  mrPant: {fileID: 0}

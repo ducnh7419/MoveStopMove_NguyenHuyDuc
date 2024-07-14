@@ -133,9 +133,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7079376
-  m_Height: 2.6154604
+  m_Height: 2.896757
   m_Direction: 1
-  m_Center: {x: 0, y: 1.1506712, z: 0.011588454}
+  m_Center: {x: 0, y: 1.010023, z: 0.011588454}
 --- !u!114 &-2071778296372906726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,12 +150,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 4
   characterConfig: {fileID: 11400000, guid: 860b605248672234a826187428b5cc54, type: 2}
+  characterSkin:
+    WingHolder: {fileID: 0}
+    HairHolder: {fileID: 3606394051640065009}
+    TailHolder: {fileID: 0}
+    ShieldHolder: {fileID: 6502071884055925946}
+    MrPant: {fileID: 538327483304337885}
   navigatorRenderer: {fileID: 3720041577558518874}
   animator: {fileID: 6066288507882763316}
   weaponHolder: {fileID: 230664222591984641}
-  hairSkinHolder: {fileID: 7760074568127296224}
-  shieldHolder: {fileID: 2902587954024794032}
-  pantRenderer: {fileID: 538327483304337885}
   IsAttacking: 0
   botAttackArea: {fileID: 3979167361065973436}
   Agent: {fileID: 4238481982141773456}
@@ -400,7 +403,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6502071884055925946}
-  - component: {fileID: 2902587954024794032}
   m_Layer: 0
   m_Name: ShieldHolder
   m_TagString: Untagged
@@ -423,18 +425,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5410860566266400246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2902587954024794032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7733739750817318354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0959a35a03371fb48bf9663cee163d31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8576663302795911603
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +434,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3606394051640065009}
-  - component: {fileID: 7760074568127296224}
   m_Layer: 0
   m_Name: HairSkinHolder
   m_TagString: Untagged
@@ -467,18 +456,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3791319886374023484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7760074568127296224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8576663302795911603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0959a35a03371fb48bf9663cee163d31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8716873001612895258
 GameObject:
   m_ObjectHideFlags: 0

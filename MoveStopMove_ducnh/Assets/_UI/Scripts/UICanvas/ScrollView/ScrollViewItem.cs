@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScrollViewItem : MonoBehaviour
 {
-    public string ID;
+    public int ID;
     public Button Button;
     public Image ImgSelect;
     public Image ImgIcon;
@@ -15,9 +16,9 @@ public class ScrollViewItem : MonoBehaviour
         
     }
 
-    public void Setup()
+    public void Setup(EItemType eItemType)
     {
-        if (UserDataManager.Ins.CheckPurchasedItem(ID))
+        if (UserDataManager.Ins.CheckPurchasedItem(ID,eItemType))
         {
             ImgLock.gameObject.SetActive(false);
         }
@@ -36,7 +37,7 @@ public class ScrollViewItem : MonoBehaviour
         ImgSelect.gameObject.SetActive(selected);
     }
 
-    public void SetID(string id){
+    public void SetID(int id){
         ID = id;
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2567977102111640344}
-  - component: {fileID: 2161872078628263690}
+  - component: {fileID: 1408559758350767710}
   m_Layer: 0
   m_Name: HairSkinHolder
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 7836721247281774657}
   m_Father: {fileID: 3385090742519169428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2161872078628263690
+--- !u!114 &1408559758350767710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 545329011291043849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0959a35a03371fb48bf9663cee163d31, type: 3}
+  m_Script: {fileID: 11500000, guid: 22f39c36a7688b14eae0b23b3cb58713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 5
 --- !u!1 &632290025364062232
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6662159238462971077}
+  - component: {fileID: 8959107213683755402}
   m_Layer: 0
   m_Name: WingHolder
   m_TagString: Untagged
@@ -124,6 +126,19 @@ Transform:
   - {fileID: 3362562631664894869}
   m_Father: {fileID: 4354912698494798993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8959107213683755402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2267430303104262787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f39c36a7688b14eae0b23b3cb58713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 5
 --- !u!1 &5567294744816518237
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1841119893492301157}
+  - component: {fileID: 2398940106202265412}
   m_Layer: 0
   m_Name: TailHolder
   m_TagString: Untagged
@@ -156,6 +172,19 @@ Transform:
   - {fileID: 8132316300986740979}
   m_Father: {fileID: 2826047454018194272}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2398940106202265412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5567294744816518237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f39c36a7688b14eae0b23b3cb58713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 5
 --- !u!1 &5873983410661949188
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4792999400940486485}
-  - component: {fileID: 8710041866341743146}
+  - component: {fileID: 6758411846353355153}
   m_Layer: 0
   m_Name: Devil
   m_TagString: Untagged
@@ -189,7 +218,7 @@ Transform:
   - {fileID: 2360714967370787302}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8710041866341743146
+--- !u!114 &6758411846353355153
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,14 +227,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5873983410661949188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef5d317f3dc1cf4fb73cf47e4407b75, type: 3}
+  m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 591bf6bd34c3a3c4e9143ba55a6c7d7b, type: 3}
-  Description: 
-  GoldBuff: 0
-  Animator: {fileID: 5641024619256333468}
-  SetFull: {fileID: 5873983410661949188}
+  poolType: 0
+  color: {fileID: 7133318291162584086}
+  HairHolder: {fileID: 1408559758350767710}
+  WingHolder: {fileID: 8959107213683755402}
+  TailHolder: {fileID: 2398940106202265412}
+  MrPant: {fileID: 2098605680910684533}
 --- !u!1001 &1206931035315976341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1288,6 +1318,12 @@ PrefabInstance:
       addedObject: {fileID: 1200082115264543550}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+--- !u!137 &2098605680910684533 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7329684327888634620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2360714967370787302 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 38f9296dc39c27647a0119314baf12a2,
@@ -1318,9 +1354,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7329684327888634620}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &5641024619256333468 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 38f9296dc39c27647a0119314baf12a2,
+--- !u!137 &7133318291162584086 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8699012472884554006, guid: 38f9296dc39c27647a0119314baf12a2,
     type: 3}
   m_PrefabInstance: {fileID: 7329684327888634620}
   m_PrefabAsset: {fileID: 0}

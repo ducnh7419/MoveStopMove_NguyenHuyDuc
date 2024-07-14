@@ -1,27 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GloabalEnum;
 using UnityEngine;
 
 public class SetFullScrollView : ScrollView
-{
-    [SerializeField]private SetFullSkinDataConfigSO setFullSkinDataConfigSO;
-    
+{   
 
-    protected void GenerateScrollViewItem(List<SetFullSkin> skins){
-        for(int i=1;i<skins.Count;i++){
-            ScrollViewItem item=Instantiate(scrollViewItem,parentContent);
-            item.SetImageIcon(skins[i].icon);
-            item.SetID("SF-"+i);
-            list.Add(item);
-            item.Button.onClick.AddListener(()=>SelectItem(item.ID));
-        }
+    private void Awake() {
+        eItemType=EItemType.FullSet;
     }
-    
-    private void Start()
+
+    protected override void Start()
     {
-        List<SetFullSkin> setFull=setFullSkinDataConfigSO.SetFullSkins;
-        GenerateScrollViewItem(setFull);
+        base.Start();
+        List<ItemData> items=GameManager.Ins.ItemDataConfigSO.SetFullDataConfig;
+        GenerateScrollViewItem(items);
     }
 
     

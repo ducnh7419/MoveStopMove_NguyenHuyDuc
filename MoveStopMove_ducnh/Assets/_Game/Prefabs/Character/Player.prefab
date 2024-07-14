@@ -180,7 +180,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4801849651484942043}
-  - component: {fileID: 4752466209538603385}
   m_Layer: 0
   m_Name: HairSkinHolder
   m_TagString: Untagged
@@ -203,18 +202,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1035808380826096611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4752466209538603385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4654439636458051512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0959a35a03371fb48bf9663cee163d31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6197247837820729819
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +420,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2959686256352977955}
-  - component: {fileID: 4964500635638465677}
   m_Layer: 0
   m_Name: ShieldHolder
   m_TagString: Untagged
@@ -456,18 +442,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3168452334917362929}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4964500635638465677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7910500811606012493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0959a35a03371fb48bf9663cee163d31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9098579717286812652
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,12 +495,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 3
   characterConfig: {fileID: 11400000, guid: 860b605248672234a826187428b5cc54, type: 2}
+  characterSkin:
+    WingHolder: {fileID: 0}
+    HairHolder: {fileID: 4801849651484942043}
+    TailHolder: {fileID: 0}
+    ShieldHolder: {fileID: 2959686256352977955}
+    MrPant: {fileID: 4447888039391183618}
   navigatorRenderer: {fileID: 4322643241300978149}
   animator: {fileID: 7993148424827655915}
   weaponHolder: {fileID: 5889543738816786403}
-  hairSkinHolder: {fileID: 4752466209538603385}
-  shieldHolder: {fileID: 4964500635638465677}
-  pantRenderer: {fileID: 4447888039391183618}
   IsAttacking: 0
   Joystick: {fileID: 0}
   rb: {fileID: 9195972136115506977}
@@ -578,9 +555,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7079376
-  m_Height: 2.6154604
+  m_Height: 2.8282905
   m_Direction: 1
-  m_Center: {x: 0, y: 1.1506712, z: 0.011588454}
+  m_Center: {x: 0, y: 1.0442562, z: 0.011588454}
 --- !u!136 &602905163294774678
 CapsuleCollider:
   m_ObjectHideFlags: 0

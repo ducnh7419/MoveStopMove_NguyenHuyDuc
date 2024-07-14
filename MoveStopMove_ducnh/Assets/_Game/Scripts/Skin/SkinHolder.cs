@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkinHolder : MonoBehaviour
+public class SkinHolder : GameUnit
 {
-    public void SetSkin(Skin skin)
+    // Start is called before the first frame update
+    void Start()
     {
-        Instantiate(skin, this.transform);
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         
     }
 }

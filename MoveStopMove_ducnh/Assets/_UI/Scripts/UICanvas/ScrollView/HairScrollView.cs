@@ -1,30 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GloabalEnum;
 using UnityEngine;
 
 public class HairScrollView : ScrollView
 {
-    [SerializeField]private HairDataConfigSO hairDataConfigSO;
-    
 
-    protected void GenerateScrollViewItem(List<HairSkin> skins){
-        for(int i=1;i<skins.Count;i++){
-            ScrollViewItem item=Instantiate(scrollViewItem,parentContent);
-            item.SetImageIcon(skins[i].icon);
-            item.SetID("H-"+i);
-            list.Add(item);
-            item.Button.onClick.AddListener(()=>SelectItem(item.ID));
-        }
+    private void Awake() {
+        eItemType=EItemType.Hair;
     }
     
-    private void Start()
+    protected override void Start()
     {
-        List<HairSkin> hairSkins=hairDataConfigSO.HairSkins;
-        GenerateScrollViewItem(hairSkins);
+        base.Start();
+        List<ItemData> items=GameManager.Ins.ItemDataConfigSO.HairDataConfig;
+        GenerateScrollViewItem(items);
     }
 
-    
-
-    
 }

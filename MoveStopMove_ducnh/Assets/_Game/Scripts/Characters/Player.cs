@@ -9,6 +9,7 @@ public class Player : Character
     public DynamicJoystick Joystick;
     [SerializeField] private Rigidbody rb;
     public AttackArea attackArea;
+    public int Coin;
 
 
     // Update is called once per frame

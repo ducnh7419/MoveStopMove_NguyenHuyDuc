@@ -639,6 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ab0cecd03cac74ca79a037f6aff002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemDataConfigSO: {fileID: 11400000, guid: c7ebf682bc5163a45a70eb7146586b83, type: 2}
   m_Camera: {fileID: 961739754}
   Joystick: {fileID: 0}
 --- !u!4 &1938414059

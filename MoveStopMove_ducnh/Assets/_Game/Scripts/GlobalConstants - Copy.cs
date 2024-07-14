@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GlobalConstants
 {
-    public class Tag{
+    public static class Tag{
         public const string CHARACTER="Character";
         public const string BOT="Bot";
 

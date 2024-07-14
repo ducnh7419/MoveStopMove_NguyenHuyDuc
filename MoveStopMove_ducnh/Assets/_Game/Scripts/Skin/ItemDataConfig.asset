@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f3498c9706c7b49989a5c9b76b616c, type: 3}
+  m_Name: ItemDataConfig
+  m_EditorClassIdentifier: 
+  PantDataConfig:
+  - Id: 0
+    Name: Batman
+    Description: 
+    icon: {fileID: 1671384100, guid: 1e966d910547f75498e64c268c72f79f, type: 3}
+    ItemType: 2
+    EBuffType: 2
+    Value: 0
+    SkinPrefab: {fileID: -7949371119128038768, guid: 2eb5989b596097e4ea3b96101dd73a77,
+      type: 3}
+    Price: 0
+  - Id: 1
+    Name: Chambi
+    Description: 
+    icon: {fileID: 1923250579, guid: 3187ea78b1613ca419e8095f46f5f25e, type: 3}
+    ItemType: 2
+    EBuffType: 2
+    Value: 0
+    SkinPrefab: {fileID: -3670149003500393065, guid: 045ff7804762d4246915eb7c50f0c6c8,
+      type: 3}
+    Price: 0
+  - Id: 2
+    Name: Comy
+    Description: 
+    icon: {fileID: 261072589, guid: 2b097325031cb2d479ada5f9fe3c46b8, type: 3}
+    ItemType: 2
+    EBuffType: 2
+    Value: 0
+    SkinPrefab: {fileID: -1513798700025393463, guid: 8beaed21a07f0b44ca4c6e7d10bd903c,
+      type: 3}
+    Price: 0
+  - Id: 3
+    Name: Onion
+    Description: 
+    icon: {fileID: -1006376257, guid: fa6f6876198759b49a3daf9c8ae602f4, type: 3}
+    ItemType: 2
+    EBuffType: 0
+    Value: 0
+    SkinPrefab: {fileID: -5026396103100972296, guid: cdb87e0cbcd5e844981c048cc19e3b16,
+      type: 3}
+    Price: 0
+  - Id: 4
+    Name: Pokemon
+    Description: 
+    icon: {fileID: 1895235833, guid: 4379635a22a86e84d97e1a955bef48e3, type: 3}
+    ItemType: 2
+    EBuffType: 2
+    Value: 0
+    SkinPrefab: {fileID: -5410432495844307204, guid: 1b4cdf951bdc15841afb920a1da3bfc5,
+      type: 3}
+    Price: 0
+  - Id: 5
+    Name: Rainbow
+    Description: 
+    icon: {fileID: -424514542, guid: 8df4eee575bd09846b8c3c3706c2cd98, type: 3}
+    ItemType: 2
+    EBuffType: 2
+    Value: 0
+    SkinPrefab: {fileID: -4650140919446018030, guid: 585cbfcfe75a1eb488c1ce4a0f078105,
+      type: 3}
+    Price: 0
+  - Id: 6
+    Name: Skull
+    Description: 
+    icon: {fileID: 1907759786, guid: 3e6c96addd370564da6b1ff40da91e39, type: 3}
+    ItemType: 2
+    EBuffType: 2
+    Value: 0
+    SkinPrefab: {fileID: 5459460310587680323, guid: 21b36d15fa5b56547a9f8447af618c14,
+      type: 3}
+    Price: 0
+  - Id: 7
+    Name: Vantim
+    Description: 
+    icon: {fileID: 1840894354, guid: b4c94ccdb7b1b0f459375e7984db3839, type: 3}
+    ItemType: 2
+    EBuffType: 2
+    Value: 0
+    SkinPrefab: {fileID: 5151621048886264680, guid: 660b2922bc2cb1a4dab7850cfe858ea5,
+      type: 3}
+    Price: 0
+  HairDataConfig:
+  - Id: 0
+    Name: Arrow
+    Description: 
+    icon: {fileID: 21300000, guid: ba7eaabcc72662b44986102586a83d1b, type: 3}
+    ItemType: 1
+    EBuffType: 1
+    Value: 0
+    SkinPrefab: {fileID: -4976258267075682141, guid: 950858e8c60ca024188a5ea89483169b,
+      type: 3}
+    Price: 0
+  - Id: 1
+    Name: Cowboy
+    Description: 
+    icon: {fileID: 21300000, guid: b077210d30e369147abccc3ed75b6bc0, type: 3}
+    ItemType: 1
+    EBuffType: 1
+    Value: 0
+    SkinPrefab: {fileID: -1122901998076261682, guid: 49eb6325c11d0974893882d2a2f9df7c,
+      type: 3}
+    Price: 0
+  - Id: 2
+    Name: Crown
+    Description: 
+    icon: {fileID: 21300000, guid: 75e1caf98a393624a810445b8ae85902, type: 3}
+    ItemType: 1
+    EBuffType: 1
+    Value: 0
+    SkinPrefab: {fileID: 2733521058065502948, guid: f4abbc8ba3468254ea2598a20140b071,
+      type: 3}
+    Price: 0
+  - Id: 3
+    Name: Ear
+    Description: 
+    icon: {fileID: 21300000, guid: 80620b95513a84347affb760bc45f46e, type: 3}
+    ItemType: 1
+    EBuffType: 0
+    Value: 0
+    SkinPrefab: {fileID: -8884567505300494789, guid: 7a33c807cf6b9ae438e2a743aa1b5802,
+      type: 3}
+    Price: 0
+  - Id: 4
+    Name: Hat
+    Description: 
+    icon: {fileID: 21300000, guid: d4c3a2125014f6044942764930bad415, type: 3}
+    ItemType: 0
+    EBuffType: 0
+    Value: 0
+    SkinPrefab: {fileID: -6484515463891139383, guid: 681d917b4e818084e9624bdf7f606f17,
+      type: 3}
+    Price: 0
+  - Id: 5
+    Name: Hat_Cap
+    Description: 
+    icon: {fileID: 21300000, guid: 272199ec36d8f174eb997ad25166c786, type: 3}
+    ItemType: 1
+    EBuffType: 1
+    Value: 0
+    SkinPrefab: {fileID: -6022022338633152747, guid: 6809e0444c7e2fa46b542a86c3324f35,
+      type: 3}
+    Price: 0
+  - Id: 6
+    Name: Hat_Yellow
+    Description: 
+    icon: {fileID: 21300000, guid: e7c34ada89c19a240be42d096d4c80e0, type: 3}
+    ItemType: 1
+    EBuffType: 1
+    Value: 0
+    SkinPrefab: {fileID: -9110183748651094906, guid: ae7cf8dab2aeb6443bc96fe75612019b,
+      type: 3}
+    Price: 0
+  - Id: 7
+    Name: Headphone
+    Description: 
+    icon: {fileID: 21300000, guid: b6262b96f586ef44b9d39d3f062b8358, type: 3}
+    ItemType: 1
+    EBuffType: 1
+    Value: 0
+    SkinPrefab: {fileID: 4427076221667437435, guid: 75192c14921b5c8419467b4210551500,
+      type: 3}
+    Price: 0
+  - Id: 8
+    Name: Horn
+    Description: 
+    icon: {fileID: 21300000, guid: 4206c79f4f0e7fc4d9c9805aa1de030b, type: 3}
+    ItemType: 1
+    EBuffType: 1
+    Value: 0
+    SkinPrefab: {fileID: 7872671843984403325, guid: 659cf97aada921941a45b2a980cbc9be,
+      type: 3}
+    Price: 0
+  - Id: 9
+    Name: Mustache
+    Description: 
+    icon: {fileID: 21300000, guid: a56bccceb18534a4993d4fdde97df696, type: 3}
+    ItemType: 1
+    EBuffType: 1
+    Value: 0
+    SkinPrefab: {fileID: -1771050988748135697, guid: e6c73aec7102feb4eb98d2b329badb60,
+      type: 3}
+    Price: 0
+  ShieldDataConfig: []
+  SetFullDataConfig:
+  - Id: 0
+    Name: Devil
+    Description: 
+    icon: {fileID: 21300000, guid: 591bf6bd34c3a3c4e9143ba55a6c7d7b, type: 3}
+    ItemType: 4
+    EBuffType: 2
+    Value: 0
+    SkinPrefab: {fileID: 6758411846353355153, guid: 14c809f0d5b8005458d7f0588fc987f4,
+      type: 3}
+    Price: 0

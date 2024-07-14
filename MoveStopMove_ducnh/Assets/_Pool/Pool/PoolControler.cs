@@ -147,7 +147,8 @@ public enum PoolType
     Weapon,
     Bullet,
     Player,
-    Bot
+    Bot,
+    Skin
     
 }
 

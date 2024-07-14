@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
-public class Skin : MonoBehaviour
+public class Skin : GameUnit
 {
-    public Sprite icon;
-    public string Description;
+    public SkinnedMeshRenderer MrBody;
+    public SkinHolder HairHolder;
+    public SkinHolder WingHolder;
+    public SkinHolder TailHolder;
+    public SkinnedMeshRenderer MrPant;
 }

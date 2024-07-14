@@ -8,44 +8,77 @@ public class UserDataManager : MonoBehaviour
 {
    private static UserDataManager ins;
    public static UserDataManager Ins=>ins;
-   [SerializeField]private HairDataConfigSO hairDataConfigSO;
-   [SerializeField]private PantDataConfig pantDataConfigSO;
-   [SerializeField]private ShieldDataConfigSO shieldDataConfigSO;
-   [SerializeField]private SetFullSkinDataConfigSO setFullSkinDataConfigSO;
    private Player player;
    public Player Player { get => player; set => player = value; }
 
 
-    public bool CheckPurchasedItem(string id)
+    public bool CheckPurchasedItem(int id,EItemType eItemType)
     {
-        if(PlayerPrefs.GetInt(id)!=0){
+        if(PlayerPrefs.GetInt(GlobalDictionary.IdPrefix[eItemType])!=0)
+            return true;
+        return false;
+    }
+
+    private string GetKey(EItemType eItemType){
+        string key="";
+        switch(eItemType){
+            case EItemType.Hair:
+                key="Hair";
+                return key;
+            case EItemType.Pant:
+                key="Pant";
+                return key;
+            case EItemType.Shield:
+                key="Shield";
+                return key;
+            case EItemType.FullSet:
+                key="Full Set";
+                return key;
+            case EItemType.None:
+                key="";
+                return key;
+        }
+        return key;
+    }
+
+    public bool CheckCurrentEquippedItem(int id,EItemType eItemType){
+        string key=GetKey(eItemType);
+        int val=PlayerPrefs.GetInt(key);
+        if(--val==id){
             return true;
         }
         return false;
     }
 
+    public void EquipItem(int id,EItemType eItemType){
+        string key=GetKey(eItemType);
+        PlayerPrefs.SetInt(key, ++id);
+    }
+
+    public void UnEquipItem(EItemType eItemType){
+        string key=GetKey(eItemType);
+        PlayerPrefs.SetInt(key,0);
+    }
+
     public void ChangePlayerHair(int id){
         
     }
-
-    public void PurchaseItem(string id){
-        PlayerPrefs.SetInt(id,1);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="eItemType"></param>
+    /// <returns>true when success buying</returns>
+    public bool PurchaseItem(int id,EItemType eItemType){
+        ItemData itemData=GameManager.Ins.ItemDataConfigSO.GetItemData(eItemType,id);
+        if(player.Coin>itemData.Price){
+            PlayerPrefs.SetInt(GlobalDictionary.IdPrefix[eItemType]+id,1);
+            return true;
+        }
+        return false;
     }
     
-    public void SetSkin(string id){
-        string[]splitted_id = id.Split("-");
-        switch(splitted_id[0]){
-            case "H":
-                Player.SetHairSkin(hairDataConfigSO.GetHairSkinByEnum((HairSkinEnum)Convert.ToInt32(splitted_id[1])));
-                break;
-            case "P":
-                Player.SetPantSkin(pantDataConfigSO.GetPantsSkinByEnum((PantSkinEnum)Convert.ToInt32(splitted_id[1])));
-                break;
-            case "S":
-                Player.SetShieldSkin(shieldDataConfigSO.GetShieldSkinByEnum((ShieldEnum)Convert.ToInt32(splitted_id[1])));
-                break;
-            // case "FS":
-
-        }
-    }
+    // public void SetSkin(string id){
+    //     
+    // }
 }

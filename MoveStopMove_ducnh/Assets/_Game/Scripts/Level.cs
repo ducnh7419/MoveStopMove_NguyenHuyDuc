@@ -14,7 +14,6 @@ public class Level : MonoBehaviour
     /// 3. Bot Right conner
     /// </summary>
     [SerializeField] private List<Transform> characterSpawnLocations;
-    [SerializeField] private HairDataConfigSO hairDataConfigSO;
 
     [SerializeField] private Player playerPrefab;
     [SerializeField] private Bot botPrefab;
@@ -60,15 +59,15 @@ public class Level : MonoBehaviour
 
     public void GenerateSpawnPoint()
     {
-        float pos_x=characterSpawnLocation.position.x;
-        float pos_y=characterSpawnLocation.position.y;
-        float pos_z=characterSpawnLocation.position.z;
+        float pos_x = characterSpawnLocation.position.x;
+        float pos_y = characterSpawnLocation.position.y;
+        float pos_z = characterSpawnLocation.position.z;
         float sign_x = Mathf.Sign(pos_x);
         float sign_z = Mathf.Sign(pos_z);
 
-        while (spawnPositions.Count < maximumNoExistedBot+1)
+        while (spawnPositions.Count < maximumNoExistedBot + 1)
         {
-            float offset=Random.Range(-40f,40f);
+            float offset = Random.Range(-40f, 40f);
             pos_x = Random.Range(min_x, max_x);
             pos_z = Random.Range(min_z, max_z);
             // pos_x -= sign_x * offset;
@@ -78,7 +77,7 @@ public class Level : MonoBehaviour
             Vector3 pos = new Vector3(pos_x, pos_y, pos_z);
             if (HasObtacle(pos)) continue;
             spawnPositions.Add(pos);
-            
+
         }
     }
 
@@ -89,7 +88,7 @@ public class Level : MonoBehaviour
         Player player = SimplePool.Spawn<Player>(playerPrefab, spawnPos, playerPrefab.TF.rotation);
         player.SetJoyStickController(GameManager.Ins.Joystick);
         // Skin hairSkin=hairDataConfigSO.GetHairSkinByEnum(HairSkinEnum.Horn);
-        // player.SetHairSkin(hairSkin);
+        player.InitFullSetSkin(0);
         player.OnInit(id);
         id++;
         GameManager.Ins.SetCameraTarget(player);
@@ -104,6 +103,8 @@ public class Level : MonoBehaviour
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
         Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
+        bot.OnInit(id);
+        id++;
         totalCharacter--;
         NumberOfExistedBots++;
     }
@@ -114,8 +115,7 @@ public class Level : MonoBehaviour
         {
             Vector3 spawnPos = spawnPositions[i];
             Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
-            Skin hairSkin=hairDataConfigSO.GetRandomHairSkin();
-            bot.SetHairSkin(hairSkin);
+            bot.InitRandomItem();
             bot.OnInit(id);
             id++;
             totalCharacter--;

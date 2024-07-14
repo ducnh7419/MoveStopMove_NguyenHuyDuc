@@ -51,5 +51,21 @@ namespace GloabalEnum
     {
         None = 0
     }
+
+    public enum EBuffType{
+        None=0,
+        RangeBuff=1,
+        SpeedBuff=2,
+        GoldBuff=3
+    }
+
+    public enum EItemType{
+        None=0,
+        Hair=1,
+        Pant=2,
+        Shield=3,
+        FullSet=4
+    }
+
     
 }

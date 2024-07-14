@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager ins;
     private State currState;
 
-    
+    public ItemDataConfigSO ItemDataConfigSO;
 
     [SerializeField] private CameraFollow m_Camera;
 

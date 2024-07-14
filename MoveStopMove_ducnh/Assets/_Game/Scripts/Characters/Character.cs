@@ -13,20 +13,15 @@ public class Character : GameUnit
     protected bool isMoving;
     protected float attackSpeed=1f;
     private int score;
+    public CharacterSkin characterSkin;
     public UnityAction UnityAction;
     [SerializeField]private SpriteRenderer navigatorRenderer;
     [SerializeField] private  Animator animator;
     [SerializeField] private WeaponHolder weaponHolder;
-    [SerializeField] private SkinHolder hairSkinHolder;
-    [SerializeField] private SkinHolder shieldHolder;
-    [SerializeField] private SkinnedMeshRenderer pantRenderer;
-
     private List<Character> targets = new List<Character>();
     private Character target=null;
     private bool isAttackInCoolDown;
     private string currentAnim="idle";
-
-    
 
     public bool IsMoving { get => isMoving; }
     public bool IsAttacking;
@@ -49,6 +44,15 @@ public class Character : GameUnit
         
     }
 
+    public virtual void InitRandomItem(){
+        characterSkin.InitRandomItem();
+    }
+
+    public virtual void InitFullSetSkin(int id){
+        characterSkin.InitFullSetSkin(id);
+    }
+
+    
 
     private IEnumerator DelayAttack()
     {
@@ -161,25 +165,6 @@ public class Character : GameUnit
         IsAttacking=true;
     }
 
-    public void SetHairSkin(Skin skin){
-        if(skin!=null){
-            
-        }           
-    }
-
-    public void SetPantSkin(PantSkin pantSkin)
-    {
-        if(pantSkin!=null){
-            pantRenderer.material=pantSkin.Material;
-        }           
-    }
-
-    public void SetShieldSkin(ShieldSkin skin){
-        if(skin!=null){
-            shieldHolder.SetSkin(skin);
-        }       
-    }
-
     public void TurnOnNavigator(){
         navigatorRenderer.enabled=true;
     }
@@ -193,4 +178,6 @@ public class Character : GameUnit
         SimplePool.Despawn(this);
     }
 }
+
+
 
