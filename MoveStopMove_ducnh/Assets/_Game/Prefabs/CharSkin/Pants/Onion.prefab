@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 5
-  icon: {fileID: -1006376257, guid: fa6f6876198759b49a3daf9c8ae602f4, type: 3}
-  TfWeaponHolder: {fileID: 0}
-  TfHairHolder: {fileID: 0}
-  mrPant: {fileID: 9018985954323490425}
+  MrBody: {fileID: 0}
+  HairHolder: {fileID: 0}
+  WingHolder: {fileID: 0}
+  TailHolder: {fileID: 0}
+  MrPant: {fileID: 9018985954323490425}

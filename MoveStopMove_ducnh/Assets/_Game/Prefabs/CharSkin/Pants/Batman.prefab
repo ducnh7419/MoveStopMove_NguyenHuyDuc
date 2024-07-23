@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 5
-  icon: {fileID: 1671384100, guid: 1e966d910547f75498e64c268c72f79f, type: 3}
-  TfWeaponHolder: {fileID: 0}
-  TfHairHolder: {fileID: 0}
-  mrPant: {fileID: 9162454306935037135}
+  MrBody: {fileID: 0}
+  HairHolder: {fileID: 0}
+  WingHolder: {fileID: 0}
+  TailHolder: {fileID: 0}
+  MrPant: {fileID: 9162454306935037135}
 --- !u!137 &9162454306935037135
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

@@ -88,11 +88,11 @@ public class Level : MonoBehaviour
         Player player = SimplePool.Spawn<Player>(playerPrefab, spawnPos, playerPrefab.TF.rotation);
         player.SetJoyStickController(GameManager.Ins.Joystick);
         // Skin hairSkin=hairDataConfigSO.GetHairSkinByEnum(HairSkinEnum.Horn);
-        player.InitFullSetSkin(0);
+        // player.InitFullSetSkin(0);
         player.OnInit(id);
         id++;
         GameManager.Ins.SetCameraTarget(player);
-        // UserDataManager.Ins.Player=player;
+        UserDataManager.Ins.Player=player;
         totalCharacter--;
         NumberOfExistedBots++;
         spawnPositions.RemoveAt(rdn);

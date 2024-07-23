@@ -85,7 +85,7 @@ SkinnedMeshRenderer:
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  m_DirtyAABB: 1
+  m_DirtyAABB: 0
 --- !u!114 &5151621048886264680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 5
-  icon: {fileID: 1840894354, guid: b4c94ccdb7b1b0f459375e7984db3839, type: 3}
-  TfWeaponHolder: {fileID: 0}
-  TfHairHolder: {fileID: 0}
-  mrPant: {fileID: 2283775323888329421}
+  MrBody: {fileID: 0}
+  HairHolder: {fileID: 0}
+  WingHolder: {fileID: 0}
+  TailHolder: {fileID: 0}
+  MrPant: {fileID: 2283775323888329421}

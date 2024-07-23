@@ -115,8 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
-  icon: {fileID: 21300000, guid: b6262b96f586ef44b9d39d3f062b8358, type: 3}
-  TfWeaponHolder: {fileID: 0}
-  TfHairHolder: {fileID: 0}
-  mrPant: {fileID: 0}
+  poolType: 13
+  MrBody: {fileID: 0}
+  HairHolder: {fileID: 0}
+  WingHolder: {fileID: 0}
+  TailHolder: {fileID: 0}
+  MrPant: {fileID: 0}

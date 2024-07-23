@@ -13,19 +13,22 @@ public class ScrollView : UICanvas
     private GameObject btnSelectGO;
     private GameObject btnUnEquipGO;
     protected EItemType eItemType;
-    protected List<ScrollViewItem> list=new();
+    protected List<ScrollViewItem> list = new();
     private ItemData selectedItem;
     public Transform parentContent;
-    [SerializeField]protected ScrollViewItem scrollViewItem;
+    [SerializeField] protected ScrollViewItem scrollViewItem;
     [SerializeField] private Button btnPurchase;
     [SerializeField] private Button btnSelect;
     [SerializeField] private Button btnUnEquip;
-    [SerializeField] TextMeshPro description;
+    [SerializeField] TextMeshProUGUI description;
+    [SerializeField] TextMeshProUGUI priceText;
 
-    protected virtual void Start(){
-        btnPurchaseGO=btnPurchase.gameObject;
-        btnSelectGO=btnSelect.gameObject;
-        btnUnEquipGO=btnUnEquip.gameObject;
+
+    protected virtual void Start()
+    {
+        btnPurchaseGO = btnPurchase.gameObject;
+        btnSelectGO = btnSelect.gameObject;
+        btnUnEquipGO = btnUnEquip.gameObject;
         btnPurchase.onClick.AddListener(OnPurchaseBtnClicked);
         btnSelect.onClick.AddListener(OnSelectBtnClicked);
         btnUnEquip.onClick.AddListener(OnUnEquipBtnClicked);
@@ -33,55 +36,87 @@ public class ScrollView : UICanvas
 
     private void OnPurchaseBtnClicked()
     {
-        if(UserDataManager.Ins.PurchaseItem(selectedItem.Id,eItemType)){
+        if (UserDataManager.Ins.PurchaseItem(selectedItem.Id, eItemType))
+        {
             btnPurchaseGO.SetActive(false);
             btnSelectGO.SetActive(true);
         }
     }
 
-    private void OnSelectBtnClicked(){
-        UserDataManager.Ins.EquipItem(selectedItem.Id,eItemType);
+    public void DeActiveAll(){
+        btnPurchaseGO.SetActive(false);
+        btnSelectGO.SetActive(false);
+        btnUnEquipGO.SetActive(false);
+    }
+
+    private void OnSelectBtnClicked()
+    {
+        UserDataManager.Ins.EquipItem(selectedItem.Id, eItemType);
         btnSelectGO.SetActive(false);
         btnUnEquipGO.SetActive(true);
     }
 
-    private void OnUnEquipBtnClicked(){
+    private void OnUnEquipBtnClicked()
+    {
         UserDataManager.Ins.UnEquipItem(eItemType);
         btnSelectGO.SetActive(true);
         btnUnEquipGO.SetActive(false);
     }
 
-    protected void GenerateScrollViewItem(List<ItemData> items){
-        for(int i=0;i<items.Count;i++){
-            ScrollViewItem item=Instantiate(scrollViewItem,parentContent);
+    protected void GenerateScrollViewItem(List<ItemData> items)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            ScrollViewItem item = Instantiate(scrollViewItem, parentContent);
             item.SetImageIcon(items[i].icon);
             item.SetID(items[i].Id);
-            list.Add(item);
-            item.Button.onClick.AddListener(()=>SelectItem(item.ID));
+            item.Button.onClick.AddListener(() => SelectItem(item.Id));
             item.Setup(eItemType);
+            list.Add(item);
         }
     }
-   
 
-   public void SelectItem(int id){
+
+    public void SelectItem(int id)
+    {
         Debug.Log("Clicked");
-        for (int i=0;i<list.Count;i++){
-            if(list[i].ID==id){
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].Id == id)
+            {
                 list[i].ChangeSelectedStatus(true);
-                selectedItem=GameManager.Ins.ItemDataConfigSO.GetItemData(eItemType,list[i].ID);
-                description.text=selectedItem.Description;
-                if(!UserDataManager.Ins.CheckPurchasedItem(selectedItem.Id,eItemType)) return;
-                btnPurchaseGO.SetActive(false);
-                if(UserDataManager.Ins.CheckCurrentEquippedItem(selectedItem.Id,eItemType)){
-                    btnSelectGO.SetActive(false);
-                    btnUnEquipGO.SetActive(true);
-                }else{
-                    btnUnEquipGO.SetActive(false);
-                    btnSelectGO.SetActive(true);
-                }
-            }else{
+            }
+            else
+            {
                 list[i].ChangeSelectedStatus(false);
             }
+        }
+        selectedItem = GameManager.Ins.ItemDataConfigSO.GetItemData(eItemType, id);
+        description.text = selectedItem.Description;
+        priceText.text = selectedItem.Price.ToString();
+        UserDataManager.Ins.ChangeSkin(selectedItem.Id, eItemType);
+        if (UserDataManager.Ins.CheckPurchasedItem(selectedItem.Id, eItemType))
+        {
+            btnPurchaseGO.SetActive(false);
+            if (selectedItem.Price > UserDataManager.Ins.GetCurrentBudget())
+            {
+                priceText.color = Color.red;
+            }
+            if (UserDataManager.Ins.CheckCurrentEquippedItem(selectedItem.Id, eItemType))
+            {
+                btnSelectGO.SetActive(false);
+                btnUnEquipGO.SetActive(true);
+            }
+            else
+            {
+                btnUnEquipGO.SetActive(false);
+                btnSelectGO.SetActive(true);
+            }
+        }
+        else
+        {
+            DeActiveAll();
+            btnPurchaseGO.SetActive(true);
         }
     }
 }

@@ -96,7 +96,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 67c567da09b9c714b9b2a5b7f471fd7c,
         type: 3}
       propertyPath: m_Name
-      value: Arrow
+      value: Arrow 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -105,7 +105,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 67c567da09b9c714b9b2a5b7f471fd7c,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -4976258267075682141}
+      addedObject: {fileID: -7087257664127181388}
   m_SourcePrefab: {fileID: 100100000, guid: 67c567da09b9c714b9b2a5b7f471fd7c, type: 3}
 --- !u!1 &5347988814730680721 stripped
 GameObject:
@@ -113,7 +113,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4113530747254964376}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-4976258267075682141
+--- !u!114 &-7087257664127181388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,12 +122,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5347988814730680721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
+  m_Script: {fileID: 11500000, guid: ff0a8146a1834cc4e978ec2aa5792df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 7
-  MrBody: {fileID: 0}
-  HairHolder: {fileID: 0}
-  WingHolder: {fileID: 0}
-  TailHolder: {fileID: 0}
-  MrPant: {fileID: 0}
+  poolType: 5
+  ESkinType: 1
+  EHairs: 0
+  EPants: 0
+  EShields: 0
+  EFullSets: 0

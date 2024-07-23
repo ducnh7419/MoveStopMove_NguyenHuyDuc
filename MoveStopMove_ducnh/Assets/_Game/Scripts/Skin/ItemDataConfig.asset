@@ -113,7 +113,7 @@ MonoBehaviour:
     Value: 0
     SkinPrefab: {fileID: -1122901998076261682, guid: 49eb6325c11d0974893882d2a2f9df7c,
       type: 3}
-    Price: 0
+    Price: 150
   - Id: 2
     Name: Crown
     Description: 

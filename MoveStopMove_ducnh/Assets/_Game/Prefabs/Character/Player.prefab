@@ -124,6 +124,37 @@ MonoBehaviour:
   areaCollider: {fileID: 5483898419030999561}
   TF: {fileID: 2214161889541582250}
   character: {fileID: 807623632792965339}
+--- !u!1 &950836939795258813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7693826851105525520}
+  m_Layer: 0
+  m_Name: FullSetHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7693826851105525520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950836939795258813}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 548752010740259095}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2621074408170294913
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,11 +527,13 @@ MonoBehaviour:
   poolType: 3
   characterConfig: {fileID: 11400000, guid: 860b605248672234a826187428b5cc54, type: 2}
   characterSkin:
+    FullSetHolder: {fileID: 7693826851105525520}
     WingHolder: {fileID: 0}
     HairHolder: {fileID: 4801849651484942043}
-    TailHolder: {fileID: 0}
     ShieldHolder: {fileID: 2959686256352977955}
+    FullSkinRoot: {fileID: 6227672505043833228}
     MrPant: {fileID: 4447888039391183618}
+    MrBody: {fileID: 4781432014204585569}
   navigatorRenderer: {fileID: 4322643241300978149}
   animator: {fileID: 7993148424827655915}
   weaponHolder: {fileID: 5889543738816786403}
@@ -508,6 +541,7 @@ MonoBehaviour:
   Joystick: {fileID: 0}
   rb: {fileID: 9195972136115506977}
   attackArea: {fileID: 1521923256328320246}
+  Coin: 0
 --- !u!54 &9195972136115506977
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1467,6 +1501,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -4431429744085825124, guid: 38f9296dc39c27647a0119314baf12a2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7693826851105525520}
     - targetCorrespondingSourceObject: {fileID: -1232451692195220358, guid: 38f9296dc39c27647a0119314baf12a2,
         type: 3}
       insertIndex: -1
@@ -1484,6 +1522,12 @@ PrefabInstance:
 --- !u!4 &29095161749830545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 38f9296dc39c27647a0119314baf12a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4980393137011576971}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &548752010740259095 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4431429744085825124, guid: 38f9296dc39c27647a0119314baf12a2,
     type: 3}
   m_PrefabInstance: {fileID: 4980393137011576971}
   m_PrefabAsset: {fileID: 0}
@@ -1508,6 +1552,12 @@ Transform:
 --- !u!137 &4447888039391183618 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4980393137011576971}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4781432014204585569 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8699012472884554006, guid: 38f9296dc39c27647a0119314baf12a2,
     type: 3}
   m_PrefabInstance: {fileID: 4980393137011576971}
   m_PrefabAsset: {fileID: 0}

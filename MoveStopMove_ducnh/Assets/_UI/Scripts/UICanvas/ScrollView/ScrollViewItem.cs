@@ -6,19 +6,20 @@ using UnityEngine.UI;
 
 public class ScrollViewItem : MonoBehaviour
 {
-    public int ID;
+    public int Id;
     public Button Button;
     public Image ImgSelect;
     public Image ImgIcon;
     public Image ImgLock;
+    private GameObject imgSelectGO;
 
-    private void Start(){
-        
+    private void Awake(){
+        imgSelectGO=ImgSelect.gameObject;
     }
 
     public void Setup(EItemType eItemType)
     {
-        if (UserDataManager.Ins.CheckPurchasedItem(ID,eItemType))
+        if (UserDataManager.Ins.CheckPurchasedItem(Id,eItemType))
         {
             ImgLock.gameObject.SetActive(false);
         }
@@ -34,10 +35,10 @@ public class ScrollViewItem : MonoBehaviour
     }
 
     public void ChangeSelectedStatus(bool selected){
-        ImgSelect.gameObject.SetActive(selected);
+        imgSelectGO.SetActive(selected);
     }
 
     public void SetID(int id){
-        ID = id;
+        Id = id;
     }
 }

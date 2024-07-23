@@ -61,17 +61,17 @@ public class PoolControlerEditor : Editor
                 {
                     Transform tf = new GameObject(pool.Pool[i].prefab.poolType.ToString()).transform;
                     tf.parent = pool.transform;
-                    pool.Pool[i].root = tf; 
+                    pool.Pool[i].root = tf;
                 }
             }
-            
+
             for (int i = 0; i < pool.Particle.Length; i++)
             {
                 if (pool.Particle[i].root == null)
                 {
                     Transform tf = new GameObject(pool.Particle[i].particleType.ToString()).transform;
                     tf.parent = pool.transform;
-                    pool.Particle[i].root = tf; 
+                    pool.Particle[i].root = tf;
                 }
             }
         }
@@ -116,7 +116,7 @@ public class PoolAmount
     public int amount;
     public bool collect;
 
-    public PoolAmount (Transform root, GameUnit prefab, int amount, bool collect)
+    public PoolAmount(Transform root, GameUnit prefab, int amount, bool collect)
     {
         this.root = root;
         this.prefab = prefab;
@@ -143,13 +143,27 @@ public enum ParticleType
 
 public enum PoolType
 {
-    None,
-    Weapon,
-    Bullet,
-    Player,
-    Bot,
-    Skin
-    
+    None = 0,
+    Weapon = 1,
+    Bullet = 2,
+    Player = 3,
+    Bot = 4,
+    Skin = 5,
+    Crown = 6,
+    Arrow = 7,
+    Cowboy = 8,
+    Ear = 9,
+    Hat = 10,
+    Hat_Cap = 11,
+    Hat_Yellow = 12,
+    Headphone = 13,
+    Horn = 14,
+    Mustache = 15,
+    Shield1=16,
+    Shield2=17,
+    Devil=18
+
 }
+
 
 

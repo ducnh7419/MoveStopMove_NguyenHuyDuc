@@ -14,14 +14,14 @@ namespace GloabalEnum
         Candy = 4
     }
 
-    public enum PantSkinEnum
+    public enum EPants
     {
         None = 0,
         Batman = 1,
         Chambi = 2
     }
 
-    public enum HairSkinEnum{
+    public enum EHairs{
         None=0,
         Arrow=1,
         Cowboy=2,
@@ -35,19 +35,19 @@ namespace GloabalEnum
         Mustache=10
     }
 
-    public enum ShieldEnum{
+    public enum EShields{
         None=0,
         Shield1=1,
         Shield2=2,
     }
 
-    public enum SetFullEnum{
+    public enum EFullSets{
         None=0,
         Devil=1
 
     }
 
-    public enum WeaponSkin
+    public enum EWeapon
     {
         None = 0
     }

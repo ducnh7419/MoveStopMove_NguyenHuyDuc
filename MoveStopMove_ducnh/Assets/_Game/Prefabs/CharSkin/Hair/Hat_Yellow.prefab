@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 48a7273928aaa034aae9a26c3080a167,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 48a7273928aaa034aae9a26c3080a167,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 48a7273928aaa034aae9a26c3080a167,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 48a7273928aaa034aae9a26c3080a167,
         type: 3}
@@ -31,12 +31,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 48a7273928aaa034aae9a26c3080a167,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.094
+      value: -0.018
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 48a7273928aaa034aae9a26c3080a167,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.19
+      value: -0.196
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 48a7273928aaa034aae9a26c3080a167,
         type: 3}
@@ -115,8 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 5
-  icon: {fileID: 21300000, guid: e7c34ada89c19a240be42d096d4c80e0, type: 3}
-  TfWeaponHolder: {fileID: 0}
-  TfHairHolder: {fileID: 0}
-  mrPant: {fileID: 0}
+  poolType: 12
+  MrBody: {fileID: 0}
+  HairHolder: {fileID: 0}
+  WingHolder: {fileID: 0}
+  TailHolder: {fileID: 0}
+  MrPant: {fileID: 0}

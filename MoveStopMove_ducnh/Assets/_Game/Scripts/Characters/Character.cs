@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -46,6 +47,10 @@ public class Character : GameUnit
 
     public virtual void InitRandomItem(){
         characterSkin.InitRandomItem();
+    }
+
+    public virtual void ChangeSkin(int id,EItemType eItemType){
+        characterSkin.InitSkin(eItemType,id);
     }
 
     public virtual void InitFullSetSkin(int id){

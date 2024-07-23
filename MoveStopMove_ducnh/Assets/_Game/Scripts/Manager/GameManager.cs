@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private State currState;
 
     public ItemDataConfigSO ItemDataConfigSO;
+    public WeaponDataSO WeaponDataSO;
 
     [SerializeField] private CameraFollow m_Camera;
 
@@ -124,6 +125,7 @@ public class GameManager : MonoBehaviour
 
     private void OnMainMenu()
     {
+        UIManager.Ins.CloseAll();
         m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,2.45f,-10.2f),Quaternion.Euler(0,0,0));
         Joystick=UIManager.Ins.OpenUI<UICJoystick>().dynamicJoystick;
         LevelManager.Ins.GenerateLevel();

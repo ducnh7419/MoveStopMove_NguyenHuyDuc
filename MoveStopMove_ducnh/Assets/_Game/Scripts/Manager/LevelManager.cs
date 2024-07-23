@@ -25,7 +25,8 @@ public class LevelManager : MonoBehaviour
 
     public void GenerateLevel()
     {
-        level=Instantiate(levels[0]);
+        if(level==null)
+            level=Instantiate(levels[0]);
     }
     
 

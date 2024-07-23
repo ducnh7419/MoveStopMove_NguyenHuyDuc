@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class Skin : GameUnit
 {
-    public SkinnedMeshRenderer MrBody;
-    public SkinHolder HairHolder;
-    public SkinHolder WingHolder;
-    public SkinHolder TailHolder;
+    public FullSet FullSet;
     public SkinnedMeshRenderer MrPant;
+
+    public void OnDespawn(){
+        SimplePool.Despawn(this);
+    }
+
+    public void SetScale(Vector3 scale){
+        TF.localScale = scale;
+    }
 }

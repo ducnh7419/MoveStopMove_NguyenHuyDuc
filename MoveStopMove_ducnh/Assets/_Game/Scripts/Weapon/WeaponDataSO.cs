@@ -2,19 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GloabalEnum;
+using Unity.VisualScripting;
+using System;
 
-[CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/WeaponSO", order = 1)]
+[CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/WeaponDataSO", order = 3)]
 public class WeaponDataSO : ScriptableObject
 {
-    [SerializeField]private List<Weapon> weapons;
+    public List<WeaponData> weapons=new();
     
-    public Weapon GetWeaponByEnum(WeaponEnum weaponEnum ){
-        int index=(int)weaponEnum;
+    public WeaponData GetWeaponDataById(int id ){
         for(int i=0;i<weapons.Count;i++){
-            if(i==index){
+            if(weapons[i].Id==id){
                 return weapons[i];
             }
         }
-        return weapons[0];
+        return null;
     }
+    
+}
+
+[Serializable]
+public class WeaponData{
+    public int Id;
+    public string Name;
+    public string Description;
+    public Sprite Icon;
+    public int Price;
+    public Weapon WeaponPrefab;
 }

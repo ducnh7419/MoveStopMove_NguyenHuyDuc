@@ -14,6 +14,7 @@ public class SetFullScrollView : ScrollView
     protected override void Start()
     {
         base.Start();
+        
         List<ItemData> items=GameManager.Ins.ItemDataConfigSO.SetFullDataConfig;
         GenerateScrollViewItem(items);
     }

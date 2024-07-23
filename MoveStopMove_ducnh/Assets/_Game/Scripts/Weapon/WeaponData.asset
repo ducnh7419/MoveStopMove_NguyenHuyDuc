@@ -13,8 +13,31 @@ MonoBehaviour:
   m_Name: WeaponData
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: -7672517947198740057, guid: 1b602aeec874335459b9ac4f662ce53c, type: 3}
-  - {fileID: -7672517947198740057, guid: 1b602aeec874335459b9ac4f662ce53c, type: 3}
-  - {fileID: 8415838966336699542, guid: c9446a5893066da43b91c2bcb8e74725, type: 3}
-  - {fileID: 436861411293863186, guid: a633e2bc4deba1c45b1e56966af8573f, type: 3}
-  - {fileID: -1184864278944432202, guid: 4a06ad9d663f2924c8c94aea51e1de2d, type: 3}
+  - Id: 0
+    Name: Axe
+    Description: 
+    Icon: {fileID: 21300000, guid: c0e85ffc93ead054f8c67b9085091a5d, type: 3}
+    Price: 0
+    WeaponPrefab: {fileID: 8415838966336699542, guid: c9446a5893066da43b91c2bcb8e74725,
+      type: 3}
+  - Id: 1
+    Name: Boomerang
+    Description: 
+    Icon: {fileID: 0}
+    Price: 0
+    WeaponPrefab: {fileID: 436861411293863186, guid: a633e2bc4deba1c45b1e56966af8573f,
+      type: 3}
+  - Id: 2
+    Name: Candy
+    Description: 
+    Icon: {fileID: 0}
+    Price: 0
+    WeaponPrefab: {fileID: -1184864278944432202, guid: 4a06ad9d663f2924c8c94aea51e1de2d,
+      type: 3}
+  - Id: 3
+    Name: Hammer
+    Description: 
+    Icon: {fileID: 0}
+    Price: 0
+    WeaponPrefab: {fileID: -7672517947198740057, guid: 1b602aeec874335459b9ac4f662ce53c,
+      type: 3}

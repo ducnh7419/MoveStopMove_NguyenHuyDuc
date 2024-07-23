@@ -14,12 +14,15 @@ public class CharacterSkin
 
     [NonSerialized] public Skin ShieldSkin;
 
+    [NonSerialized] public FullSet FullSet;
 
+    public Transform FullSetHolder;
     public Transform WingHolder;
     public Transform HairHolder;
-    public Transform TailHolder;
     public Transform ShieldHolder;
+    public Transform FullSkinRoot;
     public SkinnedMeshRenderer MrPant;
+    public SkinnedMeshRenderer MrBody;
 
 
     public void InitRandomItem(){
@@ -33,28 +36,41 @@ public class CharacterSkin
     }
 
     public void InitRandomFullSet(){
+        if(FullSet!=null){
+            FullSet.OnDespawn();
+        }
         ItemData fullSet=GameManager.Ins.ItemDataConfigSO.RandomItemData(EItemType.FullSet);
-        SimplePool.Spawn(fullSet.SkinPrefab.HairHolder);
+        FullSet=SimplePool.Spawn<FullSet>(fullSet.SkinPrefab.FullSet,FullSetHolder);
+        FullSet.Setup(MrBody,MrPant);
     }
 
     public void InitFullSetSkin(int id){
+        if(FullSet!=null){
+            FullSet.OnDespawn();
+        }
         ItemData fullSet=GameManager.Ins.ItemDataConfigSO.GetItemData(EItemType.FullSet,id);
-        SimplePool.Spawn<SkinHolder>(fullSet.SkinPrefab.HairHolder,fullSet.SkinPrefab.HairHolder.TF);
-        SimplePool.Spawn<SkinHolder>(fullSet.SkinPrefab.WingHolder,fullSet.SkinPrefab.HairHolder.TF);
-        // SimplePool.Spawn(fullSet.SkinPrefab.TailHolder);
+        FullSet=SimplePool.Spawn<FullSet>(fullSet.SkinPrefab.FullSet,FullSetHolder);
+        FullSet.Setup(MrBody,MrPant);
     }
 
     public void InitSkin(EItemType eItemType,int itemId){
         ItemData data=GameManager.Ins.ItemDataConfigSO.GetItemData(eItemType,itemId);
         switch(eItemType){
             case EItemType.Hair:
+                if(HairSkin!=null){
+                    HairSkin.OnDespawn();
+                }
                 HairSkin=SimplePool.Spawn<Skin>(data.SkinPrefab,HairHolder);
+                HairSkin.SetScale(data.SkinPrefab.TF.localScale);
                 break;
             case EItemType.Pant:
                 PantSkin=data.SkinPrefab.MrPant.sharedMaterial;
                 MrPant.material=PantSkin;
                 break;
             case EItemType.Shield:
+                if(ShieldSkin!=null){
+                    ShieldSkin.OnDespawn();
+                }
                 ShieldSkin=SimplePool.Spawn<Skin>(data.SkinPrefab,ShieldHolder);
                 break;
         }

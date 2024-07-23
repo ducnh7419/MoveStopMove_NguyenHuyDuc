@@ -17,7 +17,7 @@ public class WeaponHolder : GameUnit
     }
 
     private void Start() {     
-        Weapon WeaponPrefab= WeaponDataSO.GetWeaponByEnum(GloabalEnum.WeaponEnum.Boomerang);
+        Weapon WeaponPrefab= WeaponDataSO.GetWeaponDataById(0).WeaponPrefab;
         Weapon=SimplePool.Spawn<Weapon>(WeaponPrefab,TF);
         Weapon.SetPositionAndRotation(WeaponPrefab);
         Weapon.OnInit(this);
