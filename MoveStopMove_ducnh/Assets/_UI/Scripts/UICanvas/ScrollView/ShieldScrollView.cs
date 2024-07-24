@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class ShieldScrollView : ScrollView
 {
-     private void Awake() {
-        eItemType=EItemType.Shield;
-    }
+
     
     protected override void Start()
     {

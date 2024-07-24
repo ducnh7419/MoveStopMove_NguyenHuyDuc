@@ -50,16 +50,16 @@ public class UserDataManager : MonoBehaviour
         switch (eItemType)
         {
             case EItemType.Hair:
-                PlayerPrefs.SetString("Purchased Hair",newIds);
+                PlayerPrefs.SetString("Purchased Hair", newIds);
                 break;
             case EItemType.Pant:
-                PlayerPrefs.SetString("Purchased Pant",newIds);
+                PlayerPrefs.SetString("Purchased Pant", newIds);
                 break;
             case EItemType.Shield:
-                PlayerPrefs.SetString("Purchased Shield",newIds);
+                PlayerPrefs.SetString("Purchased Shield", newIds);
                 break;
             case EItemType.FullSet:
-                PlayerPrefs.SetString("Purchased Full Set",newIds);
+                PlayerPrefs.SetString("Purchased Full Set", newIds);
                 break;
 
         }
@@ -110,11 +110,10 @@ public class UserDataManager : MonoBehaviour
             case EItemType.FullSet:
                 key = "Full Set";
                 return key;
-            case EItemType.None:
+            default:
                 key = "";
                 return key;
         }
-        return key;
     }
 
     public bool CheckCurrentEquippedItem(int id, EItemType eItemType)
@@ -130,21 +129,18 @@ public class UserDataManager : MonoBehaviour
 
     public void ChangeSkin(int id, EItemType eItemType)
     {
-        if (eItemType == EItemType.FullSet)
-        {
-            player.InitFullSetSkin(id);
-        }
-        else
-        {
-            player.ChangeSkin(id, eItemType);
-        }
-
+        player.ChangeSkin(id, eItemType);
     }
 
     public void EquipItem(int id, EItemType eItemType)
     {
+        if (eItemType == EItemType.FullSet)
+        {
+            UnEquipAll();
+        }
         string key = GetKey(eItemType);
         PlayerPrefs.SetInt(key, id);
+        ChangeSkin(id, eItemType);
     }
 
 
@@ -152,6 +148,15 @@ public class UserDataManager : MonoBehaviour
     {
         string key = GetKey(eItemType);
         PlayerPrefs.SetInt(key, 0);
+        ChangeSkin(0,eItemType);
+    }
+
+    public void UnEquipAll()
+    {
+        UnEquipItem(EItemType.Hair);
+        UnEquipItem(EItemType.Pant);
+        UnEquipItem(EItemType.Shield);
+        UnEquipItem(EItemType.FullSet);
     }
 
     public int GetEquippedItem(EItemType eItemType)
@@ -162,14 +167,29 @@ public class UserDataManager : MonoBehaviour
 
     public void LoadAllEquippedItem()
     {
-        int hairID = GetEquippedItem(EItemType.Hair);
-        int pantID = GetEquippedItem(EItemType.Hair);
-        int shieldID = GetEquippedItem(EItemType.Shield);
         int fsID = GetEquippedItem(EItemType.FullSet);
-        player.ChangeSkin(hairID, EItemType.Hair);
-        player.ChangeSkin(pantID, EItemType.Pant);
-        player.ChangeSkin(shieldID, EItemType.Shield);
-        player.ChangeSkin(fsID, EItemType.Shield);
+        if(fsID!=0){
+            ChangeSkin(fsID, EItemType.FullSet);
+            return;
+        }
+        ChangeSkin(0, EItemType.FullSet);
+        int hairID = GetEquippedItem(EItemType.Hair);
+        int pantID = GetEquippedItem(EItemType.Pant);
+        int shieldID = GetEquippedItem(EItemType.Shield);
+        ChangeSkin(hairID, EItemType.Hair);
+        ChangeSkin(pantID, EItemType.Pant);
+        ChangeSkin(shieldID, EItemType.Shield);
+        
+
+    }
+
+    public bool CheckEquippedItem(int id, EItemType eItemType)
+    {
+        if (id == GetEquippedItem(eItemType))
+        {
+            return true;
+        }
+        return false;
     }
 
 

@@ -53,9 +53,6 @@ public class Character : GameUnit
         characterSkin.InitSkin(eItemType,id);
     }
 
-    public virtual void InitFullSetSkin(int id){
-        characterSkin.InitFullSetSkin(id);
-    }
 
     
 

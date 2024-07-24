@@ -67,5 +67,13 @@ namespace GloabalEnum
         FullSet=4
     }
 
+    public enum EItemState{
+        None=0,
+        NotPurchased=1,
+        Purchased=2,
+        NotEquipped=3,
+        Equipped=4
+    }
+
     
 }

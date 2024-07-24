@@ -110,19 +110,19 @@ public class ItemDataConfigSO : ScriptableObject
                 return null;
             case EItemType.Pant:
                 list = PantDataConfig;
-                rdn=Random.Range(0, list.Count);
+                rdn=Random.Range(1, list.Count);
                 return list[rdn];
             case EItemType.Hair:
                 list = HairDataConfig;
-                rdn=Random.Range(0, list.Count);
+                rdn=Random.Range(1, list.Count);
                 return list[rdn];
             case EItemType.Shield:
                 list = ShieldDataConfig;
-                rdn=Random.Range(0, list.Count);
+                rdn=Random.Range(1, list.Count);
                 return list[rdn];      
             case EItemType.FullSet:
                 list = SetFullDataConfig;
-                rdn=Random.Range(0, list.Count);
+                rdn=Random.Range(1, list.Count);
                 return list[rdn];
         }
         return null;

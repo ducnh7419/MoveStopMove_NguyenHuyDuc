@@ -17,12 +17,12 @@ public class FullSet : GameUnit
     {
         mrBody.material = MrBody.sharedMaterial;
         mrPant.material= MrPant.sharedMaterial;
-        // if (HairHolder != null)
-        //     SimplePool.Spawn<SkinHolder>(HairHolder,parent);
+        // // if (HairHolder != null)
+        // //     SimplePool.Spawn<SkinHolder>(HairHolder,TF);
         // if (WingHolder != null)
-        //     SimplePool.Spawn<SkinHolder>(WingHolder,parent);
+        //     SimplePool.Spawn<SkinHolder>(WingHolder,TF);
         // if (TailHolder != null)
-        //     SimplePool.Spawn<SkinHolder>(TailHolder,parent);
+        //     SimplePool.Spawn<SkinHolder>(TailHolder,TF);
     }
 
     internal void OnDespawn()

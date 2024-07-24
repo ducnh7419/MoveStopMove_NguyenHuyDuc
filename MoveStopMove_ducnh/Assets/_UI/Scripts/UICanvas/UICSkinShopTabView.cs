@@ -39,20 +39,24 @@ public class UICSkinShopTabView : UICanvas
     private void OpenHairShop(){
         CloseAll();
         HairScrollView.SetActive(true);
+        UserDataManager.Ins.LoadAllEquippedItem();
     }
 
     private void OpenPantShop(){
         CloseAll();
         PantsScrollView.SetActive(true);
+        UserDataManager.Ins.LoadAllEquippedItem();
     }
 
     private void OpenShieldShop(){
         CloseAll();
         ShieldScrollView.SetActive(true);
+        UserDataManager.Ins.LoadAllEquippedItem();
     }
 
     private void OpenFullSetShop(){
         CloseAll();
         SetFullScrollView.SetActive(true);
+        UserDataManager.Ins.LoadAllEquippedItem();
     }
 }

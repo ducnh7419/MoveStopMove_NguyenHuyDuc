@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class HairScrollView : ScrollView
 {
-
-    private void Awake() {
-        eItemType=EItemType.Hair;
-    }
     
     protected override void Start()
     {

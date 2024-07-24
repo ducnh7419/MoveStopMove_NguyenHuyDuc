@@ -7,9 +7,6 @@ using UnityEngine;
 public class PantsScrollView : ScrollView
 {
 
-    private void Awake() {
-        eItemType=EItemType.Pant;
-    }
 
     protected override void Start()
     {

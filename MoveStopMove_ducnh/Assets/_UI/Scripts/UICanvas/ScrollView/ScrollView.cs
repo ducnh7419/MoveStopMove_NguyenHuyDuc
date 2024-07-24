@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GloabalEnum;
 using TMPro;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,11 @@ public class ScrollView : UICanvas
 {
     protected int id;
     private GameObject btnPurchaseGO;
+    private bool isActive;
     private GameObject btnSelectGO;
     private GameObject btnUnEquipGO;
-    protected EItemType eItemType;
     protected List<ScrollViewItem> list = new();
-    private ItemData selectedItem;
+    private ScrollViewItem selectedItem;
     public Transform parentContent;
     [SerializeField] protected ScrollViewItem scrollViewItem;
     [SerializeField] private Button btnPurchase;
@@ -23,7 +24,24 @@ public class ScrollView : UICanvas
     [SerializeField] TextMeshProUGUI description;
     [SerializeField] TextMeshProUGUI priceText;
 
+    private void OnEnable() {
+        isActive=true;
+        for(int i=0; i<list.Count;i++){
+            if(list[i].IsEquipped){
+                SelectItem(list[i].Id);
+                return;
+            }
+        }
+        if(list.Count==0) return;
+        SelectItem(list[0].Id);
+        Debug.Log(selectedItem.Id);
+        
+    }
 
+    private void OnDisable() {
+        isActive=false;
+    }
+    
     protected virtual void Start()
     {
         btnPurchaseGO = btnPurchase.gameObject;
@@ -36,14 +54,17 @@ public class ScrollView : UICanvas
 
     private void OnPurchaseBtnClicked()
     {
-        if (UserDataManager.Ins.PurchaseItem(selectedItem.Id, eItemType))
+        if(isActive==false) return;
+        var item = GameManager.Ins.ItemDataConfigSO.GetItemData(selectedItem.EItemType, selectedItem.Id);
+        if (UserDataManager.Ins.PurchaseItem(item.Id, selectedItem.EItemType))
         {
-            btnPurchaseGO.SetActive(false);
-            btnSelectGO.SetActive(true);
+            ChangeButtonStatus(EItemState.Purchased);
+            selectedItem.SetItemState(EItemState.Purchased);
         }
     }
 
-    public void DeActiveAll(){
+    public void DeActiveAll()
+    {
         btnPurchaseGO.SetActive(false);
         btnSelectGO.SetActive(false);
         btnUnEquipGO.SetActive(false);
@@ -51,28 +72,65 @@ public class ScrollView : UICanvas
 
     private void OnSelectBtnClicked()
     {
-        UserDataManager.Ins.EquipItem(selectedItem.Id, eItemType);
-        btnSelectGO.SetActive(false);
-        btnUnEquipGO.SetActive(true);
+        if(isActive==false) return;
+        var item = GameManager.Ins.ItemDataConfigSO.GetItemData(selectedItem.EItemType, selectedItem.Id);
+        UserDataManager.Ins.EquipItem(item.Id, selectedItem.EItemType);
+        for(int i=0;i<list.Count;i++){
+            if(list[i].Id!=selectedItem.Id){
+                if(list[i].EItemState==EItemState.Equipped){
+                    list[i].SetItemState(EItemState.NotEquipped);
+                    break;
+                }
+            }
+        }
+        ChangeButtonStatus(EItemState.Equipped);
+        selectedItem.SetItemState(EItemState.Equipped);
     }
 
     private void OnUnEquipBtnClicked()
     {
-        UserDataManager.Ins.UnEquipItem(eItemType);
-        btnSelectGO.SetActive(true);
-        btnUnEquipGO.SetActive(false);
+        if(isActive==false) return;
+        UserDataManager.Ins.UnEquipItem(selectedItem.EItemType);
+        ChangeButtonStatus(EItemState.NotEquipped);
+        selectedItem.SetItemState(EItemState.NotEquipped);
     }
 
     protected void GenerateScrollViewItem(List<ItemData> items)
     {
-        for (int i = 0; i < items.Count; i++)
+        for (int i = 1; i < items.Count; i++)
         {
             ScrollViewItem item = Instantiate(scrollViewItem, parentContent);
             item.SetImageIcon(items[i].icon);
             item.SetID(items[i].Id);
+            item.SetItemType(items[i].ItemType);
             item.Button.onClick.AddListener(() => SelectItem(item.Id));
-            item.Setup(eItemType);
+            item.Setup(item.EItemType);
             list.Add(item);
+            if(item.IsEquipped){
+                SelectItem(item.Id);
+            }
+        }
+    }
+
+    public void ChangeButtonStatus(EItemState eItemStatus)
+    {
+        switch (eItemStatus){
+            case EItemState.NotPurchased:
+                DeActiveAll();
+                btnPurchaseGO.SetActive(true);
+                break;
+            case EItemState.Purchased:
+                DeActiveAll();
+                btnSelectGO.SetActive(true);
+                break;
+            case EItemState.Equipped:
+                DeActiveAll();
+                btnUnEquipGO.SetActive(true);
+                break;
+            case EItemState.NotEquipped:
+                DeActiveAll();
+                btnSelectGO.SetActive(true);
+                break;
         }
     }
 
@@ -85,38 +143,24 @@ public class ScrollView : UICanvas
             if (list[i].Id == id)
             {
                 list[i].ChangeSelectedStatus(true);
+                ChangeButtonStatus(list[i].EItemState);
+                Debug.Log(list[i].EItemState);
+                selectedItem=list[i];
             }
             else
             {
                 list[i].ChangeSelectedStatus(false);
             }
         }
-        selectedItem = GameManager.Ins.ItemDataConfigSO.GetItemData(eItemType, id);
-        description.text = selectedItem.Description;
-        priceText.text = selectedItem.Price.ToString();
-        UserDataManager.Ins.ChangeSkin(selectedItem.Id, eItemType);
-        if (UserDataManager.Ins.CheckPurchasedItem(selectedItem.Id, eItemType))
+        var item = GameManager.Ins.ItemDataConfigSO.GetItemData(selectedItem.EItemType, id);
+        if (item.Price > UserDataManager.Ins.GetCurrentBudget())
         {
-            btnPurchaseGO.SetActive(false);
-            if (selectedItem.Price > UserDataManager.Ins.GetCurrentBudget())
-            {
-                priceText.color = Color.red;
-            }
-            if (UserDataManager.Ins.CheckCurrentEquippedItem(selectedItem.Id, eItemType))
-            {
-                btnSelectGO.SetActive(false);
-                btnUnEquipGO.SetActive(true);
-            }
-            else
-            {
-                btnUnEquipGO.SetActive(false);
-                btnSelectGO.SetActive(true);
-            }
+            priceText.color = Color.red;
+        }else{
+            priceText.color = Color.black;
         }
-        else
-        {
-            DeActiveAll();
-            btnPurchaseGO.SetActive(true);
-        }
+        description.text = item.Description;
+        priceText.text = item.Price.ToString();
+        UserDataManager.Ins.ChangeSkin(item.Id, selectedItem.EItemType);
     }
 }

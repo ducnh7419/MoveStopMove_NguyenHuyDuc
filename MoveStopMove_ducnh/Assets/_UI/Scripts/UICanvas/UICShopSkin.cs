@@ -18,5 +18,6 @@ public class UICShopSkin : UICanvas
     private void OnClose()
     {
         GameManager.Ins.ChangeState(GameManager.State.MainMenu);
+        UserDataManager.Ins.LoadAllEquippedItem();
     }
 }
