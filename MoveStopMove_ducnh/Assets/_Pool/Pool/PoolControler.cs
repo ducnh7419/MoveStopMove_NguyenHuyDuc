@@ -161,7 +161,11 @@ public enum PoolType
     Mustache = 15,
     Shield1=16,
     Shield2=17,
-    Devil=18
+    Devil=18,
+    Boomerang = 19,
+    Hammer=20,
+    Candy=21,
+    Axe=22
 
 }
 

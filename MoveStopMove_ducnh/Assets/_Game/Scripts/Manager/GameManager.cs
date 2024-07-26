@@ -97,6 +97,10 @@ public class GameManager : MonoBehaviour
                 currState=State.SkinShop;
                 OnSkinShop();
                 break;
+            case State.WeaponShop:
+                currState=State.WeaponShop;
+                OnWeaponShop();
+                break;
             case State.StartGame:
                 currState=State.StartGame;
                 OnStartGame();
@@ -109,6 +113,13 @@ public class GameManager : MonoBehaviour
                 // OnEndGame();
                 break;
         }
+    }
+
+    private void OnWeaponShop()
+    {
+        UIManager.Ins.CloseAll();
+        m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,12f,-10.2f),Quaternion.Euler(0,0,0));
+        UIManager.Ins.OpenUI<UICShopWeapon>();
     }
 
     private void OnSkinShop()

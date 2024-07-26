@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using GloabalEnum;
@@ -53,7 +54,15 @@ public class Character : GameUnit
         characterSkin.InitSkin(eItemType,id);
     }
 
+    public void InitWeapon(Tuple<int,int> weapSkinId){
+        weaponHolder.Setup(weapSkinId);
+    }
 
+    public void InitRandomWeapon(){
+        WeaponData weaponData= GameManager.Ins.WeaponDataSO.GetRandomWeapon();
+        WeaponSkinData weaponSkinData=weaponData.GetRandomSkin();
+        weaponHolder.Setup(weaponData,weaponSkinData);
+    }
     
 
     private IEnumerator DelayAttack()

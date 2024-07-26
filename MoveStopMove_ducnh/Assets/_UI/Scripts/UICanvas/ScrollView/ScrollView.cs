@@ -58,8 +58,8 @@ public class ScrollView : UICanvas
         var item = GameManager.Ins.ItemDataConfigSO.GetItemData(selectedItem.EItemType, selectedItem.Id);
         if (UserDataManager.Ins.PurchaseItem(item.Id, selectedItem.EItemType))
         {
-            ChangeButtonStatus(EItemState.Purchased);
-            selectedItem.SetItemState(EItemState.Purchased);
+            ChangeButtonStatus(EItemState.NotEquipped);
+            selectedItem.SetItemState(EItemState.NotEquipped);
         }
     }
 
@@ -118,10 +118,6 @@ public class ScrollView : UICanvas
             case EItemState.NotPurchased:
                 DeActiveAll();
                 btnPurchaseGO.SetActive(true);
-                break;
-            case EItemState.Purchased:
-                DeActiveAll();
-                btnSelectGO.SetActive(true);
                 break;
             case EItemState.Equipped:
                 DeActiveAll();

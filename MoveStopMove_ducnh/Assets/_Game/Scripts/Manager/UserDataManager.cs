@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using GloabalEnum;
+using GlobalConstants;
 using UnityEngine;
 
 public class UserDataManager : MonoBehaviour
@@ -25,18 +27,19 @@ public class UserDataManager : MonoBehaviour
         }
     }
 
+    #region PurchaseItem
     public string LoadAllPurchasedItem(EItemType eItemType)
     {
         switch (eItemType)
         {
             case EItemType.Hair:
-                return PlayerPrefs.GetString("Purchased Hair");
+                return PlayerPrefs.GetString(DataKey.PURCHASED_HAIR);
             case EItemType.Pant:
-                return PlayerPrefs.GetString("Purchased Pant");
+                return PlayerPrefs.GetString(DataKey.PURCHASED_PANT);
             case EItemType.Shield:
-                return PlayerPrefs.GetString("Purchased Shield");
+                return PlayerPrefs.GetString(DataKey.PURCHASED_SHIELD);
             case EItemType.FullSet:
-                return PlayerPrefs.GetString("Purchased Full Set");
+                return PlayerPrefs.GetString(DataKey.PURCHASED_FS);
 
         }
         return "";
@@ -50,16 +53,16 @@ public class UserDataManager : MonoBehaviour
         switch (eItemType)
         {
             case EItemType.Hair:
-                PlayerPrefs.SetString("Purchased Hair", newIds);
+                PlayerPrefs.SetString(DataKey.PURCHASED_HAIR, newIds);
                 break;
             case EItemType.Pant:
-                PlayerPrefs.SetString("Purchased Pant", newIds);
+                PlayerPrefs.SetString(DataKey.PURCHASED_PANT, newIds);
                 break;
             case EItemType.Shield:
-                PlayerPrefs.SetString("Purchased Shield", newIds);
+                PlayerPrefs.SetString(DataKey.PURCHASED_SHIELD, newIds);
                 break;
             case EItemType.FullSet:
-                PlayerPrefs.SetString("Purchased Full Set", newIds);
+                PlayerPrefs.SetString(DataKey.PURCHASED_FS, newIds);
                 break;
 
         }
@@ -78,7 +81,7 @@ public class UserDataManager : MonoBehaviour
         if (currentBudget >= itemData.Price)
         {
             SavePurchasedItem(eItemType, id);
-            DecreseBudget(itemData.Price);
+            ChangeBudget(-itemData.Price);
             return true;
         }
         return false;
@@ -93,26 +96,24 @@ public class UserDataManager : MonoBehaviour
         return false;
     }
 
+    #endregion
+
+    #region EquippedItem
+
     private string GetKey(EItemType eItemType)
     {
-        string key = "";
         switch (eItemType)
         {
             case EItemType.Hair:
-                key = "Hair";
-                return key;
+                return DataKey.EQUIPPED_HAIR;
             case EItemType.Pant:
-                key = "Pant";
-                return key;
+                return DataKey.EQUIPPED_PANT;
             case EItemType.Shield:
-                key = "Shield";
-                return key;
+                return DataKey.EQUIPPED_SHIELD;
             case EItemType.FullSet:
-                key = "Full Set";
-                return key;
+                return DataKey.EQUIPPED_FS;
             default:
-                key = "";
-                return key;
+                return "";
         }
     }
 
@@ -148,7 +149,7 @@ public class UserDataManager : MonoBehaviour
     {
         string key = GetKey(eItemType);
         PlayerPrefs.SetInt(key, 0);
-        ChangeSkin(0,eItemType);
+        ChangeSkin(0, eItemType);
     }
 
     public void UnEquipAll()
@@ -168,7 +169,8 @@ public class UserDataManager : MonoBehaviour
     public void LoadAllEquippedItem()
     {
         int fsID = GetEquippedItem(EItemType.FullSet);
-        if(fsID!=0){
+        if (fsID != 0)
+        {
             ChangeSkin(fsID, EItemType.FullSet);
             return;
         }
@@ -179,7 +181,7 @@ public class UserDataManager : MonoBehaviour
         ChangeSkin(hairID, EItemType.Hair);
         ChangeSkin(pantID, EItemType.Pant);
         ChangeSkin(shieldID, EItemType.Shield);
-        
+
 
     }
 
@@ -192,39 +194,109 @@ public class UserDataManager : MonoBehaviour
         return false;
     }
 
+    #endregion
 
-    // public bool PurchaseWeapon(int id){
-    //     currentBudget=GetCurrentBudget();
-    //     if(currentBudget>=itemData.Price){
-    //         PlayerPrefs.SetInt("WP-"+id,1);
-    //         DecreseBudget(itemData.Price);
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    #region PurchaseAndEquipWeapon
 
+    public bool PurchaseWeapon(int id)
+    {
+        currentBudget = GetCurrentBudget();
+        WeaponData weaponData = GameManager.Ins.WeaponDataSO.GetWeaponDataById(id);
+        if (currentBudget >= weaponData.Price)
+        {
+            SavePurchasedWeaponData(id);
+            ChangeBudget(-weaponData.Price);
+            return true;
+        }
+        return false;
+    }
+
+    public void SavePurchasedWeaponData(int id)
+    {
+        string ids = PlayerPrefs.GetString(DataKey.PURCHASED_WEAPON, "0");
+        List<String> listIds = ids.Split('-').ToList();
+        listIds.Add(id.ToString());
+        ids = string.Join("-", listIds);
+        PlayerPrefs.SetString(DataKey.PURCHASED_WEAPON, ids);
+    }
+
+    public bool CheckWeaponPurchased(int id)
+    {
+        Debug.Log(id+","+PlayerPrefs.GetString(DataKey.PURCHASED_WEAPON, "0"));
+        string[] ids = PlayerPrefs.GetString(DataKey.PURCHASED_WEAPON, "0").Split('-');
+        if (ids.Contains(id.ToString()))
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    /// <summary>
+    /// Example: 1_0 is weapon have id 1 and skinId 0
+    /// </summary>
+    /// <param name="weaponDataId"></param>
+    /// <param name="weaponSkinId"></param>
+    public void SaveEquippedWeaponData(int weaponDataId,int weaponSkinId)
+    {
+        StringBuilder val=new StringBuilder(weaponDataId.ToString());
+        val.Append("_"+weaponSkinId);
+        PlayerPrefs.SetString(DataKey.EQUIPPED_WEAPON, val.ToString());
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Tuple (weaponId,SkinId)</returns>
+    public Tuple<int,int> GetEquippedWeapon()
+    {
+        string id=PlayerPrefs.GetString(DataKey.EQUIPPED_WEAPON, "0_0");
+        string[] ids=id.Split('_');
+        return Tuple.Create(Convert.ToInt32(ids[0]), Convert.ToInt32(ids[1]));
+    }
+
+    public bool CheckWeaponEquipped(int weaponId,int weapSkinId){
+        var equippedWeapId=GetEquippedWeapon();
+        if(equippedWeapId.Item1==weaponId&&equippedWeapId.Item2==weapSkinId){
+            return true;
+        }
+        return false;
+    }
+
+    #endregion
+
+    #region WeaponSkin
+
+    public WeaponSkinData GetWeaponSkinDataById(int id, WeaponData weaponData)
+    {
+        return weaponData.GetWeaponSkinById(id);
+    }
+
+    public void InitEquippedWeapon(){
+        var equippedWeapId=GetEquippedWeapon();
+        player.InitWeapon(equippedWeapId);
+    }
+
+    #endregion
+
+    #region budgetData
     public int GetCurrentBudget()
     {
-        currentBudget = PlayerPrefs.GetInt("Budget");
+        currentBudget = PlayerPrefs.GetInt(DataKey.BUDGET);
         return currentBudget;
     }
 
     private void SetBudget(int budget)
     {
-        PlayerPrefs.SetInt("Budget", budget);
+        PlayerPrefs.SetInt(DataKey.BUDGET, budget);
     }
 
-    public void AddBudget(int coin)
+    public void ChangeBudget(int coin)
     {
         int currBudget = GetCurrentBudget();
         currBudget += coin;
         SetBudget(currBudget);
     }
 
-    public void DecreseBudget(int coin)
-    {
-        int currBudget = GetCurrentBudget();
-        currBudget -= coin;
-        SetBudget(currBudget);
-    }
+    #endregion
 }

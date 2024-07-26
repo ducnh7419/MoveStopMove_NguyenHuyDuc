@@ -24,6 +24,8 @@ public class Bot : Character
 
     public override void OnInit(int id){
         base.OnInit(id);
+        InitRandomItem();
+        InitRandomWeapon();
         ChangeState(new IdleState());
         Score=Random.Range(10,51);
         botAttackArea.SetAttackAreaSize(Score);

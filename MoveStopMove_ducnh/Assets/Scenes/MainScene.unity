@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemDataConfigSO: {fileID: 11400000, guid: c7ebf682bc5163a45a70eb7146586b83, type: 2}
-  WeaponDataSO: {fileID: 0}
+  WeaponDataSO: {fileID: 11400000, guid: ade0920278cd4b24497193a0aaf6609c, type: 2}
   m_Camera: {fileID: 961739754}
   Joystick: {fileID: 0}
 --- !u!4 &1938414059

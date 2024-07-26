@@ -7,12 +7,11 @@ using UnityEngine;
 public class Weapon : GameUnit
 {
     [SerializeField] public Bullet  BulletPrefab;
-    [SerializeField] private  MeshRenderer meshRenderer;
+    [SerializeField] public  MeshRenderer MeshRenderer;
     public Character Owner;
 
     public void SetPositionAndRotation(Weapon weaponPrefab){
-        TF.localPosition=Vector3.zero;
-        TF.rotation=weaponPrefab.TF.rotation*Quaternion.Euler(new Vector3(0,0,-35f));
+        TF.SetLocalPositionAndRotation(weaponPrefab.TF.localPosition, weaponPrefab.TF.rotation);
     }
 
     public void OnInit(WeaponHolder weaponHolder){
@@ -28,10 +27,15 @@ public class Weapon : GameUnit
     }
 
     public void Hide(){
-        meshRenderer.enabled=false;
+        MeshRenderer.enabled=false;
     }
 
     public void Show(){
-        meshRenderer.enabled=true;
+        MeshRenderer.enabled=true;
+    }
+
+    internal void OnDespawn()
+    {
+        SimplePool.Despawn(this);
     }
 }

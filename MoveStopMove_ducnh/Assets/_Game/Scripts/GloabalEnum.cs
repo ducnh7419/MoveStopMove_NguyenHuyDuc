@@ -49,7 +49,10 @@ namespace GloabalEnum
 
     public enum EWeapon
     {
-        None = 0
+        None = 0,
+        Hammer=1,
+        Candy=2,
+        Boomerang=3
     }
 
     public enum EBuffType{
@@ -70,9 +73,8 @@ namespace GloabalEnum
     public enum EItemState{
         None=0,
         NotPurchased=1,
-        Purchased=2,
-        NotEquipped=3,
-        Equipped=4
+        NotEquipped=2,
+        Equipped=3
     }
 
     

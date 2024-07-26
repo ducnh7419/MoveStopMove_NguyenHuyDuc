@@ -33,6 +33,7 @@ public class Player : Character
         base.OnInit(id);
         Score=0;
         attackArea.SetAttackAreaSize(Score);
+        UserDataManager.Ins.InitEquippedWeapon();
     }
 
     public void SetJoyStickController(DynamicJoystick joystick){

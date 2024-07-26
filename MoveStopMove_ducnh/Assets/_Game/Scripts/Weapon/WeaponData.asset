@@ -12,32 +12,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259a4a8976ffd5e41a8291c7e6124ca2, type: 3}
   m_Name: WeaponData
   m_EditorClassIdentifier: 
-  weapons:
+  Weapons:
   - Id: 0
-    Name: Axe
+    Name: Hammer
     Description: 
-    Icon: {fileID: 21300000, guid: c0e85ffc93ead054f8c67b9085091a5d, type: 3}
+    Icon: {fileID: 21300000, guid: da504079f4e7835438b2a8df91e01bc1, type: 3}
+    EWeapon: 1
+    Skins:
+    - Id: 0
+      Name: 
+      Icon: {fileID: 21300000, guid: da504079f4e7835438b2a8df91e01bc1, type: 3}
+      weaponSkinPrefab: {fileID: 5089868107236780187, guid: 9e82b06bb00fb0647b1e2046c1e49683,
+        type: 3}
+    - Id: 1
+      Name: 
+      Icon: {fileID: 21300000, guid: 02e60892e351aa64a94400b7e5837b67, type: 3}
+      weaponSkinPrefab: {fileID: 5089868107236780187, guid: a54b5adc099867d41833213b8a51c0d5,
+        type: 3}
+    - Id: 2
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 5089868107236780187, guid: 89b4ffaae4f086740af07068d70115bb,
+        type: 3}
+    - Id: 3
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 5089868107236780187, guid: 94807703a52e12c43a63ec3b7be85e1b,
+        type: 3}
     Price: 0
-    WeaponPrefab: {fileID: 8415838966336699542, guid: c9446a5893066da43b91c2bcb8e74725,
+    WeaponPrefab: {fileID: -7672517947198740057, guid: 1b602aeec874335459b9ac4f662ce53c,
       type: 3}
   - Id: 1
-    Name: Boomerang
-    Description: 
-    Icon: {fileID: 0}
-    Price: 0
-    WeaponPrefab: {fileID: 436861411293863186, guid: a633e2bc4deba1c45b1e56966af8573f,
-      type: 3}
-  - Id: 2
     Name: Candy
     Description: 
     Icon: {fileID: 0}
+    EWeapon: 2
+    Skins:
+    - Id: 0
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 5753508611796114255, guid: 3dc57c68fe1822242b5a0be62c581e19,
+        type: 3}
+    - Id: 1
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 5753508611796114255, guid: 6222d210ee2ea564ca0eb197413d13d5,
+        type: 3}
+    - Id: 2
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 5753508611796114255, guid: a604d15e6b40eb141a367e8adeea2a2f,
+        type: 3}
+    - Id: 3
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 5753508611796114255, guid: d396ff5627366714ebc31883c5fa1bdc,
+        type: 3}
+    - Id: 4
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 5753508611796114255, guid: 71192154a55cc9449a8c114132a97ae0,
+        type: 3}
     Price: 0
     WeaponPrefab: {fileID: -1184864278944432202, guid: 4a06ad9d663f2924c8c94aea51e1de2d,
       type: 3}
-  - Id: 3
-    Name: Hammer
+  - Id: 2
+    Name: Boomerang
     Description: 
     Icon: {fileID: 0}
+    EWeapon: 3
+    Skins:
+    - Id: 0
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: -4694565101124347667, guid: bad5c98f21b712441ad1bb53d618abf7,
+        type: 3}
+    - Id: 1
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: -1571597746203134763, guid: aed64051a81cdb74698df5ff3add3940,
+        type: 3}
+    - Id: 2
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: -4568245908553058911, guid: c2abf95a98c7fbb41b43628a1602ac45,
+        type: 3}
+    - Id: 3
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 3066761986087240073, guid: bf63fbdfba8e73647a43bee4d3879a30,
+        type: 3}
+    - Id: 4
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: -1947032226813977710, guid: 49f0f8e04ae2a944883b4a22879e52d2,
+        type: 3}
+    - Id: 5
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 771221309647439949, guid: 7cbe7f98f94d85149bd6087e9a7c7b94,
+        type: 3}
+    - Id: 6
+      Name: 
+      Icon: {fileID: 0}
+      weaponSkinPrefab: {fileID: 5967179234049290815, guid: 4fc68ebd63e33ab40a066031e3224efa,
+        type: 3}
     Price: 0
-    WeaponPrefab: {fileID: -7672517947198740057, guid: 1b602aeec874335459b9ac4f662ce53c,
+    WeaponPrefab: {fileID: 436861411293863186, guid: a633e2bc4deba1c45b1e56966af8573f,
       type: 3}

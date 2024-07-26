@@ -26,14 +26,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9080330763233529339}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.8699968, y: -0.4269654, z: -0.1840639, w: -0.16409361}
+  m_LocalPosition: {x: -0.302, y: 0.225, z: -0.098}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1175590891107672608}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.374, y: -207.661, z: 125.902}
 --- !u!65 &7723202975758710116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67,10 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06bfdfc5724d12c4094a4fe91b31a388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 1
+  poolType: 19
   BulletPrefab: {fileID: 4882336438745608728, guid: 09509f4e3b1a54044ad0fe3ab546ef73,
     type: 3}
-  meshRenderer: {fileID: 1175590891105902784}
+  MeshRenderer: {fileID: 1175590891105902784}
   Owner: {fileID: 0}
 --- !u!1001 &1175590891108071584
 PrefabInstance:
