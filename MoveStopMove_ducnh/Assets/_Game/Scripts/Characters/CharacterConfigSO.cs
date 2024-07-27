@@ -7,5 +7,7 @@ using UnityEngine;
 public class CharacterConfigSO : ScriptableObject
 {
     public float Speed;
-    public Vector3 DefaultAtackAreaScale;
+    public float Range;
+
+    public float AttackSpeed;
 }

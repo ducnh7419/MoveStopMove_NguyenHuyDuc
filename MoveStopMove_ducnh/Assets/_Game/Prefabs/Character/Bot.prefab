@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 0
-  WeaponDataSO: {fileID: 11400000, guid: ade0920278cd4b24497193a0aaf6609c, type: 2}
   owner: {fileID: -2071778296372906726}
 --- !u!1 &1837108131727307429
 GameObject:
@@ -60,6 +59,7 @@ GameObject:
   - component: {fileID: 2641572600663010143}
   - component: {fileID: -2071778296372906726}
   - component: {fileID: 4238481982141773456}
+  - component: {fileID: 67304659668832894}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Character
@@ -150,19 +150,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 4
   characterConfig: {fileID: 11400000, guid: 860b605248672234a826187428b5cc54, type: 2}
-  characterSkin:
-    FullSetHolder: {fileID: 8163987183832289807}
-    WingHolder: {fileID: 0}
+  HairSkin:
     HairHolder: {fileID: 3606394051640065009}
-    ShieldHolder: {fileID: 6502071884055925946}
-    FullSkinRoot: {fileID: 1108908331538869836}
+  PantSkin:
+    MrPant: {fileID: 538327483304337885}
+  FullSetSkin:
+    FullSetHolder: {fileID: 8163987183832289807}
     MrPant: {fileID: 538327483304337885}
     MrBody: {fileID: 8690144562924610750}
   navigatorRenderer: {fileID: 3720041577558518874}
   animator: {fileID: 6066288507882763316}
   weaponHolder: {fileID: 230664222591984641}
   IsAttacking: 0
-  botAttackArea: {fileID: 3979167361065973436}
+  botAttackArea: {fileID: 7901381743958646895}
+  targetIndicator: {fileID: 67304659668832894}
   Agent: {fileID: 4238481982141773456}
   destination: {x: 0, y: 0, z: 0}
 --- !u!195 &4238481982141773456
@@ -187,6 +188,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &67304659668832894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837108131727307429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 0.9716981, g: 0.93961376, b: 0.93961376, a: 0}
+  needBoxIndicator: 0
+  needArrowIndicator: 1
+  needDistanceText: 0
+  indicator: {fileID: 0}
 --- !u!1 &1918215153721472192
 GameObject:
   m_ObjectHideFlags: 0

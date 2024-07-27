@@ -168,6 +168,7 @@ public class UserDataManager : MonoBehaviour
 
     public void LoadAllEquippedItem()
     {
+        if(player==null) return;
         int fsID = GetEquippedItem(EItemType.FullSet);
         if (fsID != 0)
         {
@@ -273,6 +274,7 @@ public class UserDataManager : MonoBehaviour
     }
 
     public void InitEquippedWeapon(){
+        if(player==null) return;
         var equippedWeapId=GetEquippedWeapon();
         player.InitWeapon(equippedWeapId);
     }
@@ -299,4 +301,9 @@ public class UserDataManager : MonoBehaviour
     }
 
     #endregion
+
+    public void ChangePlayerAnim(string anim){
+        if(player==null) return;
+        player.ChangeAnim(anim);
+    }
 }

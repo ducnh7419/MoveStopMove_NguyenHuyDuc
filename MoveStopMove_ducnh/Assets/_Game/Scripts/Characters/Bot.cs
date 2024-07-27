@@ -9,7 +9,8 @@ public class Bot : Character
     public BotAttackArea botAttackArea;
     private IState<Bot> currentState;
     private float totalTimeInCurrentState;
-
+    [SerializeField] private Target targetIndicator;
+    private NavMeshPath navMeshPathTesting;
 
     [Header("NavMesh Agent")]
     public NavMeshAgent Agent;
@@ -22,8 +23,13 @@ public class Bot : Character
         base.Update();
     }
 
+    public bool HasDestination(){
+        return destination!=Vector3.zero;
+    }
+
     public override void OnInit(int id){
         base.OnInit(id);
+        navMeshPathTesting= new();
         InitRandomItem();
         InitRandomWeapon();
         ChangeState(new IdleState());
@@ -32,7 +38,9 @@ public class Bot : Character
         Agent.speed=speed/2;
     }
 
-    
+    public bool CanReachDestination(Vector3 dest){
+        return Agent.CalculatePath(dest,navMeshPathTesting);
+    }
 
 
    public override void StopMoving(){
@@ -88,5 +96,10 @@ public class Bot : Character
     {
         Agent.ResetPath();
         destination=Vector3.zero;
+    }
+
+    public override void OnDespawn(){
+        LevelManager.Ins.DecreseNORemainBots();
+        base.OnDespawn();
     }
 }

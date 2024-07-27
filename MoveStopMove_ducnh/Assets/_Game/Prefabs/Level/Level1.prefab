@@ -82,13 +82,12 @@ MonoBehaviour:
   - {fileID: 7940606776455793412}
   - {fileID: 1092408722027821868}
   - {fileID: 8985651066989477480}
-  hairDataConfigSO: {fileID: 11400000, guid: e42bf8f5fa1d0da40b7de0232b19a8b5, type: 2}
   playerPrefab: {fileID: 807623632792965339, guid: 8a80edd8a8b074241901b5f15771665f,
     type: 3}
   botPrefab: {fileID: -2071778296372906726, guid: e58ec0106255d90408b013b57015b583,
     type: 3}
   totalCharacter: 100
-  maximumNoExistedBot: 50
+  maximumNoExistedBot: 25
 --- !u!114 &5980996700914031684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +117,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: ec9cdc1cd8819584bbf38830f4c374c4, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0fefd8771cd50e745a490c1634b65734, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2305466156221472089
 GameObject:

@@ -1,8 +1,10 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using GloabalEnum;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "ItemDataConfig", menuName = "ScriptableObjects/ItemDataConfig", order = 3)]
 public class ItemDataConfigSO : ScriptableObject
@@ -12,8 +14,9 @@ public class ItemDataConfigSO : ScriptableObject
     public List<ItemData> ShieldDataConfig = new();
     public List<ItemData> SetFullDataConfig = new();
 
-    public EBuffType GetItemBuffType(EItemType type, int id)
+    public Tuple<EBuffType,float> GetItemBuff(EItemType type, int id)
     {
+        if (id==0) return null;
         switch (type)
         {
             case EItemType.Pant:
@@ -21,7 +24,7 @@ public class ItemDataConfigSO : ScriptableObject
                 {
                     if (PantDataConfig[i].Id == id)
                     {
-                        return PantDataConfig[i].EBuffType;
+                        return Tuple.Create(PantDataConfig[i].EBuffType,PantDataConfig[i].Value);
                     }
                 }
                 break;
@@ -30,7 +33,7 @@ public class ItemDataConfigSO : ScriptableObject
                 {
                     if (HairDataConfig[i].Id == id)
                     {
-                        return HairDataConfig[i].EBuffType;
+                        return Tuple.Create(HairDataConfig[i].EBuffType,HairDataConfig[i].Value);
                     }
                 }
                 break;
@@ -39,7 +42,7 @@ public class ItemDataConfigSO : ScriptableObject
                 {
                     if (ShieldDataConfig[i].Id == id)
                     {
-                        return ShieldDataConfig[i].EBuffType;
+                        return Tuple.Create(ShieldDataConfig[i].EBuffType,ShieldDataConfig[i].Value);
                     }
                 }
                 break;
@@ -48,12 +51,12 @@ public class ItemDataConfigSO : ScriptableObject
                 {
                     if (SetFullDataConfig[i].Id == id)
                     {
-                        return SetFullDataConfig[i].EBuffType;
+                        return Tuple.Create(SetFullDataConfig[i].EBuffType,SetFullDataConfig[i].Value);
                     }
                 }
                 break;
         }
-        return EBuffType.None;
+        return null;
     }
 
     public ItemData GetItemData(EItemType type, int id)

@@ -18,6 +18,6 @@ public class AttackState : IState<Bot>
 
     public void OnExit(Bot bot)
     {
-       
+       bot.ClearDestination();
     }
 }

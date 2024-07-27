@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GloabalEnum;
-using Unity.VisualScripting;
+using Random = UnityEngine.Random;
+using System;
 
 [CreateAssetMenu(fileName = "WeaponData", menuName = "ScriptableObjects/WeaponDataSO", order = 3)]
 public class WeaponDataSO : ScriptableObject
@@ -21,9 +22,22 @@ public class WeaponDataSO : ScriptableObject
         return null;
     }
 
-    public WeaponData GetRandomWeapon(){
-        int rdn=Random.Range(0, Weapons.Count);
+    public WeaponData GetRandomWeapon()
+    {
+        int rdn = Random.Range(0, Weapons.Count);
         return Weapons[rdn];
+    }
+
+    public Tuple<EBuffType, float> GetItemBuff( int id)
+    {
+        for (int i = 0; i < Weapons.Count; i++)
+        {
+            if (Weapons[i].Id == id)
+            {
+                return Tuple.Create(Weapons[i].EBuffType, Weapons[i].Value);
+            }
+        }
+        return null;
     }
 
 }
@@ -36,6 +50,8 @@ public class WeaponData
     public string Description;
     public Sprite Icon;
     public EWeapon EWeapon;
+    public EBuffType EBuffType;
+    public float Value;
     public List<WeaponSkinData> Skins;
     public int Price;
     public Weapon WeaponPrefab;
@@ -45,8 +61,10 @@ public class WeaponData
         Skins = new();
     }
 
-    public WeaponSkinData GetWeaponSkinById(int id){
-        for (int i = 0;i<Skins.Count;i++){
+    public WeaponSkinData GetWeaponSkinById(int id)
+    {
+        for (int i = 0; i < Skins.Count; i++)
+        {
             if (Skins[i].Id == id)
             {
                 return Skins[i];
@@ -55,8 +73,9 @@ public class WeaponData
         return null;
     }
 
-    public WeaponSkinData GetRandomSkin(){
-        int rdn=Random.Range(0,Skins.Count);
+    public WeaponSkinData GetRandomSkin()
+    {
+        int rdn = Random.Range(0, Skins.Count);
         return Skins[rdn];
     }
 }

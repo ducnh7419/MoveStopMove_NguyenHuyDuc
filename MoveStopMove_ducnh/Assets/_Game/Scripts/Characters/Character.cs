@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using GloabalEnum;
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
@@ -12,67 +13,110 @@ public class Character : GameUnit
     private int id;
     [SerializeField] private CharacterConfigSO characterConfig;
     protected float speed;
+    private float range;
     protected bool isMoving;
-    protected float attackSpeed=1f;
+    //attack per second
+    protected float attackSpeed;
     private int score;
-    public CharacterSkin characterSkin;
+    public HairSkinImpl HairSkin;
+    public PantSkinImpl PantSkin;
+    public FullSetImpl FullSetSkin;
     public UnityAction UnityAction;
-    [SerializeField]private SpriteRenderer navigatorRenderer;
-    [SerializeField] private  Animator animator;
+    [SerializeField] private SpriteRenderer navigatorRenderer;
+    [SerializeField] private Animator animator;
     [SerializeField] private WeaponHolder weaponHolder;
     private List<Character> targets = new List<Character>();
-    private Character target=null;
+    private Character target = null;
     private bool isAttackInCoolDown;
-    private string currentAnim="idle";
-
+    private string currentAnim = "idle";
+    private float gold =>score+score*goldBuff;
+    private float goldBuff;
     public bool IsMoving { get => isMoving; }
     public bool IsAttacking;
     public int Score { get => score; set => score = value; }
     public int Id { get => id; set => id = value; }
     public Character Target => target;
 
-    protected virtual void Update(){
-        if(GameManager.Ins.CurrState<GameManager.State.StartGame) return;
-        GameManager.Ins.SetCharacterScore(this,score);
+    public float Range => range;
+
+    protected virtual void Update()
+    {
+        if (GameManager.Ins.CurrState < GameManager.State.StartGame) return;
+        GameManager.Ins.SetCharacterScore(this, score);
     }
 
     protected virtual void FixedUpdate()
     {
-        if(GameManager.Ins.CurrState<GameManager.State.StartGame) return;
+        if (GameManager.Ins.CurrState < GameManager.State.StartGame) return;
         if (!isMoving)
         {
             Attack();
         }
-        
+
     }
 
-    public virtual void InitRandomItem(){
-        characterSkin.InitRandomItem();
+    public virtual void OnInit(int id)
+    {
+        Id = id;
+        UnityAction = null;
+        targets = new List<Character>();
+        speed = characterConfig.Speed;
+        range = characterConfig.Range;
+        attackSpeed=characterConfig.AttackSpeed;
+        StopMoving();
+
     }
 
-    public virtual void ChangeSkin(int id,EItemType eItemType){
-        characterSkin.InitSkin(eItemType,id);
+
+    public virtual void InitRandomItem()
+    {
+        HairSkin.InitRandomItem();
+        PantSkin.InitRandomItem();
+        ApplyItemBuff();
     }
 
-    public void InitWeapon(Tuple<int,int> weapSkinId){
+    public virtual void ChangeSkin(int id, EItemType eItemType)
+    {
+        switch (eItemType)
+        {
+            case EItemType.Hair:
+                HairSkin.InitSkin(id);
+                break;
+            case EItemType.Pant:
+                PantSkin.InitSkin(id);
+                break;
+            case EItemType.FullSet:
+                FullSetSkin.InitSkin(id);
+                break;
+        }
+        ApplyItemBuff();
+    }
+
+    public void InitWeapon(Tuple<int, int> weapSkinId)
+    {
+        var weaponBuff=GameManager.Ins.WeaponDataSO.GetItemBuff(weapSkinId.Item1); 
         weaponHolder.Setup(weapSkinId);
+        ApplyWeaponBuff(weaponBuff);
     }
 
-    public void InitRandomWeapon(){
-        WeaponData weaponData= GameManager.Ins.WeaponDataSO.GetRandomWeapon();
-        WeaponSkinData weaponSkinData=weaponData.GetRandomSkin();
-        weaponHolder.Setup(weaponData,weaponSkinData);
+    public void InitRandomWeapon()
+    {
+        WeaponData weaponData = GameManager.Ins.WeaponDataSO.GetRandomWeapon();
+        WeaponSkinData weaponSkinData = weaponData.GetRandomSkin();
+        weaponHolder.Setup(weaponData, weaponSkinData);
+        var weaponBuff=GameManager.Ins.WeaponDataSO.GetItemBuff(weaponData.Id); 
+        ApplyWeaponBuff(weaponBuff);
     }
-    
+
 
     private IEnumerator DelayAttack()
     {
-        yield return new WaitForSeconds(attackSpeed);
-        IsAttacking=false;
-        if(Target==null) yield break;
+        yield return new WaitForSeconds(1f/attackSpeed);
+        IsAttacking = false;
+        if (Target == null) yield break;
         ChangeAnim("attack");
         weaponHolder.Weapon.Fire(Target);
-        isAttackInCoolDown =true;
+        isAttackInCoolDown = true;
         StartCoroutine(CoolDownAttack());
     }
 
@@ -82,24 +126,29 @@ public class Character : GameUnit
     //     target = null;
     // }
 
-    private IEnumerator CoolDownAttack(){
+    private IEnumerator CoolDownAttack()
+    {
         yield return new WaitForSeconds(2f);
-        isAttackInCoolDown=false;
+        isAttackInCoolDown = false;
     }
 
-    public void RemoveTarget(Character target){
-        if(targets.Contains(target))        
+    public void RemoveTarget(Character target)
+    {
+        if (targets.Contains(target))
             targets.Remove(target);
     }
 
-    public void DropUnityActionEvent(Character target){
-        target.UnityAction-=()=>Untarget(target);
+    public void DropUnityActionEvent(Character target)
+    {
+        target.UnityAction -= () => Untarget(target);
     }
 
-    public void Untarget(Character target){
+    public void Untarget(Character target)
+    {
         RemoveTarget(target);
-        if(this.target==null) return;
-        if(this.target.id== target.id){
+        if (this.target == null) return;
+        if (this.target.id == target.id)
+        {
             this.target = null;
         }
     }
@@ -107,9 +156,10 @@ public class Character : GameUnit
 
     public void AddTarget(Character target)
     {
-        if(!targets.Contains(target)){
+        if (!targets.Contains(target))
+        {
             targets.Add(target);
-            target.UnityAction+=()=>Untarget(target);
+            target.UnityAction += () => Untarget(target);
         }
     }
 
@@ -122,17 +172,17 @@ public class Character : GameUnit
         {
             if (Vector3.Distance(TF.position, targets[i].TF.position) < minDist)
             {
-                    target = targets[i];
+                target = targets[i];
             }
         }
     }
-    
+
     protected virtual void Moving()
     {
         isMoving = true;
         ChangeAnim("run");
         // ResetTargets();
-        target=null;
+        target = null;
     }
 
     public virtual void StopMoving()
@@ -142,51 +192,111 @@ public class Character : GameUnit
         ChangeAnim("idle");
     }
 
-    protected virtual void ChangeAnim(string anim){
-        if(anim!=currentAnim){
-            currentAnim=anim;
-            animator.SetTrigger(anim);       
+    public virtual void ChangeAnim(string anim)
+    {
+        if (anim != currentAnim)
+        {
+            currentAnim = anim;
+            animator.SetTrigger(anim);
         }
     }
 
-    public virtual void OnInit(int id)
+    
+    public void ApplyItemBuff()
     {
-        Id=id;
-        UnityAction=null;
-        targets = new List<Character>();
-        speed=characterConfig.Speed;
-        StopMoving();
-        
+        goldBuff=0;
+        if (HairSkin.Exists())
+        {
+            var itemBuff = HairSkin.GetItemBuff();
+            ApplyItemBuffByType(itemBuff.Item1, itemBuff.Item2);
+        }
+        if (PantSkin.Exists())
+        {
+            var itemBuff = PantSkin.GetItemBuff();
+            ApplyItemBuffByType(itemBuff.Item1, itemBuff.Item2);
+        }
+        if (FullSetSkin.Exists())
+        {
+            var itemBuff = FullSetSkin.GetItemBuff();
+            ApplyItemBuffByType(itemBuff.Item1, itemBuff.Item2);
+        }
     }
 
-    public virtual void IncreaseScore(int score){
-        Score+=score;
-        
+    public void ApplyItemBuffByType(EBuffType eBuffType, float value)
+    {
+        switch (eBuffType)
+        {
+            case EBuffType.SpeedBuff:
+                speed += speed * value;
+                break;
+            case EBuffType.RangeBuff:
+                range += range * value;
+                break;
+            case EBuffType.GoldBuff:
+                goldBuff=value;
+                break;
+            case EBuffType.AttackSpeed:
+                attackSpeed+=value;
+                break;
+        }
+    }
+
+    public void ApplyWeaponBuff(Tuple<EBuffType,float> weaponBuff)
+    {
+        float value=weaponBuff.Item2;
+        switch (weaponBuff.Item1)
+        {
+            case EBuffType.SpeedBuff:
+                speed += value;
+                break;
+            case EBuffType.RangeBuff:
+                range += value;
+                break;
+            
+        }
+    }
+    
+    public virtual void IncreaseScore(int score)
+    {
+        Score = Score+score+GameManager.Ins.GameRuleSO.BonusPointPerKill;
+
     }
 
     protected virtual void Attack()
     {
-        if(IsAttacking) return;
-        if(isAttackInCoolDown) return;
-        LockTarget();   
+        if (IsAttacking) return;
+        if (isAttackInCoolDown) return;
+        LockTarget();
         if (Target == null) return;
-        Vector3 direction=Target.TF.position-TF.position;
-        TF.rotation=Quaternion.LookRotation(direction);
+        Vector3 direction = Target.TF.position - TF.position;
+        TF.rotation = Quaternion.LookRotation(direction);
         StartCoroutine(DelayAttack());
-        IsAttacking=true;
+        IsAttacking = true;
     }
 
-    public void TurnOnNavigator(){
-        navigatorRenderer.enabled=true;
+    public void TurnOnNavigator()
+    {
+        navigatorRenderer.enabled = true;
     }
 
-    public void TurnOffNavigator(){
-        navigatorRenderer.enabled=false;
+    public void TurnOffNavigator()
+    {
+        navigatorRenderer.enabled = false;
     }
 
-    public void OnDespawn(){
-        UnityAction();
+    public virtual void OnDespawn()
+    {
+        ChangeAnim("dead");
+        StartCoroutine(DelayDespawn());
+    }
+
+    IEnumerator DelayDespawn()
+    {
+        
+        yield return new WaitForSeconds(0.5f);
         SimplePool.Despawn(this);
+        UnityAction();
+
     }
 }
 

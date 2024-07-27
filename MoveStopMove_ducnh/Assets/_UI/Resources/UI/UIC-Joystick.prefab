@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDestroyOnClose: 0
-  dynamicJoystick: {fileID: 5409668240144595899}
+  DynamicJoystick: {fileID: 5409668240144595899}
 --- !u!1001 &4322181412764670460
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 

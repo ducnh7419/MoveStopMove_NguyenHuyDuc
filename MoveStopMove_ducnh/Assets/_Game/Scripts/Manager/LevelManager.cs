@@ -23,12 +23,40 @@ public class LevelManager : MonoBehaviour
         
     }
 
+    public void StartGame(){
+        level.OnInit();
+    }
+
     public void GenerateLevel()
     {
-        if(level==null)
+        if(level==null){
             level=Instantiate(levels[0]);
+        }
+            
+    }
+
+    public void RestartLevel(){
+        
+        GenerateLevel();
+        GameManager.Ins.ChangeState(GameManager.State.StartGame);
+    }
+
+    public void DestroyLevel(){
+        if(level!=null){
+            Destroy(level.gameObject);
+        }
+    }
+
+    public void SetController(DynamicJoystick joystick){
+        level.SetController(joystick);
     }
     
+    public int GetNORemainBots(){
+         return level.GetNumberOfRemainBots();
+    }
 
+    public void DecreseNORemainBots(){
+        level.DecreseNORemainBots();
+    }
     
 }

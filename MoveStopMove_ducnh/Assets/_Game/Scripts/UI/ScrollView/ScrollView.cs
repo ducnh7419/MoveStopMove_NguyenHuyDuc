@@ -133,7 +133,7 @@ public class ScrollView : UICanvas
 
     public void SelectItem(int id)
     {
-        Debug.Log("Clicked");
+        Debug.Log("Clicked "+id);
         for (int i = 0; i < list.Count; i++)
         {
             if (list[i].Id == id)

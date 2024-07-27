@@ -59,7 +59,8 @@ namespace GloabalEnum
         None=0,
         RangeBuff=1,
         SpeedBuff=2,
-        GoldBuff=3
+        GoldBuff=3,
+        AttackSpeed=4
     }
 
     public enum EItemType{
@@ -75,6 +76,12 @@ namespace GloabalEnum
         NotPurchased=1,
         NotEquipped=2,
         Equipped=3
+    }
+
+    public enum EGameRule{
+        None=0,
+        Range=1,
+        Gold=2
     }
 
     

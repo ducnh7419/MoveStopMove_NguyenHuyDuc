@@ -16,6 +16,7 @@ public class Player : Character
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+        if(Joystick==null) return;
         if (Joystick.Horizontal != 0 || Joystick.Vertical != 0)
         {
             rb.velocity = new Vector3(Joystick.Horizontal * speed * Time.fixedDeltaTime, 0, Joystick.Vertical * speed * Time.fixedDeltaTime);
@@ -34,6 +35,7 @@ public class Player : Character
         Score=0;
         attackArea.SetAttackAreaSize(Score);
         UserDataManager.Ins.InitEquippedWeapon();
+        UserDataManager.Ins.LoadAllEquippedItem();
     }
 
     public void SetJoyStickController(DynamicJoystick joystick){

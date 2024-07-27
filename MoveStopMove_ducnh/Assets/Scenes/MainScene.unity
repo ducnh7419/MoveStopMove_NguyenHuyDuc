@@ -735,6 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ab0cecd03cac74ca79a037f6aff002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameRuleSO: {fileID: 11400000, guid: 17186f5ab48498b4c84f7e31b58f31fe, type: 2}
   ItemDataConfigSO: {fileID: 11400000, guid: c7ebf682bc5163a45a70eb7146586b83, type: 2}
   WeaponDataSO: {fileID: 11400000, guid: ade0920278cd4b24497193a0aaf6609c, type: 2}
   m_Camera: {fileID: 961739754}

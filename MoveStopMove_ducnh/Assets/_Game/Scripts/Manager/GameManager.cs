@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager ins;
     private State currState;
-
+    public GameRuleSO GameRuleSO;
     public ItemDataConfigSO ItemDataConfigSO;
     public WeaponDataSO WeaponDataSO;
 
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.OngoingGame:
                 currState=State.OngoingGame;
-                // OnGoingGame();
+                OnGoingGame();
                 break;
             case State.EndGame:
                 // OnEndGame();
@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
         UIManager.Ins.CloseAll();
         m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,1.31f,-10.2f),Quaternion.Euler(0,0,0));
         UIManager.Ins.OpenUI<UICShopSkin>();
+        UserDataManager.Ins.ChangePlayerAnim("skin_dance");
     }
 
     // private void OnLevelSelectionMenu()
@@ -138,27 +139,30 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Ins.CloseAll();
         m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,2.45f,-10.2f),Quaternion.Euler(0,0,0));
-        Joystick=UIManager.Ins.OpenUI<UICJoystick>().dynamicJoystick;
         LevelManager.Ins.GenerateLevel();
-        Joystick.enabled=false;
         UIManager.Ins.OpenUI<UICMainMenu>();
-
     }
+
+    
 
     // private void OnStartScreen(){
     //     UIManager.Ins.OpenUI<OpeningScreen>();
 
     // }
 
-    // private void OnGoingGame(){
-    //     UIManager.Ins.OpenUI<IngameUI>();
-    // }
+    private void OnGoingGame(){
+        UIManager.Ins.OpenUI<UICInGameUI>();
+    }
 
     private void OnStartGame(){
+        LevelManager.Ins.StartGame();
         SetCameraPositionAndRotation(new Vector3(0.03f,20.4f,-24.9f),Quaternion.Euler(40f,0,0));
-        UIManager.Ins.CloseUI<UICMainMenu>();
-        Joystick.enabled=true;
-        StartCoroutine(DelayChangeState(State.OngoingGame));
+        UIManager.Ins.CloseAll();
+        UIManager.Ins.OpenUI<UICOffScreenIndicator>();
+        UICJoystick uICJoystick=UIManager.Ins.OpenUI<UICJoystick>();
+        Joystick=uICJoystick.DynamicJoystick;
+        LevelManager.Ins.SetController(Joystick);
+        ChangeState(State.OngoingGame);
         
     }
 

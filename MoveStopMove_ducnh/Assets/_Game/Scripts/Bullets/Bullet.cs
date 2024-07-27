@@ -30,7 +30,7 @@ namespace Bullets
 
         private void OnTriggerEnter(Collider other)
         {
-            Character character = CacheCollider<Character>.GetCollider(other.GetComponent<Collider>());
+            Character character = CacheCollider<Character>.GetCollider(other);
             if (character == null) return;
             if (character.TF != target) return;
             character.OnDespawn();

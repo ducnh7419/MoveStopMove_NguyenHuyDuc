@@ -14,7 +14,7 @@ public class Level : MonoBehaviour
     /// 3. Bot Right conner
     /// </summary>
     [SerializeField] private List<Transform> characterSpawnLocations;
-
+    Player player;
     [SerializeField] private Player playerPrefab;
     [SerializeField] private Bot botPrefab;
     private float max_x, min_x, max_z, min_z;
@@ -24,11 +24,14 @@ public class Level : MonoBehaviour
     private Transform characterSpawnLocation;
     [SerializeField] private int totalCharacter;
     [SerializeField] private int maximumNoExistedBot;
-    private int numberOfSpawnedBots;
     private int numberOfExistedBots;
-    private int remainedNoBots => totalCharacter - numberOfSpawnedBots - 1;
+    private int remainedNoBots;
 
-    public int NumberOfExistedBots { get => numberOfExistedBots; set => numberOfExistedBots = value; }
+    public void OnInit(){
+        remainedNoBots=totalCharacter-1;
+        numberOfExistedBots=0;
+        SpawnBots();
+    }
 
     private void Awake()
     {
@@ -43,21 +46,19 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log(spawnPositions.Count);
         SpawnPlayer();
-        SpawnBots();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (NumberOfExistedBots < maximumNoExistedBot && remainedNoBots > 0)
+        if (numberOfExistedBots <= maximumNoExistedBot && remainedNoBots > 0)
         {
             SpawnBotAtRandomPos();
         }
     }
 
-    public void GenerateSpawnPoint()
+    private void GenerateSpawnPoint()
     {
         float pos_x = characterSpawnLocation.position.x;
         float pos_y = characterSpawnLocation.position.y;
@@ -81,35 +82,32 @@ public class Level : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer()
+    private void SpawnPlayer()
     {
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
-        Player player = SimplePool.Spawn<Player>(playerPrefab, spawnPos, playerPrefab.TF.rotation);
-        player.SetJoyStickController(GameManager.Ins.Joystick);
+        player = SimplePool.Spawn<Player>(playerPrefab, spawnPos, playerPrefab.TF.rotation);
         // Skin hairSkin=hairDataConfigSO.GetHairSkinByEnum(HairSkinEnum.Horn);
         // player.InitFullSetSkin(0);
         GameManager.Ins.SetCameraTarget(player);
         UserDataManager.Ins.Player=player;
         player.OnInit(id);
         id++;
-        totalCharacter--;
-        NumberOfExistedBots++;
+        numberOfExistedBots++;
         spawnPositions.RemoveAt(rdn);
     }
 
-    public void SpawnBotAtRandomPos()
+    private void SpawnBotAtRandomPos()
     {
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
         Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
         bot.OnInit(id);
         id++;
-        totalCharacter--;
-        NumberOfExistedBots++;
+        numberOfExistedBots++;
     }
 
-    public void SpawnBots()
+    private void SpawnBots()
     {
         for (int i = 0; i < spawnPositions.Count; i++)
         {
@@ -118,11 +116,11 @@ public class Level : MonoBehaviour
             bot.OnInit(id);
             id++;
             totalCharacter--;
-            NumberOfExistedBots++;
+            numberOfExistedBots++;
         }
     }
 
-    public bool HasObtacle(Vector3 pos)
+    private bool HasObtacle(Vector3 pos)
     {
         if (Physics.Raycast(pos, Vector3.up, out RaycastHit hit, 1f))
         {
@@ -131,5 +129,17 @@ public class Level : MonoBehaviour
         return false;
     }
 
+    public void SetController(DynamicJoystick dynamicJoystick){
+        if(player==null) return;
+        player.SetJoyStickController(GameManager.Ins.Joystick);
+    }
 
+    public int GetNumberOfRemainBots(){
+        return remainedNoBots;
+    }
+
+    public void DecreseNORemainBots(){
+        remainedNoBots--;
+        numberOfExistedBots--;
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UICJoystick : UICanvas
 {
-    [SerializeField]public DynamicJoystick dynamicJoystick;
+    [SerializeField]public DynamicJoystick DynamicJoystick;
     
 
     public void Enabled(bool enabled){
