@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdacf9508374fb84f8b683264f6e7543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
+  poolType: 25
   speed: 20
 --- !u!65 &4044190336464965687
 BoxCollider:
