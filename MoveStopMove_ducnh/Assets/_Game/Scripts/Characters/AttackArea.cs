@@ -26,7 +26,7 @@ public class AttackArea : MonoBehaviour
       TF.localScale=new Vector3(character.Range,character.Range,character.Range)+new Vector3(numberOfTimeIncreased,numberOfTimeIncreased,numberOfTimeIncreased);
    }
 
-   private void OnTriggerExit(Collider other)
+   protected void OnTriggerExit(Collider other)
    {
       if (other.CompareTag(GlobalConstants.Tag.CHARACTER))
       {

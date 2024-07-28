@@ -15,9 +15,11 @@ MonoBehaviour:
   Weapons:
   - Id: 0
     Name: Hammer
-    Description: 
+    Description: +1 Range
     Icon: {fileID: 21300000, guid: da504079f4e7835438b2a8df91e01bc1, type: 3}
     EWeapon: 1
+    EBuffType: 1
+    Value: 1
     Skins:
     - Id: 0
       Name: 
@@ -31,12 +33,12 @@ MonoBehaviour:
         type: 3}
     - Id: 2
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: 4163720b325528e448d5f07d862aea0c, type: 3}
       weaponSkinPrefab: {fileID: 5089868107236780187, guid: 89b4ffaae4f086740af07068d70115bb,
         type: 3}
     - Id: 3
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: 5eba92035308833468c3412f4916f946, type: 3}
       weaponSkinPrefab: {fileID: 5089868107236780187, guid: 94807703a52e12c43a63ec3b7be85e1b,
         type: 3}
     Price: 0
@@ -44,33 +46,35 @@ MonoBehaviour:
       type: 3}
   - Id: 1
     Name: Candy
-    Description: 
-    Icon: {fileID: 0}
+    Description: +3 Range
+    Icon: {fileID: 21300000, guid: ebdba8730c395f84cbdfcd45bfc79351, type: 3}
     EWeapon: 2
+    EBuffType: 1
+    Value: 3
     Skins:
     - Id: 0
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: ebdba8730c395f84cbdfcd45bfc79351, type: 3}
       weaponSkinPrefab: {fileID: 5753508611796114255, guid: 3dc57c68fe1822242b5a0be62c581e19,
         type: 3}
     - Id: 1
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: d3df4fd03601570448c844568cb1c099, type: 3}
       weaponSkinPrefab: {fileID: 5753508611796114255, guid: 6222d210ee2ea564ca0eb197413d13d5,
         type: 3}
     - Id: 2
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: 3128bb7563d82694bb1e7509d64b954b, type: 3}
       weaponSkinPrefab: {fileID: 5753508611796114255, guid: a604d15e6b40eb141a367e8adeea2a2f,
         type: 3}
     - Id: 3
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: f13a1cb1b066bca40900ae21ce65e6bc, type: 3}
       weaponSkinPrefab: {fileID: 5753508611796114255, guid: d396ff5627366714ebc31883c5fa1bdc,
         type: 3}
     - Id: 4
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: cb6d40910a2f18e458e4790f5a108f89, type: 3}
       weaponSkinPrefab: {fileID: 5753508611796114255, guid: 71192154a55cc9449a8c114132a97ae0,
         type: 3}
     Price: 0
@@ -78,45 +82,42 @@ MonoBehaviour:
       type: 3}
   - Id: 2
     Name: Boomerang
-    Description: 
-    Icon: {fileID: 0}
+    Description: +5 Range
+    Icon: {fileID: 21300000, guid: f4571560f8213fa4184218953ddfc5ee, type: 3}
     EWeapon: 3
+    EBuffType: 1
+    Value: 5
     Skins:
     - Id: 0
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: f4571560f8213fa4184218953ddfc5ee, type: 3}
       weaponSkinPrefab: {fileID: -4694565101124347667, guid: bad5c98f21b712441ad1bb53d618abf7,
         type: 3}
     - Id: 1
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: cf43f47352ab4cc4aaac8f44439b37cd, type: 3}
       weaponSkinPrefab: {fileID: -1571597746203134763, guid: aed64051a81cdb74698df5ff3add3940,
         type: 3}
     - Id: 2
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: 4c4d797936e73ca43a9ae0e6edfa3821, type: 3}
       weaponSkinPrefab: {fileID: -4568245908553058911, guid: c2abf95a98c7fbb41b43628a1602ac45,
         type: 3}
     - Id: 3
       Name: 
-      Icon: {fileID: 0}
-      weaponSkinPrefab: {fileID: 3066761986087240073, guid: bf63fbdfba8e73647a43bee4d3879a30,
+      Icon: {fileID: 21300000, guid: 6a3478993ed257e46bee5bcfa4a4af98, type: 3}
+      weaponSkinPrefab: {fileID: -1947032226813977710, guid: 49f0f8e04ae2a944883b4a22879e52d2,
         type: 3}
     - Id: 4
       Name: 
-      Icon: {fileID: 0}
-      weaponSkinPrefab: {fileID: -1947032226813977710, guid: 49f0f8e04ae2a944883b4a22879e52d2,
-        type: 3}
-    - Id: 5
-      Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: 762ccf38a5bc59d4d9885050cf0e3339, type: 3}
       weaponSkinPrefab: {fileID: 771221309647439949, guid: 7cbe7f98f94d85149bd6087e9a7c7b94,
         type: 3}
     - Id: 6
       Name: 
-      Icon: {fileID: 0}
+      Icon: {fileID: 21300000, guid: 358f8e81d49f10445bf14cc325c6ec59, type: 3}
       weaponSkinPrefab: {fileID: 5967179234049290815, guid: 4fc68ebd63e33ab40a066031e3224efa,
         type: 3}
-    Price: 0
+    Price: 250
     WeaponPrefab: {fileID: 436861411293863186, guid: a633e2bc4deba1c45b1e56966af8573f,
       type: 3}

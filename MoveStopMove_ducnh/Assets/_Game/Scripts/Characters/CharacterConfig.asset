@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
   Speed: 650
-  Range: 3
+  Range: 5
   AttackSpeed: 1

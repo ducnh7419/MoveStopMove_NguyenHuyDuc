@@ -56,6 +56,10 @@ public class Level : MonoBehaviour
         {
             SpawnBotAtRandomPos();
         }
+        if(remainedNoBots<=0){
+            GameManager.Ins.SetGameResult(EGameResult.Win);
+            GameManager.Ins.ChangeState(GameManager.State.EndGame);
+        }
     }
 
     private void GenerateSpawnPoint()
@@ -86,15 +90,16 @@ public class Level : MonoBehaviour
     {
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
-        player = SimplePool.Spawn<Player>(playerPrefab, spawnPos, playerPrefab.TF.rotation);
-        // Skin hairSkin=hairDataConfigSO.GetHairSkinByEnum(HairSkinEnum.Horn);
-        // player.InitFullSetSkin(0);
-        GameManager.Ins.SetCameraTarget(player);
+        SpawnPlayer(spawnPos);
+        spawnPositions.RemoveAt(rdn);
+        id++;
         UserDataManager.Ins.Player=player;
         player.OnInit(id);
-        id++;
-        numberOfExistedBots++;
-        spawnPositions.RemoveAt(rdn);
+    }
+
+    private void SpawnPlayer(Vector3 pos){
+        player = SimplePool.Spawn<Player>(playerPrefab, pos, playerPrefab.TF.rotation);
+        GameManager.Ins.SetCameraTarget(player);
     }
 
     private void SpawnBotAtRandomPos()
@@ -141,5 +146,22 @@ public class Level : MonoBehaviour
     public void DecreseNORemainBots(){
         remainedNoBots--;
         numberOfExistedBots--;
+    }
+
+    private void OnDestroy(){
+        SimplePool.Collect(PoolType.Bot);
+    }
+
+    public void RevivePlayer(){
+        if(player==null) return;
+        if(player.CanRevive){
+            SpawnPlayer(player.TF.position);
+            player.Score=UserDataManager.Ins.Player.Score;
+            player.OnInit(UserDataManager.Ins.Player.Id);
+            player.CanRevive=false;
+            UserDataManager.Ins.Player=player;
+            StartCoroutine(player.SetImmortalState(5f));
+            
+        }
     }
 }

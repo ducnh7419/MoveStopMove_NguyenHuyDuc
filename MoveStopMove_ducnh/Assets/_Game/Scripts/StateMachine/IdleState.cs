@@ -11,7 +11,7 @@ public class IdleState : IState<Bot>
 
     public void OnExecute(Bot bot)
     {
-        if(GameManager.Ins.CurrState==GameManager.State.StartGame)
+        if(GameManager.Ins.CurrState==GameManager.State.StartGame||GameManager.Ins.CurrState==GameManager.State.OngoingGame)
         {
             bot.ChangeState(new PatrolState());
         }

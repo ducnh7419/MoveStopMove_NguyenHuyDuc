@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -17,11 +18,10 @@ public class GameManager : MonoBehaviour
     private Dictionary<Character,int> leaderboard=new Dictionary<Character,int>();
     public DynamicJoystick Joystick;
 
-    private GameResult currentResult;
+    private EGameResult eGameResult;
 
     public static GameManager Ins=>ins;
 
-    public GameResult CurrentResult { get => currentResult; set => currentResult = value; }
     public State CurrState { get => currState; }
     
 
@@ -38,12 +38,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public enum GameResult{
-        None=0,
-        Win=1,
-        Lose=2
-    }
-
     // Start is called before the first frame update
     private void Awake()
     {
@@ -57,11 +51,15 @@ public class GameManager : MonoBehaviour
         }
         
         OnInit();
-        ChangeState(State.MainMenu);
+        ChangeState(State.StartScreen);
     }
 
     public void SetCharacterScore(Character character ,int score){
         leaderboard[character]=score;
+    }
+
+    public void SetGameResult(EGameResult gameResult){
+        eGameResult=gameResult;
     }
 
     public Character GetCharacterHaveHighestScore(){
@@ -87,7 +85,7 @@ public class GameManager : MonoBehaviour
             case State.None:
                 break;
             case State.StartScreen:
-                // OnStartScreen();
+                OnStartScreen();
                 break;
             case State.MainMenu:
                 currState=State.MainMenu;
@@ -110,7 +108,8 @@ public class GameManager : MonoBehaviour
                 OnGoingGame();
                 break;
             case State.EndGame:
-                // OnEndGame();
+                currState=State.EndGame;
+                OnEndGame();
                 break;
         }
     }
@@ -120,6 +119,7 @@ public class GameManager : MonoBehaviour
         UIManager.Ins.CloseAll();
         m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,12f,-10.2f),Quaternion.Euler(0,0,0));
         UIManager.Ins.OpenUI<UICShopWeapon>();
+        UIManager.Ins.OpenUI<UICBudget>();
     }
 
     private void OnSkinShop()
@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
         UIManager.Ins.CloseAll();
         m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,1.31f,-10.2f),Quaternion.Euler(0,0,0));
         UIManager.Ins.OpenUI<UICShopSkin>();
+        UIManager.Ins.OpenUI<UICBudget>();
         UserDataManager.Ins.ChangePlayerAnim("skin_dance");
     }
 
@@ -145,10 +146,9 @@ public class GameManager : MonoBehaviour
 
     
 
-    // private void OnStartScreen(){
-    //     UIManager.Ins.OpenUI<OpeningScreen>();
-
-    // }
+    private void OnStartScreen(){
+        UIManager.Ins.OpenUI<UICStartScreen>();
+    }
 
     private void OnGoingGame(){
         UIManager.Ins.OpenUI<UICInGameUI>();
@@ -166,25 +166,24 @@ public class GameManager : MonoBehaviour
         
     }
 
-    IEnumerator DelayChangeState(State state){
-        yield return new WaitForSeconds(1f);
-        GameManager.Ins.ChangeState(state);
+    public IEnumerator DelayChangeState(State state,float time){
+        yield return new WaitForSeconds(time);
+        ChangeState(state);
     }
 
-    // IEnumerator DelayShowingEndGameCanvas(){
-    //     yield return new WaitForSeconds(7);
-    //     Time.timeScale=0;
-    //     if(currentResult==GameResult.Win){
-    //         UIManager.Ins.OpenUI<Win>();
-    //     }else{
-    //         UIManager.Ins.OpenUI<Lose>();
-    //     }
-    // }
 
-    // private void OnEndGame(){
-    //     StartCoroutine(DelayShowingEndGameCanvas());
+    private void OnEndGame(){
+        Time.timeScale=0;
+        switch(eGameResult){
+            case EGameResult.Win:
+                UIManager.Ins.OpenUI<UICWin>();
+                break;
+            case EGameResult.Lose:
+                UIManager.Ins.OpenUI<UICLose>();
+                break;
+        }
 
-    // }
+    }
 
     protected void OnInit()
     {

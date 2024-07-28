@@ -36,14 +36,16 @@ public class LevelManager : MonoBehaviour
     }
 
     public void RestartLevel(){
-        
+        DestroyLevel();
         GenerateLevel();
-        GameManager.Ins.ChangeState(GameManager.State.StartGame);
+        StartCoroutine(GameManager.Ins.DelayChangeState(GameManager.State.StartGame,.5f));
     }
+
 
     public void DestroyLevel(){
         if(level!=null){
             Destroy(level.gameObject);
+            level=null;
         }
     }
 
@@ -57,6 +59,12 @@ public class LevelManager : MonoBehaviour
 
     public void DecreseNORemainBots(){
         level.DecreseNORemainBots();
+    }
+
+    public void RevivePlayer(){
+        level.RevivePlayer();
+        SetController(GameManager.Ins.Joystick);
+        
     }
     
 }

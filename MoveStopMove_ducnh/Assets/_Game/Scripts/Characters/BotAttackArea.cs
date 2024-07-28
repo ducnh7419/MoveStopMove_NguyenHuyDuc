@@ -10,5 +10,6 @@ public class BotAttackArea : AttackArea
         base.CollideWithEnemy(other);
         bot.ChangeState(new AttackState());
     }
+    
 
 }

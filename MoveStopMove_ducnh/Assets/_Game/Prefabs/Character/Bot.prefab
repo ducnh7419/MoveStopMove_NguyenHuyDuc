@@ -150,10 +150,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 4
   characterConfig: {fileID: 11400000, guid: 860b605248672234a826187428b5cc54, type: 2}
+  IsImmortal: 0
   HairSkin:
     HairHolder: {fileID: 3606394051640065009}
   PantSkin:
     MrPant: {fileID: 538327483304337885}
+  ShieldSkin:
+    ShieldHolder: {fileID: 6502071884055925946}
   FullSetSkin:
     FullSetHolder: {fileID: 8163987183832289807}
     MrPant: {fileID: 538327483304337885}

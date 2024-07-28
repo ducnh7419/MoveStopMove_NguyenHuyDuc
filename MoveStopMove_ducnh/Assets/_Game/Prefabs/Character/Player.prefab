@@ -525,10 +525,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolType: 3
   characterConfig: {fileID: 11400000, guid: 860b605248672234a826187428b5cc54, type: 2}
+  IsImmortal: 0
   HairSkin:
     HairHolder: {fileID: 4801849651484942043}
   PantSkin:
     MrPant: {fileID: 4447888039391183618}
+  ShieldSkin:
+    ShieldHolder: {fileID: 2959686256352977955}
   FullSetSkin:
     FullSetHolder: {fileID: 7693826851105525520}
     MrPant: {fileID: 4447888039391183618}
@@ -540,7 +543,7 @@ MonoBehaviour:
   Joystick: {fileID: 0}
   rb: {fileID: 9195972136115506977}
   attackArea: {fileID: 7418922742540475760}
-  Coin: 0
+  CanRevive: 0
 --- !u!54 &9195972136115506977
 Rigidbody:
   m_ObjectHideFlags: 0

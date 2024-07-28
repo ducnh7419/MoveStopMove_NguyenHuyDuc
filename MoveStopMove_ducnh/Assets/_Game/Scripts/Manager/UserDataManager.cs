@@ -306,4 +306,12 @@ public class UserDataManager : MonoBehaviour
         if(player==null) return;
         player.ChangeAnim(anim);
     }
+
+    public int GetPlayerCurrentCoin(){
+        return player.GetCoin();
+    }
+
+    public bool CanPlayerBeRevived(){
+        return player.CanRevive;
+    }
 }

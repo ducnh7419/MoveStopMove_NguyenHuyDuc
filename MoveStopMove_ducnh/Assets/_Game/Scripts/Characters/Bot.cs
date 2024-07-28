@@ -23,6 +23,7 @@ public class Bot : Character
         base.Update();
     }
 
+
     public bool HasDestination(){
         return destination!=Vector3.zero;
     }
@@ -33,13 +34,14 @@ public class Bot : Character
         InitRandomItem();
         InitRandomWeapon();
         ChangeState(new IdleState());
-        Score=Random.Range(10,51);
+        Score=Random.Range(10,20);
         botAttackArea.SetAttackAreaSize(Score);
         Agent.speed=speed/2;
     }
 
     public bool CanReachDestination(Vector3 dest){
-        return Agent.CalculatePath(dest,navMeshPathTesting);
+        Agent.CalculatePath(dest,navMeshPathTesting);
+        return navMeshPathTesting.status==NavMeshPathStatus.PathComplete;
     }
 
 
@@ -50,9 +52,10 @@ public class Bot : Character
    }
 
     public void SetDestination(Vector3 dest){
-        Moving();
         destination=dest;
+        Moving();
         Agent.SetDestination(dest);
+        
     }
     
 
@@ -99,6 +102,7 @@ public class Bot : Character
     }
 
     public override void OnDespawn(){
+        if(IsImmortal) return;
         LevelManager.Ins.DecreseNORemainBots();
         base.OnDespawn();
     }

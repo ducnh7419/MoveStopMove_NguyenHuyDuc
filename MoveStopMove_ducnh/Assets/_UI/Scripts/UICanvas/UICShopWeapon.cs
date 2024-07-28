@@ -149,6 +149,11 @@ public class UICShopWeapon : UICanvas
                 btnPurchaseGO.SetActive(true);
                 lockTextGO.SetActive(true);
                 SetActiveSkinTab(scrollViewGOList[newIndex],false);
+                if(UserDataManager.Ins.GetCurrentBudget()<weaponDatas[newIndex].Price){
+                    priceText.color=Color.red;
+                }else{
+                    priceText.color=Color.black;
+                }
                 break;
             case EItemState.Equipped:
                 DeActiveAll();

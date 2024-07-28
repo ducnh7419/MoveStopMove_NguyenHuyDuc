@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3744075735672661807}
   - component: {fileID: 6186818562984449336}
-  - component: {fileID: 3559742443368230849}
   m_Layer: 0
   m_Name: Shield1
   m_TagString: Untagged
@@ -43,27 +42,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6547856025568286480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 380c5a6f26f4b394480964d03fc5c2fd, type: 3}
+  m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 0
-  icon: {fileID: 0}
-  TfShieldHolder: {fileID: 0}
---- !u!114 &3559742443368230849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6547856025568286480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 380c5a6f26f4b394480964d03fc5c2fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolType: 0
-  icon: {fileID: 0}
-  TfShieldHolder: {fileID: 0}
+  poolType: 16
+  FullSet: {fileID: 0}
+  MrPant: {fileID: 0}
 --- !u!1001 &5612536693141937101
 PrefabInstance:
   m_ObjectHideFlags: 0

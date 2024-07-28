@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3924185904860152830}
-  - component: {fileID: -1947032226813977710}
+  - component: {fileID: 771221309647439949}
   m_Layer: 0
   m_Name: Boomerang 4
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1175590891107672608}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &-1947032226813977710
+--- !u!114 &771221309647439949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +113,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: cb6e597070ed41f4eb5cb9583c725959, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 504d28f091854764c8a6ad04db81a20d, type: 2}
+      objectReference: {fileID: 2100000, guid: a8c43187fb70e3941864d2ad3bd5b3e3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

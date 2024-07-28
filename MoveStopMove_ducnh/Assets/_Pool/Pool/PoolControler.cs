@@ -165,7 +165,8 @@ public enum PoolType
     Boomerang = 19,
     Hammer=20,
     Candy=21,
-    Axe=22
+    Axe=22,
+    Angel
 
 }
 

@@ -10,4 +10,6 @@ public class GameRuleSO : ScriptableObject
     public float ScalePerScore;
     public int BonusPointPerKill;
 
+    public float ImmortalTime;
+
 }

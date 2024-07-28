@@ -84,5 +84,10 @@ namespace GloabalEnum
         Gold=2
     }
 
+    public enum EGameResult{
+        None=0,
+        Win=1,
+        Lose=2
+    }
     
 }

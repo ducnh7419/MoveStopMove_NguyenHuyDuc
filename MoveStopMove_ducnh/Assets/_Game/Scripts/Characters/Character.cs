@@ -14,12 +14,14 @@ public class Character : GameUnit
     [SerializeField] private CharacterConfigSO characterConfig;
     protected float speed;
     private float range;
+    public bool IsImmortal;
     protected bool isMoving;
     //attack per second
     protected float attackSpeed;
     private int score;
     public HairSkinImpl HairSkin;
     public PantSkinImpl PantSkin;
+    public ShieldSkinImpl ShieldSkin;
     public FullSetImpl FullSetSkin;
     public UnityAction UnityAction;
     [SerializeField] private SpriteRenderer navigatorRenderer;
@@ -29,7 +31,7 @@ public class Character : GameUnit
     private Character target = null;
     private bool isAttackInCoolDown;
     private string currentAnim = "idle";
-    private float gold =>score+score*goldBuff;
+    protected int coin => (int)Math.Ceiling(score+score*goldBuff);
     private float goldBuff;
     public bool IsMoving { get => isMoving; }
     public bool IsAttacking;
@@ -60,11 +62,21 @@ public class Character : GameUnit
         Id = id;
         UnityAction = null;
         targets = new List<Character>();
+        target=null;
         speed = characterConfig.Speed;
         range = characterConfig.Range;
         attackSpeed=characterConfig.AttackSpeed;
         StopMoving();
+        StartCoroutine(SetImmortalState(GameManager.Ins.GameRuleSO.ImmortalTime));
+        IsAttacking=false;
+        isAttackInCoolDown=false;
 
+    }
+
+    public IEnumerator SetImmortalState(float time){
+        IsImmortal=true;
+        yield return new WaitForSeconds(time);
+        IsImmortal=false;
     }
 
 
@@ -72,6 +84,7 @@ public class Character : GameUnit
     {
         HairSkin.InitRandomItem();
         PantSkin.InitRandomItem();
+        ShieldSkin.InitRandomItem();
         ApplyItemBuff();
     }
 
@@ -85,7 +98,13 @@ public class Character : GameUnit
             case EItemType.Pant:
                 PantSkin.InitSkin(id);
                 break;
+            case EItemType.Shield:
+                ShieldSkin.InitSkin(id);
+                break;
             case EItemType.FullSet:
+                HairSkin.InitSkin(0);
+                PantSkin.InitSkin(0);
+                ShieldSkin.InitSkin(0);
                 FullSetSkin.InitSkin(id);
                 break;
         }
@@ -111,24 +130,31 @@ public class Character : GameUnit
 
     private IEnumerator DelayAttack()
     {
-        yield return new WaitForSeconds(1f/attackSpeed);
-        IsAttacking = false;
-        if (Target == null) yield break;
+        IsAttacking=true;
         ChangeAnim("attack");
+        yield return new WaitForSeconds(.5f);
+        if (Target == null) yield break;
         weaponHolder.Weapon.Fire(Target);
-        isAttackInCoolDown = true;
+        IsAttacking = false;
         StartCoroutine(CoolDownAttack());
     }
 
-    // public void ResetTargets()
-    // {
-    //     targets.Clear();
-    //     target = null;
-    // }
+    protected virtual void Attack()
+    {
+        if(IsAttacking) return;
+        if (isAttackInCoolDown) return;
+        LockTarget();
+        if (Target == null) return;
+        Vector3 direction = Target.TF.position - TF.position;
+        TF.rotation = Quaternion.LookRotation(direction);
+        StartCoroutine(DelayAttack());
+        IsAttacking = true;
+    }
 
     private IEnumerator CoolDownAttack()
     {
-        yield return new WaitForSeconds(2f);
+        isAttackInCoolDown = true;
+        yield return new WaitForSeconds(2f/attackSpeed);
         isAttackInCoolDown = false;
     }
 
@@ -188,7 +214,6 @@ public class Character : GameUnit
     public virtual void StopMoving()
     {
         isMoving = false;
-        // if(!IsAttacking)
         ChangeAnim("idle");
     }
 
@@ -262,17 +287,7 @@ public class Character : GameUnit
 
     }
 
-    protected virtual void Attack()
-    {
-        if (IsAttacking) return;
-        if (isAttackInCoolDown) return;
-        LockTarget();
-        if (Target == null) return;
-        Vector3 direction = Target.TF.position - TF.position;
-        TF.rotation = Quaternion.LookRotation(direction);
-        StartCoroutine(DelayAttack());
-        IsAttacking = true;
-    }
+    
 
     public void TurnOnNavigator()
     {
@@ -292,7 +307,6 @@ public class Character : GameUnit
 
     IEnumerator DelayDespawn()
     {
-        
         yield return new WaitForSeconds(0.5f);
         SimplePool.Despawn(this);
         UnityAction();
