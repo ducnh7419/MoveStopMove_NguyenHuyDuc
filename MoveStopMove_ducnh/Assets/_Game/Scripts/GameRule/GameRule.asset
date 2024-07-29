@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b931aaa89001642ad22f7d0ccd8aa3, type: 3}
   m_Name: GameRule
   m_EditorClassIdentifier: 
-  ScalePerScore: 0.1
+  ScalePerScore: 0.05
   BonusPointPerKill: 0
   ImmortalTime: 5

@@ -28,7 +28,6 @@ public class Level : MonoBehaviour
     private int remainedNoBots;
 
     public void OnInit(){
-        remainedNoBots=totalCharacter-1;
         numberOfExistedBots=0;
         SpawnBots();
     }
@@ -41,6 +40,7 @@ public class Level : MonoBehaviour
         max_z = characterSpawnLocations[0].position.z;
         min_z = characterSpawnLocations[3].position.z;
         GenerateSpawnPoint();
+        remainedNoBots=totalCharacter-1;
     }
 
     // Start is called before the first frame update
