@@ -19,7 +19,7 @@ public class Level : MonoBehaviour
     [SerializeField] private Bot botPrefab;
     private float max_x, min_x, max_z, min_z;
     private int id = 0;
-
+    private bool flag;
     List<Vector3> spawnPositions = new List<Vector3>();
     private Transform characterSpawnLocation;
     [SerializeField] private int totalCharacter;
@@ -28,8 +28,10 @@ public class Level : MonoBehaviour
     private int remainedNoBots;
 
     public void OnInit(){
+        flag=false;
         numberOfExistedBots=0;
         SpawnBots();
+        
     }
 
     private void Awake()
@@ -52,6 +54,7 @@ public class Level : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(!flag) return;
         if (numberOfExistedBots <= maximumNoExistedBot && remainedNoBots > 0)
         {
             SpawnBotAtRandomPos();
@@ -123,6 +126,7 @@ public class Level : MonoBehaviour
             totalCharacter--;
             numberOfExistedBots++;
         }
+        flag=true;
     }
 
     private bool HasObtacle(Vector3 pos)

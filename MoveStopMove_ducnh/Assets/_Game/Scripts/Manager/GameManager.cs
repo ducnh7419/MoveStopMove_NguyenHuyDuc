@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
             case State.None:
                 break;
             case State.StartScreen:
+                currState=State.StartScreen;
                 OnStartScreen();
                 break;
             case State.MainMenu:

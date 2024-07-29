@@ -117,7 +117,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 0fefd8771cd50e745a490c1634b65734, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 050bcc86bbf7be1458ffd43aab01d62b, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2305466156221472089
 GameObject:
@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 287431461614715130}
   - component: {fileID: 3328127918033530022}
   - component: {fileID: 4300473536512153786}
+  - component: {fileID: 4098050879582292661}
   m_Layer: 0
   m_Name: Plane (2)
   m_TagString: Untagged
@@ -287,6 +288,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4098050879582292661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396743976644749377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &6681373059139510724
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,6 +319,7 @@ GameObject:
   - component: {fileID: 5347381646297616837}
   - component: {fileID: 2597699453974916957}
   - component: {fileID: 292377667641757645}
+  - component: {fileID: 1073393364803989465}
   m_Layer: 0
   m_Name: Plane (3)
   m_TagString: Untagged
@@ -393,6 +414,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1073393364803989465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6681373059139510724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &7402357882304686858
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +476,7 @@ GameObject:
   - component: {fileID: 7619558059722055184}
   - component: {fileID: 8000762563618522624}
   - component: {fileID: 8161591091224775165}
+  - component: {fileID: 8862288956027138395}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -530,6 +571,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8862288956027138395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7404466219259402882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &7838938755328542849
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +602,7 @@ GameObject:
   - component: {fileID: 1568816785042714164}
   - component: {fileID: 6483563888603844359}
   - component: {fileID: 7151737329116431591}
+  - component: {fileID: 1652627858934443111}
   m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Untagged
@@ -636,6 +697,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1652627858934443111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838938755328542849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &901579612296497147
 PrefabInstance:
   m_ObjectHideFlags: 0
