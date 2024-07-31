@@ -50,7 +50,7 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        SpawnPlayer();
+        OnInit();
     }
 
     // Update is called once per frame
@@ -71,6 +71,7 @@ public class Level : MonoBehaviour
     public void OnReset(){
         bots.Clear();
         CollectALL();
+        spawnPositions.Clear();
         GenerateSpawnPoint();
         OnInit();
         
@@ -133,7 +134,6 @@ public class Level : MonoBehaviour
             Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
             bot.OnInit(id);
             id++;
-            totalCharacter--;
             numberOfExistedBots++;
         }
     }

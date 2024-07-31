@@ -10,7 +10,7 @@ public class PatrolState : IState<Bot>
     public void OnEnter(Bot bot)
     {
         timer += Time.fixedDeltaTime;
-        float radius = Random.Range(10f,30f);
+        float radius = Random.Range(70f,100f);
         Vector3 rdnPoint = Random.insideUnitCircle * radius;
         Vector3 dest = bot.TF.position + new Vector3(rdnPoint.x, 0, rdnPoint.y);
         if(!bot.CanReachDestination(dest)){

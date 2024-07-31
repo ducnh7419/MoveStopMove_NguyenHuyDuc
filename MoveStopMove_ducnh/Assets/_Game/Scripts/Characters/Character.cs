@@ -311,8 +311,8 @@ public class Character : GameUnit
     IEnumerator DelayDespawn()
     {
         yield return new WaitForSeconds(0.5f);
-        SimplePool.Despawn(this);
         UnityAction();
+        SimplePool.Despawn(this);
         CancelInvoke();
 
     }
