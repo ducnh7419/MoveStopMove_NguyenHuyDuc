@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class LevelManager : MonoBehaviour
 {
@@ -23,8 +24,6 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    
-
     public void GenerateLevel()
     {
         if(level==null){
@@ -33,18 +32,9 @@ public class LevelManager : MonoBehaviour
             
     }
 
-    public void RestartLevel(){
-        DestroyLevel();
-        GenerateLevel();
-        StartCoroutine(GameManager.Ins.DelayChangeState(GameManager.State.StartGame,.5f));
-    }
-
-
-    public void DestroyLevel(){
-        if(level!=null){
-            Destroy(level.gameObject);
-            level=null;
-        }
+    public void ResetLevel(){
+        level.OnReset();
+        
     }
 
     public void SetController(DynamicJoystick joystick){

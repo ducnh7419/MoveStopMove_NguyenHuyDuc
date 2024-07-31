@@ -14,12 +14,12 @@ public class Level : MonoBehaviour
     /// 3. Bot Right conner
     /// </summary>
     [SerializeField] private List<Transform> characterSpawnLocations;
-    Player player;
+    private Player player;
     [SerializeField] private Player playerPrefab;
+    List<Bot> bots=new();
     [SerializeField] private Bot botPrefab;
     private float max_x, min_x, max_z, min_z;
     private int id;
-    private bool flag;
     List<Vector3> spawnPositions = new List<Vector3>();
     private Transform characterSpawnLocation;
     [SerializeField] private int totalCharacter;
@@ -27,11 +27,13 @@ public class Level : MonoBehaviour
     private int numberOfExistedBots;
     private int remainedNoBots;
 
-    public void OnInit(){
-        numberOfExistedBots=0;
+    public void OnInit()
+    {
+        id=0;
+        remainedNoBots = totalCharacter - 1;
+        numberOfExistedBots = 0;
         SpawnPlayer();
         SpawnBots();
-        flag=false;
     }
 
     private void Awake()
@@ -41,31 +43,36 @@ public class Level : MonoBehaviour
         min_x = characterSpawnLocations[0].position.x;
         max_z = characterSpawnLocations[0].position.z;
         min_z = characterSpawnLocations[3].position.z;
+        remainedNoBots = totalCharacter - 1;
         GenerateSpawnPoint();
-        remainedNoBots=totalCharacter-1;
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-       OnInit();
+        SpawnPlayer();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if(!flag) return;
-        if (numberOfExistedBots <= maximumNoExistedBot && remainedNoBots > 0)
+        if (!GameManager.Ins.IsState(GameManager.State.OngoingGame))
         {
-            SpawnBotAtRandomPos();
+            return;
         }
-        if(remainedNoBots<=0){
+        SpawnBotAtRandomPos();
+        if (remainedNoBots <= 0)
+        {
             GameManager.Ins.SetGameResult(EGameResult.Win);
             GameManager.Ins.ChangeState(GameManager.State.EndGame);
         }
     }
 
-    private void FixedUpdate(){
+    public void OnReset(){
+        bots.Clear();
+        CollectALL();
+        GenerateSpawnPoint();
+        OnInit();
         
     }
 
@@ -95,18 +102,21 @@ public class Level : MonoBehaviour
         Vector3 spawnPos = spawnPositions[rdn];
         SpawnPlayer(spawnPos);
         spawnPositions.RemoveAt(rdn);
-        UserDataManager.Ins.Player=player;
+        UserDataManager.Ins.Player = player;
         player.OnInit(id);
         id++;
     }
 
-    private void SpawnPlayer(Vector3 pos){
+    private void SpawnPlayer(Vector3 pos)
+    {
         player = SimplePool.Spawn<Player>(playerPrefab, pos, playerPrefab.TF.rotation);
         GameManager.Ins.SetCameraTarget(player);
+
     }
 
     private void SpawnBotAtRandomPos()
     {
+        if (!((remainedNoBots > 0) && (numberOfExistedBots < maximumNoExistedBot))) return;
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
         Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
@@ -137,34 +147,40 @@ public class Level : MonoBehaviour
         return false;
     }
 
-    public void SetController(DynamicJoystick dynamicJoystick){
-        if(player==null) return;
+    public void SetController(DynamicJoystick dynamicJoystick)
+    {
+        if (player == null) return;
         player.SetJoyStickController(GameManager.Ins.Joystick);
     }
 
-    public int GetNumberOfRemainBots(){
+    public int GetNumberOfRemainBots()
+    {
         return remainedNoBots;
     }
 
-    public void DecreseNORemainBots(){
+    public void DecreseNORemainBots()
+    {
         remainedNoBots--;
         numberOfExistedBots--;
     }
 
-    private void OnDestroy(){
-        SimplePool.Collect(PoolType.Bot);
+    public void CollectALL()
+    {
+        SimplePool.CollectAll();
     }
 
-    public void RevivePlayer(){
-        if(player==null) return;
-        if(player.CanRevive){
+    public void RevivePlayer()
+    {
+        if (player == null) return;
+        if (player.CanRevive)
+        {
             SpawnPlayer(player.TF.position);
-            player.Score=UserDataManager.Ins.Player.Score;
+            player.Score = UserDataManager.Ins.Player.Score;
             player.OnInit(UserDataManager.Ins.Player.Id);
-            player.CanRevive=false;
-            UserDataManager.Ins.Player=player;
+            player.CanRevive = false;
+            UserDataManager.Ins.Player = player;
             StartCoroutine(player.SetImmortalState(5f));
-            
+
         }
     }
 }

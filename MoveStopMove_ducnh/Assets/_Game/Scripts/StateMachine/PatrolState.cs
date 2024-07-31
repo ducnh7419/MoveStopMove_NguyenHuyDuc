@@ -10,14 +10,15 @@ public class PatrolState : IState<Bot>
     public void OnEnter(Bot bot)
     {
         timer += Time.fixedDeltaTime;
-        float radius = Random.Range(100f,150f);
+        float radius = Random.Range(10f,30f);
         Vector3 rdnPoint = Random.insideUnitCircle * radius;
-        Vector3 dest = bot.TF.position + new Vector3(rdnPoint.x, 0, rdnPoint.z);
+        Vector3 dest = bot.TF.position + new Vector3(rdnPoint.x, 0, rdnPoint.y);
         if(!bot.CanReachDestination(dest)){
             bot.ChangeState(new PatrolState());
-            return;
+        }else{
+            bot.SetDestination(dest);
         }
-        bot.SetDestination(dest);
+        
     }
 
     public void OnExecute(Bot bot)
@@ -31,7 +32,7 @@ public class PatrolState : IState<Bot>
         if (bot.IsReachingDestination)
         {
             Debug.Log("Reaching");
-            bot.ChangeState(new PatrolState());
+            bot.ChangeState(new IdleState());
         }
     }
 

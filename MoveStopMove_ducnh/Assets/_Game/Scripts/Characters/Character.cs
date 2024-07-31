@@ -313,6 +313,7 @@ public class Character : GameUnit
         yield return new WaitForSeconds(0.5f);
         SimplePool.Despawn(this);
         UnityAction();
+        CancelInvoke();
 
     }
 }

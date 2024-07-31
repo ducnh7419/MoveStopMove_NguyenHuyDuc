@@ -18,7 +18,7 @@ public class UICPauseMenu : UICanvas
 
     private void OnBtnMainMenuClicked()
     {
-        LevelManager.Ins.DestroyLevel();
+        LevelManager.Ins.ResetLevel();
         GameManager.Ins.ChangeState(GameManager.State.MainMenu);
         Time.timeScale=1;
     }
@@ -27,8 +27,8 @@ public class UICPauseMenu : UICanvas
     {
         Time.timeScale=1;
         this.Close(0.5f);
-        LevelManager.Ins.RestartLevel();
-        
+        LevelManager.Ins.ResetLevel();
+        StartCoroutine(GameManager.Ins.DelayChangeState(GameManager.State.StartGame,.5f));
     }
 
     private void OnBtnContinueClicked()

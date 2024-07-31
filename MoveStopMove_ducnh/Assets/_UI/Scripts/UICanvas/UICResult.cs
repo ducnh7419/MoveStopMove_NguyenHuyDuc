@@ -48,7 +48,7 @@ public class UICResult : UICanvas
 
     protected virtual void OnBtnMainMenuClicked()
     {
-        LevelManager.Ins.DestroyLevel();
+        LevelManager.Ins.ResetLevel();
         GameManager.Ins.ChangeState(GameManager.State.MainMenu);
         Time.timeScale=1;
     }
@@ -57,6 +57,7 @@ public class UICResult : UICanvas
     {
         Time.timeScale=1;
         this.Close(0.5f);
-        LevelManager.Ins.RestartLevel();
+        LevelManager.Ins.ResetLevel();
+        StartCoroutine(GameManager.Ins.DelayChangeState(GameManager.State.StartGame,.5f));
     }
 }

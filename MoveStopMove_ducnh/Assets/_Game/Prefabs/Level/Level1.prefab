@@ -86,8 +86,8 @@ MonoBehaviour:
     type: 3}
   botPrefab: {fileID: -2071778296372906726, guid: e58ec0106255d90408b013b57015b583,
     type: 3}
-  totalCharacter: 2
-  maximumNoExistedBot: 1
+  totalCharacter: 51
+  maximumNoExistedBot: 25
 --- !u!114 &5980996700914031684
 MonoBehaviour:
   m_ObjectHideFlags: 0

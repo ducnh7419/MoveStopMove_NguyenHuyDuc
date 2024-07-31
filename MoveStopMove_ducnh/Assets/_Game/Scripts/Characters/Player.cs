@@ -21,7 +21,6 @@ public class Player : Character
             Moving();
         }else{
             StopMoving();
-            Debug.Log(IsAttacking);
         }
     }
 

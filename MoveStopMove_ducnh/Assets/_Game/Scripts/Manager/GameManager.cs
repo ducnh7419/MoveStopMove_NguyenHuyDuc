@@ -54,6 +54,13 @@ public class GameManager : MonoBehaviour
         ChangeState(State.StartScreen);
     }
 
+    public bool IsState(State state){
+        if(currState==state){
+            return true;
+        }
+        return false;
+    }
+
    
     public void SetGameResult(EGameResult gameResult){
         eGameResult=gameResult;
@@ -138,13 +145,13 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Ins.CloseAll();
         m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,2.45f,-10.2f),Quaternion.Euler(0,0,0));
-        LevelManager.Ins.GenerateLevel();
         UIManager.Ins.OpenUI<UICMainMenu>();
     }
 
     
 
     private void OnStartScreen(){
+        LevelManager.Ins.GenerateLevel();
         UIManager.Ins.OpenUI<UICStartScreen>();
     }
 

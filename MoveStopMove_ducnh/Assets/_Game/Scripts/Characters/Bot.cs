@@ -21,6 +21,11 @@ public class Bot : Character
         base.Update();
     }
 
+    protected override void Moving(){
+        base.Moving();
+        // Agent.enabled=true;
+    }
+
 
     public bool HasDestination(){
         return destination!=Vector3.zero;
@@ -45,8 +50,8 @@ public class Bot : Character
 
    public override void StopMoving(){
         base.StopMoving();
+        // Agent.enabled=false;
         Agent.velocity=Vector3.zero;
-        ClearDestination();
    }
 
     public void SetDestination(Vector3 dest){
@@ -61,6 +66,7 @@ public class Bot : Character
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+        if(GameManager.Ins.IsState(GameManager.State.StartGame)||GameManager.Ins.IsState(GameManager.State.OngoingGame))
         currentState?.OnExecute(this);
         
     }
@@ -103,5 +109,6 @@ public class Bot : Character
         if(IsImmortal) return;
         LevelManager.Ins.DecreseNORemainBots();
         base.OnDespawn();
+        
     }
 }
