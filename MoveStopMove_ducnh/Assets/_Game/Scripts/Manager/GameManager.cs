@@ -54,10 +54,7 @@ public class GameManager : MonoBehaviour
         ChangeState(State.StartScreen);
     }
 
-    public void SetCharacterScore(Character character ,int score){
-        leaderboard[character]=score;
-    }
-
+   
     public void SetGameResult(EGameResult gameResult){
         eGameResult=gameResult;
     }
@@ -156,7 +153,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void OnStartGame(){
-        LevelManager.Ins.StartGame();
+        
         SetCameraPositionAndRotation(new Vector3(0.03f,20.4f,-24.9f),Quaternion.Euler(40f,0,0));
         UIManager.Ins.CloseAll();
         UIManager.Ins.OpenUI<UICOffScreenIndicator>();

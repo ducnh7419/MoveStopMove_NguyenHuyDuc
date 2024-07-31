@@ -1,12 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using GloabalEnum;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class FullSet : GameUnit
 {
+    public EFullSets eFullSets;
     public SkinnedMeshRenderer MrBody;
     public SkinnedMeshRenderer MrPant;
     public SkinHolder HairHolder;

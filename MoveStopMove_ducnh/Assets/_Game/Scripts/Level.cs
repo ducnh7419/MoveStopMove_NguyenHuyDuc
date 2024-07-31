@@ -18,7 +18,7 @@ public class Level : MonoBehaviour
     [SerializeField] private Player playerPrefab;
     [SerializeField] private Bot botPrefab;
     private float max_x, min_x, max_z, min_z;
-    private int id = 0;
+    private int id;
     private bool flag;
     List<Vector3> spawnPositions = new List<Vector3>();
     private Transform characterSpawnLocation;
@@ -28,10 +28,10 @@ public class Level : MonoBehaviour
     private int remainedNoBots;
 
     public void OnInit(){
-        flag=false;
         numberOfExistedBots=0;
+        SpawnPlayer();
         SpawnBots();
-        
+        flag=false;
     }
 
     private void Awake()
@@ -48,7 +48,7 @@ public class Level : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        SpawnPlayer();
+       OnInit();
     }
 
     // Update is called once per frame
@@ -65,6 +65,10 @@ public class Level : MonoBehaviour
         }
     }
 
+    private void FixedUpdate(){
+        
+    }
+
     private void GenerateSpawnPoint()
     {
         float pos_x = characterSpawnLocation.position.x;
@@ -78,10 +82,6 @@ public class Level : MonoBehaviour
             float offset = Random.Range(-40f, 40f);
             pos_x = Random.Range(min_x, max_x);
             pos_z = Random.Range(min_z, max_z);
-            // pos_x -= sign_x * offset;
-            // pos_z -= sign_z * offset;
-            // pos_x=(pos_x<max_x&&pos_x>min_x)?pos_x:pos_x-(-2)*sign_x*offset;
-            // pos_z=(pos_z<max_z&&pos_z>min_z)?pos_z:pos_z-(-2)*sign_z*offset;        
             Vector3 pos = new Vector3(pos_x, pos_y, pos_z);
             if (HasObtacle(pos)) continue;
             spawnPositions.Add(pos);
@@ -95,9 +95,9 @@ public class Level : MonoBehaviour
         Vector3 spawnPos = spawnPositions[rdn];
         SpawnPlayer(spawnPos);
         spawnPositions.RemoveAt(rdn);
-        id++;
         UserDataManager.Ins.Player=player;
         player.OnInit(id);
+        id++;
     }
 
     private void SpawnPlayer(Vector3 pos){
@@ -126,7 +126,6 @@ public class Level : MonoBehaviour
             totalCharacter--;
             numberOfExistedBots++;
         }
-        flag=true;
     }
 
     private bool HasObtacle(Vector3 pos)

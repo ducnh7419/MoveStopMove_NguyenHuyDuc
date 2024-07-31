@@ -1,8 +1,10 @@
 
+using GloabalEnum;
 using UnityEngine;
 
 public class Skin : GameUnit
 {
+
     public FullSet FullSet;
     public SkinnedMeshRenderer MrPant;
 

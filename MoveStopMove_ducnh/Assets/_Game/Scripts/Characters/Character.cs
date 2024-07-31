@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using GloabalEnum;
-using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -43,8 +40,6 @@ public class Character : GameUnit
 
     protected virtual void Update()
     {
-        if (GameManager.Ins.CurrState < GameManager.State.StartGame) return;
-        GameManager.Ins.SetCharacterScore(this, score);
     }
 
     protected virtual void FixedUpdate()
@@ -249,35 +244,43 @@ public class Character : GameUnit
 
     public void ApplyItemBuffByType(EBuffType eBuffType, float value)
     {
+        float defaultSpeed = characterConfig.Speed;
+        float defaultRange = characterConfig.Range;
+        float defaultAttackSpeed=characterConfig.AttackSpeed;
         switch (eBuffType)
         {
             case EBuffType.SpeedBuff:
-                speed += speed * value;
+                speed = defaultSpeed+defaultSpeed * value;
                 break;
             case EBuffType.RangeBuff:
-                range += range * value;
+                range += defaultRange+defaultRange * value;
                 break;
             case EBuffType.GoldBuff:
                 goldBuff=value;
                 break;
             case EBuffType.AttackSpeed:
-                attackSpeed+=value;
+                attackSpeed=defaultAttackSpeed+value;
                 break;
         }
     }
 
     public void ApplyWeaponBuff(Tuple<EBuffType,float> weaponBuff)
     {
+        float defaultSpeed = characterConfig.Speed;
+        float defaultRange = characterConfig.Range;
+        float defaultAttackSpeed=characterConfig.AttackSpeed;
         float value=weaponBuff.Item2;
         switch (weaponBuff.Item1)
         {
             case EBuffType.SpeedBuff:
-                speed += value;
+                speed = defaultSpeed+value;
                 break;
             case EBuffType.RangeBuff:
-                range += value;
+                range = defaultRange+value;
                 break;
-            
+            case EBuffType.AttackSpeed:
+                attackSpeed=defaultAttackSpeed+value;
+                break;
         }
     }
     

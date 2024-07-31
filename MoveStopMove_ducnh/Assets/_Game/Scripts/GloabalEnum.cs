@@ -8,10 +8,10 @@ namespace GloabalEnum
     public enum WeaponEnum
     {
         None = 0,
-        Hammer = 1,
-        Axe = 2,
-        Boomerang = 3,
-        Candy = 4
+        Hammer = PoolType.Hammer,
+        Axe = PoolType.Axe,
+        Boomerang = PoolType.Boomerang,
+        Candy = PoolType.Candy
     }
 
     public enum EPants
@@ -23,28 +23,28 @@ namespace GloabalEnum
 
     public enum EHairs{
         None=0,
-        Arrow=1,
-        Cowboy=2,
-        Crown=3,
-        Ear=4,
-        Hat=5,
-        Hat_Cap=6,
-        Hat_Yellow=7,
-        Headphone=8,
-        Horn=9,
-        Mustache=10
+        Arrow=PoolType.Arrow,
+        Cowboy=PoolType.Cowboy,
+        Crown=PoolType.Crown,
+        Ear=PoolType.Ear,
+        Hat=PoolType.Hat,
+        Hat_Cap=PoolType.Hat_Cap,
+        Hat_Yellow=PoolType.Hat_Yellow,
+        Headphone=PoolType.Headphone,
+        Horn=PoolType.Horn,
+        Mustache=PoolType.Mustache
     }
 
     public enum EShields{
         None=0,
-        Shield1=1,
-        Shield2=2,
+        Shield1=PoolType.Shield1,
+        Shield2=PoolType.Shield2,
     }
 
     public enum EFullSets{
         None=0,
-        Devil=1
-
+        Devil=PoolType.Devil,
+        Angel=PoolType.Angel
     }
 
     public enum EWeapon

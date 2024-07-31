@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using GloabalEnum;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class Player : Character

@@ -257,7 +257,7 @@ MonoBehaviour:
   - Id: 1
     Name: Devil
     Description: 8% Range
-    icon: {fileID: 21300000, guid: 9f8e6f5ea0f849447b464193072ab6f3, type: 3}
+    icon: {fileID: 21300000, guid: 591bf6bd34c3a3c4e9143ba55a6c7d7b, type: 3}
     ItemType: 4
     EBuffType: 1
     Value: 0.08
@@ -267,7 +267,7 @@ MonoBehaviour:
   - Id: 2
     Name: Angel
     Description: 11% Move Speed
-    icon: {fileID: 21300000, guid: 591bf6bd34c3a3c4e9143ba55a6c7d7b, type: 3}
+    icon: {fileID: 21300000, guid: 9f8e6f5ea0f849447b464193072ab6f3, type: 3}
     ItemType: 4
     EBuffType: 2
     Value: 0.11

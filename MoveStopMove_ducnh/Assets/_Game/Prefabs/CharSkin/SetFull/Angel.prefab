@@ -93,7 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5b8dc88b5e3a142a072cbddfde04ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 18
+  poolType: 23
+  eFullSets: 0
   MrBody: {fileID: 7133318291162584086}
   MrPant: {fileID: 2098605680910684533}
   HairHolder: {fileID: 8910842079105327143}
@@ -190,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e8137ff575e004da09e1575f997dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 18
+  poolType: 23
   FullSet: {fileID: 5543945858072729507}
   MrPant: {fileID: 2098605680910684533}
 --- !u!1 &7372748975577907605
