@@ -1,4 +1,5 @@
 
+using GloabalEnum;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,6 +27,10 @@ public class Bot : Character
         // Agent.enabled=true;
     }
 
+    private void OnDisable() {
+        targetIndicator.enabled=false;
+    }
+
 
     public bool HasDestination(){
         return destination!=Vector3.zero;
@@ -33,11 +38,12 @@ public class Bot : Character
 
     public override void OnInit(int id){
         base.OnInit(id);
+        targetIndicator.enabled=true;
         navMeshPathTesting= new();
         InitRandomItem();
         InitRandomWeapon();
         ChangeState(new IdleState());
-        Score=Random.Range(10,20);
+        Score=Random.Range(0,20);
         botAttackArea.SetAttackAreaSize(Score);
         Agent.speed=speed/2;
     }
@@ -88,13 +94,7 @@ public class Bot : Character
     public override void IncreaseScore(int score)
     {
         base.IncreaseScore(score);
-        botAttackArea.SetAttackAreaSize(Score);
-    }
-
-    public void Hunting(){
-        Character target=GameManager.Ins.GetCharacterHaveHighestScore();
-        destination=target.TF.position;
-        SetDestination(destination);
+        botAttackArea.SetAttackAreaSize(score);
     }
 
     
@@ -105,10 +105,9 @@ public class Bot : Character
         destination=Vector3.zero;
     }
 
-    public override void OnDespawn(){
-        if(IsImmortal) return;
-        LevelManager.Ins.DecreseNORemainBots();
+    public override bool OnDespawn(){
+        if(IsImmortal) return false;
         base.OnDespawn();
-        
+        return true;
     }
 }

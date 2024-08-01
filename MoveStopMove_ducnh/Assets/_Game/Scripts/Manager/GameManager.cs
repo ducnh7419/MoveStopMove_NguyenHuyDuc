@@ -66,24 +66,9 @@ public class GameManager : MonoBehaviour
         eGameResult=gameResult;
     }
 
-    public Character GetCharacterHaveHighestScore(){
-        List<Character> keyList=new List<Character>(leaderboard.Keys);
-        List<int> valueList=new List<int>(leaderboard.Values);
-        int max=valueList[0];
-        int index=0;
-        for(int i=1;i<valueList.Count;i++){
-            if(valueList[i]>max){
-                max=valueList[i];
-                index=i;
-            }
-        }
-        return keyList[index];
-    }
-
-    
-
     public void ChangeState(State state){
         currState=state;
+        Debug.Log(state);
         switch (state)
         {
             case State.None:
@@ -133,7 +118,6 @@ public class GameManager : MonoBehaviour
         m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,1.31f,-10.2f),Quaternion.Euler(0,0,0));
         UIManager.Ins.OpenUI<UICShopSkin>();
         UIManager.Ins.OpenUI<UICBudget>();
-        UserDataManager.Ins.ChangePlayerAnim("skin_dance");
     }
 
     // private void OnLevelSelectionMenu()

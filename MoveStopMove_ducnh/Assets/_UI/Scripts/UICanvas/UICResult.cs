@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,6 +32,7 @@ public class UICResult : UICanvas
 
     protected virtual void OnAdsClick()
     {
+        SoundManager.Ins.PlaySFX(ESound.CLICK);
         ChangeGiftState(true);
         UserDataManager.Ins.ChangeBudget(coin);
         coinText.text=(coin*2).ToString();
@@ -48,6 +50,7 @@ public class UICResult : UICanvas
 
     protected virtual void OnBtnMainMenuClicked()
     {
+        SoundManager.Ins.PlaySFX(ESound.CLICK);
         LevelManager.Ins.ResetLevel();
         GameManager.Ins.ChangeState(GameManager.State.MainMenu);
         Time.timeScale=1;
@@ -55,9 +58,10 @@ public class UICResult : UICanvas
 
     protected virtual void OnBtnRetryClicked()
     {
+        SoundManager.Ins.PlaySFX(ESound.CLICK);
         Time.timeScale=1;
-        this.Close(0.5f);
         LevelManager.Ins.ResetLevel();
         StartCoroutine(GameManager.Ins.DelayChangeState(GameManager.State.StartGame,.5f));
+        this.Close(1f);
     }
 }

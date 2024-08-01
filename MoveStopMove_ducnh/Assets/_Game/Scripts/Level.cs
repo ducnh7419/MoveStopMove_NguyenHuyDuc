@@ -16,7 +16,7 @@ public class Level : MonoBehaviour
     [SerializeField] private List<Transform> characterSpawnLocations;
     private Player player;
     [SerializeField] private Player playerPrefab;
-    List<Bot> bots=new();
+    List<Character> listChars=new();
     [SerializeField] private Bot botPrefab;
     private float max_x, min_x, max_z, min_z;
     private int id;
@@ -63,13 +63,19 @@ public class Level : MonoBehaviour
         SpawnBotAtRandomPos();
         if (remainedNoBots <= 0)
         {
+            SoundManager.Ins.PlaySFX(ESound.VICTORY);
             GameManager.Ins.SetGameResult(EGameResult.Win);
             GameManager.Ins.ChangeState(GameManager.State.EndGame);
         }
     }
 
+    private void RemoveCharFromList(Character character){
+        listChars.Remove(character);
+        DecreseNORemainBots();
+    }
+
     public void OnReset(){
-        bots.Clear();
+        listChars.Clear();
         CollectALL();
         spawnPositions.Clear();
         GenerateSpawnPoint();
@@ -105,6 +111,8 @@ public class Level : MonoBehaviour
         spawnPositions.RemoveAt(rdn);
         UserDataManager.Ins.Player = player;
         player.OnInit(id);
+        player.AddUnityAction(EndGame);
+        listChars.Add(player);
         id++;
     }
 
@@ -117,11 +125,13 @@ public class Level : MonoBehaviour
 
     private void SpawnBotAtRandomPos()
     {
-        if (!((remainedNoBots > 0) && (numberOfExistedBots < maximumNoExistedBot))) return;
+        if (!((remainedNoBots > 0) && (numberOfExistedBots < maximumNoExistedBot)&&(remainedNoBots>maximumNoExistedBot))) return;
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
         Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
         bot.OnInit(id);
+        bot.AddUnityAction(()=>RemoveCharFromList(bot));
+        listChars.Add(player);
         id++;
         numberOfExistedBots++;
     }
@@ -133,6 +143,8 @@ public class Level : MonoBehaviour
             Vector3 spawnPos = spawnPositions[i];
             Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
             bot.OnInit(id);
+            bot.AddUnityAction(()=>RemoveCharFromList(bot));
+            listChars.Add(bot);
             id++;
             numberOfExistedBots++;
         }
@@ -180,7 +192,11 @@ public class Level : MonoBehaviour
             player.CanRevive = false;
             UserDataManager.Ins.Player = player;
             StartCoroutine(player.SetImmortalState(5f));
-
         }
+    }
+    public void EndGame(){
+        SoundManager.Ins.PlaySFX(ESound.LOSE);
+        GameManager.Ins.SetGameResult(EGameResult.Lose);
+        StartCoroutine(GameManager.Ins.DelayChangeState(GameManager.State.EndGame,.10f));
     }
 }

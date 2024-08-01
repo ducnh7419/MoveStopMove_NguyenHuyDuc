@@ -22,7 +22,8 @@ public class AttackArea : MonoBehaviour
       // Scale increased by each 1 point
       float scaleEachScore=GameManager.Ins.GameRuleSO.ScalePerScore;
       float numberOfTimeIncreased=score*scaleEachScore;
-      TF.localScale=new Vector3(character.Range,character.Range,character.Range)+new Vector3(numberOfTimeIncreased,numberOfTimeIncreased,numberOfTimeIncreased);
+      character.SetCharacterRange(numberOfTimeIncreased);
+      TF.localScale=new Vector3(character.Range,character.Range,character.Range);
    }
 
    protected void OnTriggerExit(Collider other)

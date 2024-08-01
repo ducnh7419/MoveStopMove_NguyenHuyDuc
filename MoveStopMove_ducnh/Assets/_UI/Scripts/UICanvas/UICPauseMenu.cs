@@ -25,6 +25,7 @@ public class UICPauseMenu : UICanvas
 
     private void OnBtnRetryClicked()
     {
+        
         Time.timeScale=1;
         this.Close(0.5f);
         LevelManager.Ins.ResetLevel();
@@ -33,7 +34,7 @@ public class UICPauseMenu : UICanvas
 
     private void OnBtnContinueClicked()
     {
-        this.Close(0.5f);
+        this.Close(0f);
         Time.timeScale=1;
     }
 }

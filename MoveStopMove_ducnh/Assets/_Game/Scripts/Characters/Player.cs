@@ -1,6 +1,6 @@
 
 using GloabalEnum;
-
+using GlobalConstants;
 using UnityEngine;
 
 public class Player : Character
@@ -13,12 +13,16 @@ public class Player : Character
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+        if(GameManager.Ins.IsState(GameManager.State.SkinShop)){
+            ChangeAnim(Anim.SKIN_DANCE);
+        }
+        if(isDead) return;
         if(Joystick==null) return;
         if (Joystick.Horizontal != 0 || Joystick.Vertical != 0)
         {
+            Moving();
             rb.velocity = new Vector3(Joystick.Horizontal * speed * Time.fixedDeltaTime, 0, Joystick.Vertical * speed * Time.fixedDeltaTime);
             TF.rotation = Quaternion.LookRotation(rb.velocity);
-            Moving();
         }else{
             StopMoving();
         }
@@ -56,12 +60,12 @@ public class Player : Character
         return coin;
     }
 
-    public override void OnDespawn()
+    public override bool OnDespawn()
     {
-        if(IsImmortal) return;   
-        GameManager.Ins.SetGameResult(EGameResult.Lose);
-        StartCoroutine(GameManager.Ins.DelayChangeState(GameManager.State.EndGame,.5f));
+        if(IsImmortal) return false;
+        SoundManager.Ins.PlaySFX(ESound.PLAYER_DEATH);
         base.OnDespawn();
+        return true;
         
     }
 

@@ -8,7 +8,7 @@ public class HuntingState : IState<Bot>
     private float  randomTime;
     public void OnEnter(Bot bot)
     {
-       bot.Hunting();
+      
     }
 
     public void OnExecute(Bot bot)

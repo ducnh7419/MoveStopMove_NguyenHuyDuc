@@ -19,6 +19,8 @@ public class ShieldSkinImpl : ICharacterSkin
 
     public void InitRandomItem()
     {
+        if(ShieldSKin!=null)
+            ShieldSKin.OnDespawn(); 
         ItemData shieldData = GameManager.Ins.ItemDataConfigSO.RandomItemData(EItemType.Shield);
         ShieldSKin = SimplePool.Spawn<Skin>(shieldData.SkinPrefab, ShieldHolder);
         SetItemBuff(shieldData.Id);

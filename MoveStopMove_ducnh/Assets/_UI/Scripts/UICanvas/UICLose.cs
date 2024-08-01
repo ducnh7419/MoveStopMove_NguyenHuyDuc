@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using UnityEngine;
 
 public class UICLose : UICResult
@@ -18,6 +19,7 @@ public class UICLose : UICResult
 
     protected override void OnAdsClick()
     {
+        SoundManager.Ins.PlaySFX(ESound.CLICK);
         UserDataManager.Ins.ChangeBudget(-coin);
         LevelManager.Ins.RevivePlayer();     
         GameManager.Ins.SetGameResult(GloabalEnum.EGameResult.None);

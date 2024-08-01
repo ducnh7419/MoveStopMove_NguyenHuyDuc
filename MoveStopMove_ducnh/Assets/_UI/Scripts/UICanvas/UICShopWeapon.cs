@@ -120,6 +120,7 @@ public class UICShopWeapon : UICanvas
 
     private void OnSelectBtnClicked()
     {
+        SoundManager.Ins.PlaySFX(ESound.CLICK);
         int newIndex=Math.Abs(currentidx)%weaponDatas.Count;
         currItemState=EItemState.Equipped;
         ChangeUIState(currItemState);
@@ -128,6 +129,7 @@ public class UICShopWeapon : UICanvas
 
     private void OnPurchaseBtnClicked()
     {
+        SoundManager.Ins.PlaySFX(ESound.CLICK);
         int newIndex=Math.Abs(currentidx)%weaponDatas.Count;
         UserDataManager.Ins.PurchaseWeapon(weaponDatas[newIndex].Id);
         currItemState=EItemState.NotEquipped;

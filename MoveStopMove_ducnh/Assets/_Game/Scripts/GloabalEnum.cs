@@ -89,5 +89,15 @@ namespace GloabalEnum
         Win=1,
         Lose=2
     }
+
+    public enum ESound{
+        None=0,
+        LOSE=1,
+        ATTACK=2,
+        CLICK=3,
+        VICTORY=4,
+        PLAYER_DEATH=5,
+        WEAPON_HIT=6
+    }
     
 }

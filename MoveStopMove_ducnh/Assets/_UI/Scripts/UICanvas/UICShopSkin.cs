@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class UICShopSkin : UICanvas
 
     private void OnClose()
     {
+        SoundManager.Ins.PlaySFX(ESound.CLICK);
         GameManager.Ins.ChangeState(GameManager.State.MainMenu);
         UserDataManager.Ins.LoadAllEquippedItem();
     }

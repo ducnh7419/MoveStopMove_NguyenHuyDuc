@@ -302,11 +302,6 @@ public class UserDataManager : MonoBehaviour
 
     #endregion
 
-    public void ChangePlayerAnim(string anim){
-        if(player==null) return;
-        player.ChangeAnim(anim);
-    }
-
     public int GetPlayerCurrentCoin(){
         return player.GetCoin();
     }

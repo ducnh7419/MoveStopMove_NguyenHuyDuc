@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class UICInGameUI : UICanvas
 
     private void OnSettingsClick()
     {
+        SoundManager.Ins.PlaySFX(ESound.CLICK);
         if(Time.timeScale==1){
             Time.timeScale=0;
             UIManager.Ins.OpenUI<UICPauseMenu>();

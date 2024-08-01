@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GloabalEnum;
+using GlobalConstants;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,7 @@ public class Character : GameUnit
 {
     private int id;
     [SerializeField] private CharacterConfigSO characterConfig;
+    protected bool isDead;
     protected float speed;
     private float range;
     public bool IsImmortal;
@@ -61,11 +63,12 @@ public class Character : GameUnit
         speed = characterConfig.Speed;
         range = characterConfig.Range;
         attackSpeed=characterConfig.AttackSpeed;
-        StopMoving();
         StartCoroutine(SetImmortalState(GameManager.Ins.GameRuleSO.ImmortalTime));
         IsAttacking=false;
+        navigatorRenderer.enabled=false;
         isAttackInCoolDown=false;
-
+        isDead=false;
+        StopMoving();
     }
 
     public IEnumerator SetImmortalState(float time){
@@ -127,9 +130,10 @@ public class Character : GameUnit
     {
         IsAttacking=true;
         ChangeAnim("attack");
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.2f);
         if (Target == null) yield break;
         weaponHolder.Weapon.Fire(Target);
+        SoundManager.Ins.PlaySFX(ESound.ATTACK);
         IsAttacking = false;
         StartCoroutine(CoolDownAttack());
     }
@@ -159,6 +163,10 @@ public class Character : GameUnit
             targets.Remove(target);
     }
 
+    public void AddUnityAction(UnityAction action){
+        UnityAction+=action;
+    }
+
     public void DropUnityActionEvent(Character target)
     {
         target.UnityAction -= () => Untarget(target);
@@ -183,6 +191,7 @@ public class Character : GameUnit
             target.UnityAction += () => Untarget(target);
         }
     }
+    
 
     protected virtual void LockTarget()
     {
@@ -201,23 +210,23 @@ public class Character : GameUnit
     protected virtual void Moving()
     {
         isMoving = true;
-        ChangeAnim("run");
-        // ResetTargets();
+        ChangeAnim(Anim.RUN);
         target = null;
     }
 
     public virtual void StopMoving()
     {
         isMoving = false;
-        ChangeAnim("idle");
+        ChangeAnim(Anim.IDLE);
     }
 
     public virtual void ChangeAnim(string anim)
     {
         if (anim != currentAnim)
         {
+            animator.ResetTrigger(currentAnim);
             currentAnim = anim;
-            animator.SetTrigger(anim);
+            animator.SetTrigger(currentAnim);
         }
     }
 
@@ -253,7 +262,7 @@ public class Character : GameUnit
                 speed = defaultSpeed+defaultSpeed * value;
                 break;
             case EBuffType.RangeBuff:
-                range += defaultRange+defaultRange * value;
+                range = defaultRange+defaultRange * value;
                 break;
             case EBuffType.GoldBuff:
                 goldBuff=value;
@@ -290,7 +299,9 @@ public class Character : GameUnit
 
     }
 
-    
+    public void SetCharacterRange(float range){
+        this.range+=range;
+    }
 
     public void TurnOnNavigator()
     {
@@ -302,10 +313,12 @@ public class Character : GameUnit
         navigatorRenderer.enabled = false;
     }
 
-    public virtual void OnDespawn()
+    public virtual bool OnDespawn()
     {
-        ChangeAnim("dead");
+        isDead=true;
+        ChangeAnim(Anim.DEAD);
         StartCoroutine(DelayDespawn());
+        return true;
     }
 
     IEnumerator DelayDespawn()

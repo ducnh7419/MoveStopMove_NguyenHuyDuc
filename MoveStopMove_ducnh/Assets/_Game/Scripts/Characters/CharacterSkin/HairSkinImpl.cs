@@ -19,6 +19,8 @@ public class HairSkinImpl : ICharacterSkin
 
     public void InitRandomItem()
     {
+        if(HairSkin!=null)
+            HairSkin.OnDespawn(); 
         ItemData hairData = GameManager.Ins.ItemDataConfigSO.RandomItemData(EItemType.Hair);
         HairSkin = SimplePool.Spawn<Skin>(hairData.SkinPrefab, HairHolder);
         SetItemBuff(hairData.Id);

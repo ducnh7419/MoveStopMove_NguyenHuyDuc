@@ -23,6 +23,14 @@ namespace GlobalConstants
         public const string BUDGET="Budget";
         public const string EQUIPPED_WEAPON="Equipped Weapon";
     }
+
+    public static class Anim{
+        public const string IDLE="idle";
+        public const string RUN="run";
+        public const string DEAD="dead";
+        public const string SKIN_DANCE="skin_dance";
+        public const string ATTACK="attack";
+    }
     
     
 }

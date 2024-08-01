@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GloabalEnum;
 using UnityEngine;
 
 namespace Bullets
@@ -18,6 +19,7 @@ namespace Bullets
             this.weapon = weapon;
             this.target=target.TF;
             destPos=this.target.position+new Vector3(0,target.TF.localScale.y/2,0);
+            TF.rotation.SetLookRotation(destPos);
         }
 
         // private void OnCollisionEnter(Collision other) {
@@ -32,9 +34,11 @@ namespace Bullets
         {
             Character character = CacheCollider<Character>.GetCollider(other);
             if (character == null) return;
+            if(weapon.Owner.Id==character.Id)
             if (character.TF != target) return;
-            character.OnDespawn();
-            weapon.Owner.IncreaseScore(character.Score);
+            SoundManager.Ins.PlaySFX(ESound.WEAPON_HIT);
+            if(character.OnDespawn())
+                weapon.Owner.IncreaseScore(character.Score);
         }
 
         private void FixedUpdate()
