@@ -58,6 +58,7 @@ public class ScrollView : UICanvas
         {
             ChangeButtonStatus(EItemState.NotEquipped);
             selectedItem.SetItemState(EItemState.NotEquipped);
+            selectedItem.DisableLockImage();
         }
     }
 

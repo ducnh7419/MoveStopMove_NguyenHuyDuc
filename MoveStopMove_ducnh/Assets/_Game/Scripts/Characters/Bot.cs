@@ -38,10 +38,10 @@ public class Bot : Character
 
     public override void OnInit(int id){
         base.OnInit(id);
+        InitRandomWeapon();
+        InitRandomItem();   
         targetIndicator.enabled=true;
         navMeshPathTesting= new();
-        InitRandomItem();
-        InitRandomWeapon();
         ChangeState(new IdleState());
         Score=Random.Range(0,20);
         botAttackArea.SetAttackAreaSize(Score);

@@ -36,7 +36,7 @@ namespace Bullets
             if (character == null) return;
             if(weapon.Owner.Id==character.Id)
             if (character.TF != target) return;
-            SoundManager.Ins.PlaySFX(ESound.WEAPON_HIT);
+            SoundManager.Ins.PlaySFX(TF,ESound.WEAPON_HIT);
             if(character.OnDespawn())
                 weapon.Owner.IncreaseScore(character.Score);
         }

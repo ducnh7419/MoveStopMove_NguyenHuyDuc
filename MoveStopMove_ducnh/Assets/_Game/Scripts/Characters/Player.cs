@@ -32,11 +32,12 @@ public class Player : Character
     public override void OnInit(int id)
     {
         base.OnInit(id);
+        UserDataManager.Ins.InitEquippedWeapon();
+        UserDataManager.Ins.LoadAllEquippedItem();
         CanRevive=true;
         Score=0;
         attackArea.SetAttackAreaSize(Score);
-        UserDataManager.Ins.InitEquippedWeapon();
-        UserDataManager.Ins.LoadAllEquippedItem();
+        
     }
 
 
@@ -63,7 +64,7 @@ public class Player : Character
     public override bool OnDespawn()
     {
         if(IsImmortal) return false;
-        SoundManager.Ins.PlaySFX(ESound.PLAYER_DEATH);
+        SoundManager.Ins.PlaySFX(TF,ESound.PLAYER_DEATH);
         base.OnDespawn();
         return true;
         

@@ -309,4 +309,16 @@ public class UserDataManager : MonoBehaviour
     public bool CanPlayerBeRevived(){
         return player.CanRevive;
     }
+
+    public void SaveVolumeSettings(float masterVolume, float sfxVolume){
+        PlayerPrefs.SetFloat(DataKey.MASTER_VOLUME,masterVolume);
+        PlayerPrefs.SetFloat(DataKey.SFX_VOLUME,sfxVolume);
+    }
+
+    public Tuple<float,float> GetVolumeSettings(){
+        float masterVolume=PlayerPrefs.GetFloat(DataKey.MASTER_VOLUME,1f);
+        float sfxVolume=PlayerPrefs.GetFloat(DataKey.SFX_VOLUME,1f);
+        return Tuple.Create(masterVolume,sfxVolume);
+    }
+    
 }

@@ -133,7 +133,7 @@ public class Character : GameUnit
         yield return new WaitForSeconds(.2f);
         if (Target == null) yield break;
         weaponHolder.Weapon.Fire(Target);
-        SoundManager.Ins.PlaySFX(ESound.ATTACK);
+        SoundManager.Ins.PlaySFX(TF,ESound.ATTACK);
         IsAttacking = false;
         StartCoroutine(CoolDownAttack());
     }

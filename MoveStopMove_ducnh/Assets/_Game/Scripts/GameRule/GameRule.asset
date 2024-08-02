@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScalePerScore: 0.05
   BonusPointPerKill: 0
-  ImmortalTime: 5
+  ImmortalTime: 3

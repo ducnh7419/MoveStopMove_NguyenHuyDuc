@@ -13,7 +13,7 @@ public class UICMainMenu : UICanvas
 
    private void Start() {
       BtnPlay.onClick.AddListener(OnBtnPlayClick);
-      BtnShopWeapon.onClick.AddListener(OnBtnShopSkinClick);
+      BtnShopWeapon.onClick.AddListener(OnBtnShopWeaponClick);
       BtnShopSkin.onClick.AddListener(OnBtnShopSkinClick);
    }
 

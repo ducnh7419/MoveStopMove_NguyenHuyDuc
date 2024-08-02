@@ -12,6 +12,7 @@ public class ScrollViewItem : MonoBehaviour
     public Image ImgIcon;
     public Image ImgLock;
     private GameObject imgSelectGO;
+    private GameObject imgLockGO;
     public EItemState EItemState;
     public EItemType EItemType;
     public bool IsEquipped;
@@ -19,6 +20,7 @@ public class ScrollViewItem : MonoBehaviour
     private void Awake()
     {
         imgSelectGO = ImgSelect.gameObject;
+        imgLockGO=ImgLock.gameObject;
     }
 
     public void Setup(EItemType eItemType)
@@ -67,5 +69,9 @@ public class ScrollViewItem : MonoBehaviour
 
     public void SetItemState(EItemState eItemState){
         this.EItemState=eItemState;
+    }
+
+    public void DisableLockImage(){
+        imgLockGO.SetActive(false);
     }
 }

@@ -169,7 +169,8 @@ public enum PoolType
     Angel=23,
     Hammer_Bullet=24,
     Candy_Bullet=25,
-    Boomerang_Bullet=26
+    Boomerang_Bullet=26,
+    SFX=27
 
 }
 

@@ -22,6 +22,8 @@ namespace GlobalConstants
         public const string EQUIPPED_FS="Equipped FullSet";
         public const string BUDGET="Budget";
         public const string EQUIPPED_WEAPON="Equipped Weapon";
+        public const string MASTER_VOLUME="Master Volume";
+        public const string SFX_VOLUME="SFX Volume";
     }
 
     public static class Anim{
