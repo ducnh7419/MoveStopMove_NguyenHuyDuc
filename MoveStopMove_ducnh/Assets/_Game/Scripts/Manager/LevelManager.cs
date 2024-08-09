@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
 
     public void ResetLevel(){
         level.OnReset();
-        
+        ParticlePool.Release(ParticleType.UpSize);
     }
 
     public void SetController(DynamicJoystick joystick){
@@ -52,7 +52,6 @@ public class LevelManager : MonoBehaviour
     public void RevivePlayer(){
         level.RevivePlayer();
         SetController(GameManager.Ins.Joystick);
-        
     }
     
 }

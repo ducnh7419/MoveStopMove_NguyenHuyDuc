@@ -135,10 +135,10 @@ public class UserDataManager : MonoBehaviour
 
     public void EquipItem(int id, EItemType eItemType)
     {
-        if (eItemType == EItemType.FullSet)
-        {
-            UnEquipAll();
-        }
+        // if (eItemType == EItemType.FullSet)
+        // {
+        //     UnEquipAll();
+        // }
         string key = GetKey(eItemType);
         PlayerPrefs.SetInt(key, id);
         ChangeSkin(id, eItemType);
@@ -150,6 +150,9 @@ public class UserDataManager : MonoBehaviour
         string key = GetKey(eItemType);
         PlayerPrefs.SetInt(key, 0);
         ChangeSkin(0, eItemType);
+        if(eItemType==EItemType.FullSet){
+            LoadAllEquippedItem();
+        }
     }
 
     public void UnEquipAll()
@@ -178,7 +181,7 @@ public class UserDataManager : MonoBehaviour
         ChangeSkin(0, EItemType.FullSet);
         int hairID = GetEquippedItem(EItemType.Hair);
         int pantID = GetEquippedItem(EItemType.Pant);
-        int shieldID = GetEquippedItem(EItemType.Shield);
+        int shieldID = GetEquippedItem(EItemType.Shield);   
         ChangeSkin(hairID, EItemType.Hair);
         ChangeSkin(pantID, EItemType.Pant);
         ChangeSkin(shieldID, EItemType.Shield);

@@ -15,6 +15,7 @@ public interface ICharacterSkin
 
    public Tuple<EBuffType,float> GetItemBuff();
 
+   public void TakeOffSkin();
 
 
 }

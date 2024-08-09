@@ -5,10 +5,12 @@ using GloabalEnum;
 using GlobalConstants;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Character : GameUnit
 {
     private int id;
+    [SerializeField]private NameTag nameTag;
     [SerializeField] private CharacterConfigSO characterConfig;
     protected bool isDead;
     protected float speed;
@@ -30,7 +32,7 @@ public class Character : GameUnit
     private Character target = null;
     private bool isAttackInCoolDown;
     private string currentAnim = "idle";
-    protected int coin => (int)Math.Ceiling(score+score*goldBuff);
+    protected int coin => (int)Math.Ceiling(score + score * goldBuff);
     private float goldBuff;
     public bool IsMoving { get => isMoving; }
     public bool IsAttacking;
@@ -42,6 +44,8 @@ public class Character : GameUnit
 
     protected virtual void Update()
     {
+        if (GameManager.Ins.CurrState < GameManager.State.StartGame) return;
+        nameTag.SetScoreText(Score);
     }
 
     protected virtual void FixedUpdate()
@@ -51,30 +55,39 @@ public class Character : GameUnit
         {
             Attack();
         }
+        
 
     }
 
     public virtual void OnInit(int id)
     {
         Id = id;
+        
         UnityAction = null;
         targets = new List<Character>();
-        target=null;
+        target = null;
+        TF.localScale=Vector3.one;
         speed = characterConfig.Speed;
         range = characterConfig.Range;
-        attackSpeed=characterConfig.AttackSpeed;
+        attackSpeed = characterConfig.AttackSpeed;
         StartCoroutine(SetImmortalState(GameManager.Ins.GameRuleSO.ImmortalTime));
-        IsAttacking=false;
-        navigatorRenderer.enabled=false;
-        isAttackInCoolDown=false;
-        isDead=false;
+        IsAttacking = false;
+        navigatorRenderer.enabled = false;
+        isAttackInCoolDown = false;
+        isDead = false;
         StopMoving();
     }
 
-    public IEnumerator SetImmortalState(float time){
-        IsImmortal=true;
+    public void SetName(string name){
+        this.name=name;
+        nameTag.SetNameText(name);
+    }
+
+    public IEnumerator SetImmortalState(float time)
+    {
+        IsImmortal = true;
         yield return new WaitForSeconds(time);
-        IsImmortal=false;
+        IsImmortal = false;
     }
 
 
@@ -88,15 +101,19 @@ public class Character : GameUnit
 
     public virtual void ChangeSkin(int id, EItemType eItemType)
     {
+        // FullSetSkin.TakeOffSkin();
         switch (eItemType)
         {
             case EItemType.Hair:
+                if(FullSetSkin.Exists()) return;
                 HairSkin.InitSkin(id);
                 break;
             case EItemType.Pant:
+                if(FullSetSkin.Exists()) return;
                 PantSkin.InitSkin(id);
                 break;
             case EItemType.Shield:
+                if(FullSetSkin.Exists()) return;
                 ShieldSkin.InitSkin(id);
                 break;
             case EItemType.FullSet:
@@ -111,7 +128,7 @@ public class Character : GameUnit
 
     public void InitWeapon(Tuple<int, int> weapSkinId)
     {
-        var weaponBuff=GameManager.Ins.WeaponDataSO.GetItemBuff(weapSkinId.Item1); 
+        var weaponBuff = GameManager.Ins.WeaponDataSO.GetItemBuff(weapSkinId.Item1);
         weaponHolder.Setup(weapSkinId);
         ApplyWeaponBuff(weaponBuff);
     }
@@ -121,26 +138,29 @@ public class Character : GameUnit
         WeaponData weaponData = GameManager.Ins.WeaponDataSO.GetRandomWeapon();
         WeaponSkinData weaponSkinData = weaponData.GetRandomSkin();
         weaponHolder.Setup(weaponData, weaponSkinData);
-        var weaponBuff=GameManager.Ins.WeaponDataSO.GetItemBuff(weaponData.Id); 
+        var weaponBuff = GameManager.Ins.WeaponDataSO.GetItemBuff(weaponData.Id);
         ApplyWeaponBuff(weaponBuff);
     }
 
 
     private IEnumerator DelayAttack()
     {
-        IsAttacking=true;
+        IsAttacking = true;
         ChangeAnim("attack");
         yield return new WaitForSeconds(.2f);
-        if (Target == null) yield break;
+        if(Target==null){
+            IsAttacking=false;
+            yield break;
+        }
         weaponHolder.Weapon.Fire(Target);
-        SoundManager.Ins.PlaySFX(TF,ESound.ATTACK);
+        SoundManager.Ins.PlaySFX(TF, ESound.ATTACK);
         IsAttacking = false;
         StartCoroutine(CoolDownAttack());
     }
 
     protected virtual void Attack()
     {
-        if(IsAttacking) return;
+        if (IsAttacking) return;
         if (isAttackInCoolDown) return;
         LockTarget();
         if (Target == null) return;
@@ -153,7 +173,7 @@ public class Character : GameUnit
     private IEnumerator CoolDownAttack()
     {
         isAttackInCoolDown = true;
-        yield return new WaitForSeconds(2f/attackSpeed);
+        yield return new WaitForSeconds(2f / attackSpeed);
         isAttackInCoolDown = false;
     }
 
@@ -163,8 +183,9 @@ public class Character : GameUnit
             targets.Remove(target);
     }
 
-    public void AddUnityAction(UnityAction action){
-        UnityAction+=action;
+    public void AddUnityAction(UnityAction action)
+    {
+        UnityAction += action;
     }
 
     public void DropUnityActionEvent(Character target)
@@ -191,7 +212,7 @@ public class Character : GameUnit
             target.UnityAction += () => Untarget(target);
         }
     }
-    
+
 
     protected virtual void LockTarget()
     {
@@ -217,6 +238,7 @@ public class Character : GameUnit
     public virtual void StopMoving()
     {
         isMoving = false;
+        if(IsAttacking) return;
         ChangeAnim(Anim.IDLE);
     }
 
@@ -230,10 +252,10 @@ public class Character : GameUnit
         }
     }
 
-    
+
     public void ApplyItemBuff()
     {
-        goldBuff=0;
+        goldBuff = 0;
         if (HairSkin.Exists())
         {
             var itemBuff = HairSkin.GetItemBuff();
@@ -255,52 +277,70 @@ public class Character : GameUnit
     {
         float defaultSpeed = characterConfig.Speed;
         float defaultRange = characterConfig.Range;
-        float defaultAttackSpeed=characterConfig.AttackSpeed;
+        float defaultAttackSpeed = characterConfig.AttackSpeed;
         switch (eBuffType)
         {
             case EBuffType.SpeedBuff:
-                speed = defaultSpeed+defaultSpeed * value;
+                speed = defaultSpeed + defaultSpeed * value;
                 break;
             case EBuffType.RangeBuff:
-                range = defaultRange+defaultRange * value;
+                range = defaultRange + defaultRange * value;
                 break;
             case EBuffType.GoldBuff:
-                goldBuff=value;
+                goldBuff = value;
                 break;
             case EBuffType.AttackSpeed:
-                attackSpeed=defaultAttackSpeed+value;
+                attackSpeed = defaultAttackSpeed + value;
                 break;
         }
     }
 
-    public void ApplyWeaponBuff(Tuple<EBuffType,float> weaponBuff)
+    public void ApplyWeaponBuff(Tuple<EBuffType, float> weaponBuff)
     {
         float defaultSpeed = characterConfig.Speed;
         float defaultRange = characterConfig.Range;
-        float defaultAttackSpeed=characterConfig.AttackSpeed;
-        float value=weaponBuff.Item2;
+        float defaultAttackSpeed = characterConfig.AttackSpeed;
+        float value = weaponBuff.Item2;
         switch (weaponBuff.Item1)
         {
             case EBuffType.SpeedBuff:
-                speed = defaultSpeed+value;
+                speed = defaultSpeed + value;
                 break;
             case EBuffType.RangeBuff:
-                range = defaultRange+value;
+                range = defaultRange + value;
                 break;
             case EBuffType.AttackSpeed:
-                attackSpeed=defaultAttackSpeed+value;
+                attackSpeed = defaultAttackSpeed + value;
                 break;
         }
     }
-    
+
+    protected void ChangeCharacterrSize(int score)
+    {
+        float scaleIncresed=Mathf.Log(score,2);
+        if(!Mathf.Approximately(scaleIncresed,Mathf.Round(scaleIncresed))) return;
+        ParticlePool.Play(ParticleType.UpSize,TF.position+new Vector3(0,TF.position.y+TF.localScale.y/2,0),Quaternion.Euler(Vector3.zero));
+        SetCharacterSize(score);
+        
+    }
+
+    protected void SetCharacterSize(int score){
+        if(score==0) return;
+        float scaleIncresed=Mathf.Round(Mathf.Log(score,2));
+        TF.localScale=new Vector3(TF.localScale.x+scaleIncresed*0.2f,TF.localScale.y+scaleIncresed*0.2f,TF.localScale.z+scaleIncresed*0.2f);
+    }
+
+
+
     public virtual void IncreaseScore(int score)
     {
-        Score = Score+score+GameManager.Ins.GameRuleSO.BonusPointPerKill;
+        Score = Score + score + GameManager.Ins.GameRuleSO.BonusPointPerKill;
 
     }
 
-    public void SetCharacterRange(float range){
-        this.range+=range;
+    public void SetCharacterRange(float range)
+    {
+        this.range += range;
     }
 
     public void TurnOnNavigator()
@@ -315,7 +355,8 @@ public class Character : GameUnit
 
     public virtual bool OnDespawn()
     {
-        isDead=true;
+        isDead = true;
+        TurnOffNavigator();
         ChangeAnim(Anim.DEAD);
         StartCoroutine(DelayDespawn());
         return true;

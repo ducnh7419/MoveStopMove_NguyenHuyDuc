@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using GloabalEnum;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class GameManager : MonoBehaviour
     public ItemDataConfigSO ItemDataConfigSO;
     public WeaponDataSO WeaponDataSO;
 
-    [SerializeField] private CameraFollow m_Camera;
+    public CameraFollow M_Camera;
 
     private Dictionary<Character,int> leaderboard=new Dictionary<Character,int>();
     public DynamicJoystick Joystick;
@@ -107,7 +106,7 @@ public class GameManager : MonoBehaviour
     private void OnWeaponShop()
     {
         UIManager.Ins.CloseAll();
-        m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,12f,-10.2f),Quaternion.Euler(0,0,0));
+        M_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,12f,-10.2f),Quaternion.Euler(0,0,0));
         UIManager.Ins.OpenUI<UICShopWeapon>();
         UIManager.Ins.OpenUI<UICBudget>();
     }
@@ -115,7 +114,7 @@ public class GameManager : MonoBehaviour
     private void OnSkinShop()
     {
         UIManager.Ins.CloseAll();
-        m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,1.31f,-10.2f),Quaternion.Euler(0,0,0));
+        M_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,0.7f,-10.2f),Quaternion.Euler(0,0,0));
         UIManager.Ins.OpenUI<UICShopSkin>();
         UIManager.Ins.OpenUI<UICBudget>();
     }
@@ -128,7 +127,7 @@ public class GameManager : MonoBehaviour
     private void OnMainMenu()
     {
         UIManager.Ins.CloseAll();
-        m_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,2.45f,-10.2f),Quaternion.Euler(0,0,0));
+        M_Camera.SetCameraPositionAndRotation(new Vector3(0.31f,2.45f,-10.2f),Quaternion.Euler(0,0,0));
         UIManager.Ins.OpenUI<UICMainMenu>();
     }
 
@@ -196,10 +195,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void SetCameraTarget(Character target){
-        m_Camera.SetCameraTarget(target);
+        M_Camera.SetCameraTarget(target);
     }
     public void SetCameraPositionAndRotation(Vector3 offset, Quaternion rotation){
-        m_Camera.SetCameraPositionAndRotation(offset,rotation);
+        M_Camera.SetCameraPositionAndRotation(offset,rotation);
     }
 
     public void GoBackward()

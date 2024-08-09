@@ -8,21 +8,34 @@ public class Weapon : GameUnit
 {
     [SerializeField] public Bullet  BulletPrefab;
     [SerializeField] public  MeshRenderer MeshRenderer;
+    private float bulletSpeed;
     public Character Owner;
 
     public void SetPositionAndRotation(Weapon weaponPrefab){
         TF.SetLocalPositionAndRotation(weaponPrefab.TF.localPosition, weaponPrefab.TF.rotation);
     }
 
-    public void OnInit(WeaponHolder weaponHolder){
+    public void SkinSetUp(WeaponSkinData weaponSkinData){
+        Material[] mats=weaponSkinData.weaponSkinPrefab.MrSkin.sharedMaterials;
+        MeshRenderer.materials=mats;
+        
+    }
+
+    public void OnInit(WeaponHolder weaponHolder,float bulletSpeed){
         
         Owner=weaponHolder.Owner;
+        this.bulletSpeed=bulletSpeed;
+    }
+
+    public float GetBulletSpeed(){
+        return this.bulletSpeed;
     }
 
     public void Fire(Character target)
     {
         Bullet bullet=SimplePool.Spawn<Bullet>(BulletPrefab, TF.position, TF.rotation);
         bullet.OnInit(this,target);
+        bullet.SkinSetup(MeshRenderer.materials);
         Hide();
     }
 

@@ -18,11 +18,8 @@ public class AttackArea : MonoBehaviour
       }
    }
 
-   public void SetAttackAreaSize(int score){
+   public void SetAttackAreaSize(float range){
       // Scale increased by each 1 point
-      float scaleEachScore=GameManager.Ins.GameRuleSO.ScalePerScore;
-      float numberOfTimeIncreased=score*scaleEachScore;
-      character.SetCharacterRange(numberOfTimeIncreased);
       TF.localScale=new Vector3(character.Range,character.Range,character.Range);
    }
 

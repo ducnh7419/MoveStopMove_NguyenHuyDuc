@@ -52,4 +52,9 @@ public class HairSkinImpl : ICharacterSkin
         }
         return false;
     }
+
+    public void TakeOffSkin()
+    {
+        throw new NotImplementedException();
+    }
 }

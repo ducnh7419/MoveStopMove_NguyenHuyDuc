@@ -52,4 +52,9 @@ public class ShieldSkinImpl : ICharacterSkin
         }
         return false;
     }
+
+    public void TakeOffSkin()
+    {
+        throw new NotImplementedException();
+    }
 }

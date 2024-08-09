@@ -48,4 +48,9 @@ public class PantSkinImpl : ICharacterSkin
         }
         return false;
     }
+
+    public void TakeOffSkin()
+    {
+        throw new NotImplementedException();
+    }
 }

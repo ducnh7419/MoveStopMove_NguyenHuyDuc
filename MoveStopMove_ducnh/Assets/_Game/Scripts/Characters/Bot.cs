@@ -44,7 +44,7 @@ public class Bot : Character
         navMeshPathTesting= new();
         ChangeState(new IdleState());
         Score=Random.Range(0,20);
-        botAttackArea.SetAttackAreaSize(Score);
+        SetCharacterSize(Score);
         Agent.speed=speed/2;
     }
 
@@ -94,7 +94,7 @@ public class Bot : Character
     public override void IncreaseScore(int score)
     {
         base.IncreaseScore(score);
-        botAttackArea.SetAttackAreaSize(score);
+        ChangeCharacterrSize(score);
     }
 
     

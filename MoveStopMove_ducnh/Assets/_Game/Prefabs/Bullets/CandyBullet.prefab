@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 25
-  speed: 20
+  MeshRenderer: {fileID: 1236174867762298123}
 --- !u!65 &4044190336464965687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -142,6 +142,12 @@ PrefabInstance:
 --- !u!4 &1236174867760005099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 77de8014aff37804f92ab58c8817cced,
+    type: 3}
+  m_PrefabInstance: {fileID: 1236174867760391531}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1236174867762298123 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 77de8014aff37804f92ab58c8817cced,
     type: 3}
   m_PrefabInstance: {fileID: 1236174867760391531}
   m_PrefabAsset: {fileID: 0}

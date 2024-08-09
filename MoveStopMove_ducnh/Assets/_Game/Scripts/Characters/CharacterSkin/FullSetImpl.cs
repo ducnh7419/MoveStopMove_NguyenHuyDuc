@@ -12,6 +12,8 @@ public class FullSetImpl : ICharacterSkin
     [NonSerialized] public FullSet FullSet;
     public SkinnedMeshRenderer MrPant;
     public SkinnedMeshRenderer MrBody;
+    [SerializeField]private Transform hairHolderTF;
+    [SerializeField] private Transform leftHandHolderTF;
 
     public Tuple<EBuffType,float> GetItemBuff()
     {
@@ -31,10 +33,15 @@ public class FullSetImpl : ICharacterSkin
         }
         ItemData fullSetData = GameManager.Ins.ItemDataConfigSO.RandomItemData(EItemType.FullSet);
         FullSet = SimplePool.Spawn<FullSet>(fullSetData.SkinPrefab.FullSet, FullSetHolder);
-        FullSet.Setup(MrBody, MrPant);
+        FullSet.Setup(MrBody, MrPant,hairHolderTF,leftHandHolderTF);
         SetItemBuff(fullSetData.Id);  
     }
 
+
+    /// <summary>
+    /// itemId=0 will unequip
+    /// </summary>
+    /// <param name="itemId"></param>
     public void InitSkin(int itemId)
     {
         if (FullSet != null)
@@ -46,7 +53,7 @@ public class FullSetImpl : ICharacterSkin
         if (itemId != 0)
         {
             FullSet = SimplePool.Spawn<FullSet>(fullSetData.SkinPrefab.FullSet, FullSetHolder);
-            FullSet.Setup(MrBody, MrPant);
+            FullSet.Setup(MrBody, MrPant,hairHolderTF,leftHandHolderTF);
         }
         else
         {
@@ -55,6 +62,7 @@ public class FullSetImpl : ICharacterSkin
         }
         SetItemBuff(itemId);   
     }
+    
 
     public bool Exists()
     {
@@ -62,5 +70,10 @@ public class FullSetImpl : ICharacterSkin
             return true;
         }
         return false;
+    }
+
+    public void TakeOffSkin()
+    {
+       InitSkin(0); 
     }
 }

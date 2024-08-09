@@ -52,6 +52,7 @@ public class WeaponData
     public EWeapon EWeapon;
     public EBuffType EBuffType;
     public float Value;
+    public float bulletSpeed;
     public List<WeaponSkinData> Skins;
     public int Price;
     public Weapon WeaponPrefab;

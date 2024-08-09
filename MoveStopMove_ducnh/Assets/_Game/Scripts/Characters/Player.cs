@@ -15,6 +15,7 @@ public class Player : Character
         base.FixedUpdate();
         if(GameManager.Ins.IsState(GameManager.State.SkinShop)){
             ChangeAnim(Anim.SKIN_DANCE);
+            return;
         }
         if(isDead) return;
         if(Joystick==null) return;
@@ -36,7 +37,7 @@ public class Player : Character
         UserDataManager.Ins.LoadAllEquippedItem();
         CanRevive=true;
         Score=0;
-        attackArea.SetAttackAreaSize(Score);
+        attackArea.SetAttackAreaSize(Range);
         
     }
 
@@ -54,7 +55,7 @@ public class Player : Character
     public override void IncreaseScore(int score)
     {
         base.IncreaseScore(score);
-        attackArea.SetAttackAreaSize(Score);
+        ChangeCharacterrSize(score);
     }
 
     public int GetCoin(){

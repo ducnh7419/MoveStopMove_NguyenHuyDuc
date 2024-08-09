@@ -15,4 +15,8 @@ public class SkinHolder : GameUnit
     {
         
     }
+
+    public void Despawn(){
+        SimplePool.Despawn(this);
+    }
 }

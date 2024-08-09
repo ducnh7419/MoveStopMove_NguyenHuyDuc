@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 2
-  speed: 20
+  MeshRenderer: {fileID: 1067729113571125604}
 --- !u!65 &6586031806786644268
 BoxCollider:
   m_ObjectHideFlags: 0

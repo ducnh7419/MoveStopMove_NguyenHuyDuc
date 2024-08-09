@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GloabalEnum;
+using GlobalConstants;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -69,6 +70,10 @@ public class Level : MonoBehaviour
         }
     }
 
+    private string GetRandomName(){
+        return CharName.CHAR_NAMES[Random.Range(0, CharName.CHAR_NAMES.Length)];
+    }
+
     private void RemoveCharFromList(Character character){
         listChars.Remove(character);
         DecreseNORemainBots();
@@ -107,10 +112,12 @@ public class Level : MonoBehaviour
     {
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
+        
         SpawnPlayer(spawnPos);
         spawnPositions.RemoveAt(rdn);
         UserDataManager.Ins.Player = player;
         player.OnInit(id);
+        // player.SetName(name);
         player.AddUnityAction(EndGame);
         listChars.Add(player);
         id++;
@@ -125,11 +132,13 @@ public class Level : MonoBehaviour
 
     private void SpawnBotAtRandomPos()
     {
-        if (!((remainedNoBots > 0) && (numberOfExistedBots < maximumNoExistedBot)&&(remainedNoBots>maximumNoExistedBot))) return;
+        if (!((remainedNoBots > 0) && (numberOfExistedBots < maximumNoExistedBot)&&(remainedNoBots>=maximumNoExistedBot))) return;
+        string name=GetRandomName();
         int rdn = Random.Range(0, spawnPositions.Count);
         Vector3 spawnPos = spawnPositions[rdn];
         Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
         bot.OnInit(id);
+        bot.SetName(name);
         bot.AddUnityAction(()=>RemoveCharFromList(bot));
         listChars.Add(player);
         id++;
@@ -140,10 +149,12 @@ public class Level : MonoBehaviour
     {
         for (int i = 0; i < spawnPositions.Count; i++)
         {
+            string name=GetRandomName();
             Vector3 spawnPos = spawnPositions[i];
             Bot bot = SimplePool.Spawn<Bot>(botPrefab, spawnPos, botPrefab.TF.rotation);
             bot.OnInit(id);
             bot.AddUnityAction(()=>RemoveCharFromList(bot));
+            bot.SetName(name);
             listChars.Add(bot);
             id++;
             numberOfExistedBots++;
@@ -190,6 +201,7 @@ public class Level : MonoBehaviour
             player.Score = UserDataManager.Ins.Player.Score;
             player.OnInit(UserDataManager.Ins.Player.Id);
             player.CanRevive = false;
+            player.AddUnityAction(EndGame);
             UserDataManager.Ins.Player = player;
             StartCoroutine(player.SetImmortalState(5f));
         }

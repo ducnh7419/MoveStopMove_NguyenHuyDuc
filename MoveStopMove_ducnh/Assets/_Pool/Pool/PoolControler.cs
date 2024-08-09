@@ -138,7 +138,8 @@ public class ParticleAmount
 
 public enum ParticleType
 {
-    Hit
+    Hit,
+    UpSize
 }
 
 public enum PoolType
@@ -170,7 +171,16 @@ public enum PoolType
     Hammer_Bullet=24,
     Candy_Bullet=25,
     Boomerang_Bullet=26,
-    SFX=27
+    SFX=27,
+    Angel_Hair=28,
+    Devil_Hair=29,
+    Witch_Hair=30,
+    Thor_Hair=31,
+    Thor=32,
+    Deadpool=33,
+    Witch=34,
+    Deadpool_Blade=35,
+    Witch_Book=36
 
 }
 

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 24
-  speed: 20
+  MeshRenderer: {fileID: 336903475848732661}
 --- !u!65 &6769486669324501061
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -134,6 +134,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90389cac50942cb4ca38583e6531094a, type: 3}
+--- !u!23 &336903475848732661 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 90389cac50942cb4ca38583e6531094a,
+    type: 3}
+  m_PrefabInstance: {fileID: 336903475850758037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &336903475850632469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 90389cac50942cb4ca38583e6531094a,

@@ -10,16 +10,22 @@ namespace Bullets
         private Transform target;
         private Weapon weapon;
 
-        [SerializeField] private float speed;
+        private float speed;
         protected Vector3 startPos;
         protected Vector3 destPos;
+        public MeshRenderer MeshRenderer;
 
         public void OnInit(Weapon weapon,Character target) {
             startPos=TF.position;
             this.weapon = weapon;
             this.target=target.TF;
+            this.speed=weapon.GetBulletSpeed();
             destPos=this.target.position+new Vector3(0,target.TF.localScale.y/2,0);
-            TF.rotation.SetLookRotation(destPos);
+            TF.rotation.SetLookRotation(destPos);         
+        }
+
+        public void SkinSetup(Material[]mats){
+            MeshRenderer.materials=mats;
         }
 
         // private void OnCollisionEnter(Collision other) {
@@ -34,7 +40,7 @@ namespace Bullets
         {
             Character character = CacheCollider<Character>.GetCollider(other);
             if (character == null) return;
-            if(weapon.Owner.Id==character.Id)
+            if(weapon.Owner.Id==character.Id) return;
             if (character.TF != target) return;
             SoundManager.Ins.PlaySFX(TF,ESound.WEAPON_HIT);
             if(character.OnDespawn())

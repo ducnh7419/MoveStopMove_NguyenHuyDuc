@@ -20,6 +20,7 @@ MonoBehaviour:
     EWeapon: 1
     EBuffType: 1
     Value: 1
+    bulletSpeed: 10
     Skins:
     - Id: 0
       Name: 
@@ -51,6 +52,7 @@ MonoBehaviour:
     EWeapon: 2
     EBuffType: 1
     Value: 3
+    bulletSpeed: 10
     Skins:
     - Id: 0
       Name: 
@@ -87,6 +89,7 @@ MonoBehaviour:
     EWeapon: 3
     EBuffType: 1
     Value: 5
+    bulletSpeed: 10
     Skins:
     - Id: 0
       Name: 

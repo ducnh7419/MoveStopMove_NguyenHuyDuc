@@ -12,10 +12,6 @@ public class WeaponHolder : GameUnit
     [SerializeField]private Character owner;
     public Character Owner { get => owner;}
 
-    private void Awake() {
-        
-    }
-
     public void Setup(Tuple<int,int> weapSkinId) {
         if(Weapon!=null){
             Weapon.OnDespawn();
@@ -30,9 +26,8 @@ public class WeaponHolder : GameUnit
             Weapon.OnDespawn();
         }
         Weapon=SimplePool.Spawn<Weapon>(weaponData.WeaponPrefab,TF);
+        Weapon.OnInit(this,weaponData.bulletSpeed);
         Weapon.SetPositionAndRotation(weaponData.WeaponPrefab);
-        Material[] mats=weaponSkinData.weaponSkinPrefab.MrSkin.sharedMaterials;
-        Weapon.MeshRenderer.materials=mats;
-        Weapon.OnInit(this);
+        Weapon.SkinSetUp(weaponSkinData);
     }
 }
