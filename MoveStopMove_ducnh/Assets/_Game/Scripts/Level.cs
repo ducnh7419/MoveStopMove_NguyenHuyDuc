@@ -125,8 +125,7 @@ public class Level : MonoBehaviour
         Vector3 pos=new(pos_x, pos_y, pos_z);
         switch (ePowerUps){
             case EPowerUps.Ulti:
-                SimplePool.Spawn<Ulti>(ultiPowerUpsPrefab,pos,ultiPowerUpsPrefab.TF.rotation).OnInit();
-
+                SimplePool.Spawn<Ulti>(ultiPowerUpsPrefab,pos,ultiPowerUpsPrefab.TF.rotation);
                 break;
         }
     }

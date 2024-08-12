@@ -711,6 +711,7 @@ MonoBehaviour:
   weaponHitSound: {fileID: 8300000, guid: 1a54a9247142bfa4d9a68d974b417a5b, type: 3}
   clickSound: {fileID: 8300000, guid: 3b6425a632d4cfc4b9eb26a34e55071c, type: 3}
   victorySound: {fileID: 8300000, guid: 6363a9021e31a304ba1b643cb7722f3f, type: 3}
+  sizeUpSound: {fileID: 8300000, guid: 84159911c3981a2488380b0438e940ff, type: 3}
 --- !u!4 &1668739437
 Transform:
   m_ObjectHideFlags: 0
@@ -876,7 +877,7 @@ MonoBehaviour:
     amount: 25
     collect: 0
   Particle:
-  - root: {fileID: 0}
+  - root: {fileID: 1986967612}
     particleType: 1
     prefab: {fileID: 6615736596477068261, guid: efb86d2c1cb80ed4585628db55259fa9,
       type: 3}
