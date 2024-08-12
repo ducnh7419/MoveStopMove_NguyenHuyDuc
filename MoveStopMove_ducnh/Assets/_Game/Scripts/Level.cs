@@ -19,6 +19,7 @@ public class Level : MonoBehaviour
     [SerializeField] private Player playerPrefab;
     List<Character> listChars=new();
     [SerializeField] private Bot botPrefab;
+    [SerializeField] private Ulti ultiPowerUpsPrefab;
     private float max_x, min_x, max_z, min_z;
     private int id;
     List<Vector3> spawnPositions = new List<Vector3>();
@@ -27,6 +28,8 @@ public class Level : MonoBehaviour
     [SerializeField] private int maximumNoExistedBot;
     private int numberOfExistedBots;
     private int remainedNoBots;
+    private float timer;
+    private float randomTime;
 
     public void OnInit()
     {
@@ -35,6 +38,8 @@ public class Level : MonoBehaviour
         numberOfExistedBots = 0;
         SpawnPlayer();
         SpawnBots();
+        timer=0;
+        randomTime=Mathf.Round(Random.Range(10f, 20f));
     }
 
     private void Awake()
@@ -54,6 +59,11 @@ public class Level : MonoBehaviour
         OnInit();
     }
 
+    private void FixedUpdate(){
+        timer+=Time.fixedDeltaTime;
+
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -62,6 +72,7 @@ public class Level : MonoBehaviour
             return;
         }
         SpawnBotAtRandomPos();
+        GenerateRandomPowerUps(EPowerUps.Ulti);
         if (remainedNoBots <= 0)
         {
             SoundManager.Ins.PlaySFX(ESound.VICTORY);
@@ -93,18 +104,30 @@ public class Level : MonoBehaviour
         float pos_x = characterSpawnLocation.position.x;
         float pos_y = characterSpawnLocation.position.y;
         float pos_z = characterSpawnLocation.position.z;
-        float sign_x = Mathf.Sign(pos_x);
-        float sign_z = Mathf.Sign(pos_z);
-
         while (spawnPositions.Count < maximumNoExistedBot + 1)
         {
-            float offset = Random.Range(-40f, 40f);
             pos_x = Random.Range(min_x, max_x);
             pos_z = Random.Range(min_z, max_z);
             Vector3 pos = new Vector3(pos_x, pos_y, pos_z);
             if (HasObtacle(pos)) continue;
             spawnPositions.Add(pos);
+        }
+    }
 
+    private void GenerateRandomPowerUps(EPowerUps ePowerUps){
+        if(Mathf.Round(timer)!=randomTime){
+            return;
+        }
+        timer=0;
+        float pos_y = characterSpawnLocation.position.y+0.5f;
+        float pos_x = Random.Range(min_x, max_x);
+        float pos_z = Random.Range(min_z, max_z);
+        Vector3 pos=new(pos_x, pos_y, pos_z);
+        switch (ePowerUps){
+            case EPowerUps.Ulti:
+                SimplePool.Spawn<Ulti>(ultiPowerUpsPrefab,pos,ultiPowerUpsPrefab.TF.rotation).OnInit();
+
+                break;
         }
     }
 

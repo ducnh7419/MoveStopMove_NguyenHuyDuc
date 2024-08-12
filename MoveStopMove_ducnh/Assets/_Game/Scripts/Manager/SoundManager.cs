@@ -21,6 +21,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip weaponHitSound;
     [SerializeField] private AudioClip clickSound;
     [SerializeField] private AudioClip victorySound;
+    [SerializeField] private AudioClip sizeUpSound;
     private void Awake() {
         if (ins != null && ins != this)
         {
@@ -62,6 +63,10 @@ public class SoundManager : MonoBehaviour
             case ESound.VICTORY:
                 audioClip=victorySound;
                 sfxSource.PlayOneShot(victorySound);
+                break;
+            case ESound.SIZE_UP:
+                audioClip=sizeUpSound;
+                sfxSource.PlayOneShot(sizeUpSound);
                 break;
         }
         if(audioClip==null) return;

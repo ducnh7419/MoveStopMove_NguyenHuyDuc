@@ -97,7 +97,13 @@ namespace GloabalEnum
         CLICK=3,
         VICTORY=4,
         PLAYER_DEATH=5,
-        WEAPON_HIT=6
+        WEAPON_HIT=6,
+        SIZE_UP=7
+    }
+
+    public enum EPowerUps{
+        None=0,
+        Ulti=1
     }
     
 }

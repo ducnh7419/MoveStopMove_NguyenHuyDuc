@@ -86,6 +86,8 @@ MonoBehaviour:
     type: 3}
   botPrefab: {fileID: -2071778296372906726, guid: e58ec0106255d90408b013b57015b583,
     type: 3}
+  ultiPowerUpsPrefab: {fileID: 2324915263434326841, guid: 2f2f6e51082bf0042a853f9ac8d5acb1,
+    type: 3}
   totalCharacter: 101
   maximumNoExistedBot: 25
 --- !u!114 &5980996700914031684

@@ -14,99 +14,102 @@ public class Bot : Character
     [Header("NavMesh Agent")]
     public NavMeshAgent Agent;
     public Vector3 destination;
-    public bool IsReachingDestination => Vector3.Distance(TF.position, destination)< 0.01f;
+    public bool IsReachingDestination => Vector3.Distance(TF.position, destination) < 0.01f;
 
     public float TotalTimeInCurrentState => totalTimeInCurrentState;
 
-    protected override void Update(){
+    protected override void Update()
+    {
         base.Update();
     }
 
-    protected override void Moving(){
+    protected override void Moving()
+    {
         base.Moving();
         // Agent.enabled=true;
     }
 
-    private void OnDisable() {
-        targetIndicator.enabled=false;
+    private void OnDisable()
+    {
+        targetIndicator.enabled = false;
     }
 
 
-    public bool HasDestination(){
-        return destination!=Vector3.zero;
+    public bool HasDestination()
+    {
+        return destination != Vector3.zero;
     }
 
-    public override void OnInit(int id){
+    public override void OnInit(int id)
+    {
         base.OnInit(id);
         InitRandomWeapon();
-        InitRandomItem();   
-        targetIndicator.enabled=true;
-        navMeshPathTesting= new();
+        InitRandomItem();
+        targetIndicator.enabled = true;
+        navMeshPathTesting = new();
         ChangeState(new IdleState());
-        Score=Random.Range(0,20);
+        Score = Random.Range(0, 20);
         SetCharacterSize(Score);
-        Agent.speed=speed/2;
+        Agent.speed = speed / 2;
     }
 
-    public bool CanReachDestination(Vector3 dest){
-        Agent.CalculatePath(dest,navMeshPathTesting);
-        return navMeshPathTesting.status==NavMeshPathStatus.PathComplete;
+    public bool CanReachDestination(Vector3 dest)
+    {
+        Agent.CalculatePath(dest, navMeshPathTesting);
+        return navMeshPathTesting.status == NavMeshPathStatus.PathComplete;
     }
 
 
-   public override void StopMoving(){
+    public override void StopMoving()
+    {
         base.StopMoving();
         // Agent.enabled=false;
-        Agent.velocity=Vector3.zero;
-   }
+        Agent.velocity = Vector3.zero;
+    }
 
-    public void SetDestination(Vector3 dest){
-        destination=dest;
+    public void SetDestination(Vector3 dest)
+    {
+        destination = dest;
         Moving();
         Agent.SetDestination(dest);
-        
+
     }
-    
+
 
     // Update is called once per frame
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        if(GameManager.Ins.IsState(GameManager.State.StartGame)||GameManager.Ins.IsState(GameManager.State.OngoingGame))
-        currentState?.OnExecute(this);
-        
+        if (GameManager.Ins.IsState(GameManager.State.StartGame) || GameManager.Ins.IsState(GameManager.State.OngoingGame))
+            currentState?.OnExecute(this);
+
     }
 
     public void ChangeState(IState<Bot> state)
     {
         currentState?.OnExit(this);
-        if(currentState!=null&&currentState.GetType() != state.GetType()){
-            totalTimeInCurrentState=0;
+        if (currentState != null && currentState.GetType() != state.GetType())
+        {
+            totalTimeInCurrentState = 0;
         }
         currentState = state;
         currentState?.OnEnter(this);
     }
 
-    public void SetTotalTimeInCurrState(float time){
-        totalTimeInCurrentState+=time;
-    }
-
-    public override void IncreaseScore(int score)
+    public void SetTotalTimeInCurrState(float time)
     {
-        base.IncreaseScore(score);
-        ChangeCharacterrSize(score);
+        totalTimeInCurrentState += time;
     }
-
-    
 
     public void ClearDestination()
     {
         Agent.ResetPath();
-        destination=Vector3.zero;
+        destination = Vector3.zero;
     }
 
-    public override bool OnDespawn(){
-        if(IsImmortal) return false;
+    public override bool OnDespawn()
+    {
+        if (IsImmortal) return false;
         base.OnDespawn();
         return true;
     }

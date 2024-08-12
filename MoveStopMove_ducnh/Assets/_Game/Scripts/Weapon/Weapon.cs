@@ -31,10 +31,15 @@ public class Weapon : GameUnit
         return this.bulletSpeed;
     }
 
-    public void Fire(Character target)
+    public void Fire(Character target,bool isUlti)
     {
         Bullet bullet=SimplePool.Spawn<Bullet>(BulletPrefab, TF.position, TF.rotation);
         bullet.OnInit(this,target);
+        if(isUlti){
+            bullet.SetScale(bullet.TF.localScale*5);
+        }else{
+            bullet.SetScale(BulletPrefab.TF.localScale);
+        }
         bullet.SkinSetup(MeshRenderer.materials);
         Hide();
     }

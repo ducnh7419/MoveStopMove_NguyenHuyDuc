@@ -180,7 +180,8 @@ public enum PoolType
     Deadpool=33,
     Witch=34,
     Deadpool_Blade=35,
-    Witch_Book=36
+    Witch_Book=36,
+    Ulti=37
 
 }
 

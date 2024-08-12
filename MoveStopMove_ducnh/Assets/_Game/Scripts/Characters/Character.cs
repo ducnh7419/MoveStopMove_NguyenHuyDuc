@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class Character : GameUnit
 {
     private int id;
-    [SerializeField]private NameTag nameTag;
+    [SerializeField] private NameTag nameTag;
     [SerializeField] private CharacterConfigSO characterConfig;
     protected bool isDead;
     protected float speed;
@@ -36,6 +36,7 @@ public class Character : GameUnit
     private float goldBuff;
     public bool IsMoving { get => isMoving; }
     public bool IsAttacking;
+    private bool hasUlti;
     public int Score { get => score; set => score = value; }
     public int Id { get => id; set => id = value; }
     public Character Target => target;
@@ -55,18 +56,18 @@ public class Character : GameUnit
         {
             Attack();
         }
-        
+
 
     }
 
     public virtual void OnInit(int id)
     {
         Id = id;
-        
+
         UnityAction = null;
         targets = new List<Character>();
         target = null;
-        TF.localScale=Vector3.one;
+        TF.localScale = Vector3.one;
         speed = characterConfig.Speed;
         range = characterConfig.Range;
         attackSpeed = characterConfig.AttackSpeed;
@@ -75,11 +76,13 @@ public class Character : GameUnit
         navigatorRenderer.enabled = false;
         isAttackInCoolDown = false;
         isDead = false;
+        ChangeUltiStatus(false);
         StopMoving();
     }
 
-    public void SetName(string name){
-        this.name=name;
+    public void SetName(string name)
+    {
+        this.name = name;
         nameTag.SetNameText(name);
     }
 
@@ -88,6 +91,10 @@ public class Character : GameUnit
         IsImmortal = true;
         yield return new WaitForSeconds(time);
         IsImmortal = false;
+    }
+
+    public void ChangeUltiStatus(bool status){
+        hasUlti=status;
     }
 
 
@@ -105,15 +112,15 @@ public class Character : GameUnit
         switch (eItemType)
         {
             case EItemType.Hair:
-                if(FullSetSkin.Exists()) return;
+                if (FullSetSkin.Exists()) return;
                 HairSkin.InitSkin(id);
                 break;
             case EItemType.Pant:
-                if(FullSetSkin.Exists()) return;
+                if (FullSetSkin.Exists()) return;
                 PantSkin.InitSkin(id);
                 break;
             case EItemType.Shield:
-                if(FullSetSkin.Exists()) return;
+                if (FullSetSkin.Exists()) return;
                 ShieldSkin.InitSkin(id);
                 break;
             case EItemType.FullSet:
@@ -146,13 +153,19 @@ public class Character : GameUnit
     private IEnumerator DelayAttack()
     {
         IsAttacking = true;
-        ChangeAnim("attack");
+        if(hasUlti){
+            ChangeAnim("ulti");
+        }else{
+            ChangeAnim("attack");
+        }
         yield return new WaitForSeconds(.2f);
-        if(Target==null){
-            IsAttacking=false;
+        if (Target == null)
+        {
+            IsAttacking = false;
             yield break;
         }
-        weaponHolder.Weapon.Fire(Target);
+        weaponHolder.Weapon.Fire(Target,hasUlti);
+        ChangeUltiStatus(false);
         SoundManager.Ins.PlaySFX(TF, ESound.ATTACK);
         IsAttacking = false;
         StartCoroutine(CoolDownAttack());
@@ -238,7 +251,7 @@ public class Character : GameUnit
     public virtual void StopMoving()
     {
         isMoving = false;
-        if(IsAttacking) return;
+        if (IsAttacking) return;
         ChangeAnim(Anim.IDLE);
     }
 
@@ -315,19 +328,20 @@ public class Character : GameUnit
         }
     }
 
-    protected void ChangeCharacterrSize(int score)
+    protected void ChangeCharacterSize(int score)
     {
-        float scaleIncresed=Mathf.Log(score,2);
-        if(!Mathf.Approximately(scaleIncresed,Mathf.Round(scaleIncresed))) return;
-        ParticlePool.Play(ParticleType.UpSize,TF.position+new Vector3(0,TF.position.y+TF.localScale.y/2,0),Quaternion.Euler(Vector3.zero));
+        float scaleIncresed = Mathf.Log(score, 2);
+        if (!Mathf.Approximately(scaleIncresed, Mathf.Round(scaleIncresed))) return;
+        ParticlePool.Play(ParticleType.UpSize, TF.position + new Vector3(0, TF.position.y + TF.localScale.y / 2, 0), Quaternion.Euler(Vector3.zero));
+        SoundManager.Ins.PlaySFX(ESound.SIZE_UP);
         SetCharacterSize(score);
-        
     }
 
-    protected void SetCharacterSize(int score){
-        if(score==0) return;
-        float scaleIncresed=Mathf.Round(Mathf.Log(score,2));
-        TF.localScale=new Vector3(TF.localScale.x+scaleIncresed*0.2f,TF.localScale.y+scaleIncresed*0.2f,TF.localScale.z+scaleIncresed*0.2f);
+    protected void SetCharacterSize(int score)
+    {
+        if (score == 0) return;
+        float scaleIncresed = Mathf.Round(Mathf.Log(score, 2));
+        TF.localScale = new Vector3(characterConfig.Size + scaleIncresed * 0.2f, characterConfig.Size + scaleIncresed * 0.2f, characterConfig.Size + scaleIncresed * 0.2f);
     }
 
 
@@ -335,7 +349,7 @@ public class Character : GameUnit
     public virtual void IncreaseScore(int score)
     {
         Score = Score + score + GameManager.Ins.GameRuleSO.BonusPointPerKill;
-
+        ChangeCharacterSize(score);
     }
 
     public void SetCharacterRange(float range)

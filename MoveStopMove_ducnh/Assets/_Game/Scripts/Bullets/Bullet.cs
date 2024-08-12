@@ -9,7 +9,7 @@ namespace Bullets
     {
         private Transform target;
         private Weapon weapon;
-
+        private Vector3 defaultScale;
         private float speed;
         protected Vector3 startPos;
         protected Vector3 destPos;
@@ -22,6 +22,10 @@ namespace Bullets
             this.speed=weapon.GetBulletSpeed();
             destPos=this.target.position+new Vector3(0,target.TF.localScale.y/2,0);
             TF.rotation.SetLookRotation(destPos);         
+        }
+
+        public void SetScale(Vector3 scale){
+            TF.localScale=scale;
         }
 
         public void SkinSetup(Material[]mats){
