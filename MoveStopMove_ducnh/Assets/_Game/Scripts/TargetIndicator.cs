@@ -32,7 +32,6 @@ public class TargetIndicator : GameUnit
 
     private void LateUpdate()
     {
-        screenHalf = new Vector2(Screen.width, Screen.height) / 2;
         viewPoint = Camera.WorldToViewportPoint(target.position);
         Vector3 direction = (target.position - UserDataManager.Ins.Player.TF.position).normalized;
         if (!IsInCamera){
