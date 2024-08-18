@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103b7cb4a1dc7b44f8a2672d6e9d4e7e, type: 3}
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
-  Speed: 650
+  Speed: 500
   Range: 5
   AttackSpeed: 1
   Size: 1

@@ -139,7 +139,7 @@ public class Level : MonoBehaviour
         spawnPositions.RemoveAt(rdn);
         UserDataManager.Ins.Player = player;
         player.OnInit(id);
-        // player.SetName(name);
+        player.SetName(UserDataManager.Ins.GetPlayerName());
         player.AddUnityAction(EndGame);
         listChars.Add(player);
         id++;

@@ -8,7 +8,6 @@ public class Bot : Character
     public BotAttackArea botAttackArea;
     private IState<Bot> currentState;
     private float totalTimeInCurrentState;
-    [SerializeField] private Target targetIndicator;
     private NavMeshPath navMeshPathTesting;
 
     [Header("NavMesh Agent")]
@@ -29,11 +28,6 @@ public class Bot : Character
         // Agent.enabled=true;
     }
 
-    private void OnDisable()
-    {
-        targetIndicator.enabled = false;
-    }
-
 
     public bool HasDestination()
     {
@@ -45,7 +39,6 @@ public class Bot : Character
         base.OnInit(id);
         InitRandomWeapon();
         InitRandomItem();
-        targetIndicator.enabled = true;
         navMeshPathTesting = new();
         ChangeState(new IdleState());
         Score = Random.Range(0, 20);

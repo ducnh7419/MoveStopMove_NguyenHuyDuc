@@ -10,8 +10,9 @@ using Random = UnityEngine.Random;
 public class Character : GameUnit
 {
     private int id;
-    [SerializeField] private NameTag nameTag;
+    private TargetIndicator targetIndicator;
     [SerializeField] private CharacterConfigSO characterConfig;
+    [SerializeField] private Transform indicatorPosition;
     protected bool isDead;
     protected float speed;
     private float range;
@@ -46,7 +47,8 @@ public class Character : GameUnit
     protected virtual void Update()
     {
         if (GameManager.Ins.CurrState < GameManager.State.StartGame) return;
-        nameTag.SetScoreText(Score);
+        if(targetIndicator!=null)
+            targetIndicator.SetScore(Score);
     }
 
     protected virtual void FixedUpdate()
@@ -56,8 +58,6 @@ public class Character : GameUnit
         {
             Attack();
         }
-
-
     }
 
     public virtual void OnInit(int id)
@@ -72,6 +72,8 @@ public class Character : GameUnit
         range = characterConfig.Range;
         attackSpeed = characterConfig.AttackSpeed;
         StartCoroutine(SetImmortalState(GameManager.Ins.GameRuleSO.ImmortalTime));
+        targetIndicator=SimplePool.Spawn<TargetIndicator>(PoolType.Indicator);
+        targetIndicator.SetTarget(indicatorPosition,FullSetSkin.MrBody.material);
         IsAttacking = false;
         navigatorRenderer.enabled = false;
         isAttackInCoolDown = false;
@@ -83,7 +85,7 @@ public class Character : GameUnit
     public void SetName(string name)
     {
         this.name = name;
-        nameTag.SetNameText(name);
+        targetIndicator.SetName(name);
     }
 
     public IEnumerator SetImmortalState(float time)
@@ -333,7 +335,7 @@ public class Character : GameUnit
         float scaleIncresed = Mathf.Log(score, 2);
         if (!Mathf.Approximately(scaleIncresed, Mathf.Round(scaleIncresed))) return;
         ParticlePool.Play(ParticleType.UpSize, TF.position + new Vector3(0, TF.position.y + TF.localScale.y / 2, 0), Quaternion.Euler(Vector3.zero));
-        SoundManager.Ins.PlaySFX(ESound.SIZE_UP);
+        SoundManager.Ins.PlaySFX(TF,ESound.SIZE_UP);
         SetCharacterSize(score);
     }
 
@@ -372,6 +374,10 @@ public class Character : GameUnit
         isDead = true;
         TurnOffNavigator();
         ChangeAnim(Anim.DEAD);
+        if(targetIndicator!=null){
+            targetIndicator.OnDesPawn();
+            targetIndicator=null;
+        }
         StartCoroutine(DelayDespawn());
         return true;
     }

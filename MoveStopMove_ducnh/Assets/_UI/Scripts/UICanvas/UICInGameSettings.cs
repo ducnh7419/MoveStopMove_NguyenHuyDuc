@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using GloabalEnum;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -13,7 +11,7 @@ public class UICInGameSettings : UICanvas
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] Button closeBtn;
 
-    private void Start() {
+    protected virtual void Start() {
         masterVolumeSlider.onValueChanged.AddListener(delegate {OnMasterVolumeSliderValueChanged();});
         sfxVolumeSlider.onValueChanged.AddListener(delegate {OnSFXVolumeSliderValueChanged();});
         closeBtn.onClick.AddListener(OnCloseBtnClicked);
@@ -25,7 +23,7 @@ public class UICInGameSettings : UICanvas
 
     }
 
-    private void OnCloseBtnClicked()
+    protected virtual void OnCloseBtnClicked()
     {
         SoundManager.Ins.PlaySFX(ESound.CLICK);
         UserDataManager.Ins.SaveVolumeSettings(masterVolumeSlider.value,sfxVolumeSlider.value);

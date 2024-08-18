@@ -181,7 +181,8 @@ public enum PoolType
     Witch=34,
     Deadpool_Blade=35,
     Witch_Book=36,
-    Ulti=37
+    Ulti=37,
+    Indicator=38
 
 }
 

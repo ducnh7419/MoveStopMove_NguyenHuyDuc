@@ -89,7 +89,7 @@ MonoBehaviour:
   ultiPowerUpsPrefab: {fileID: 2324915263434326841, guid: 2f2f6e51082bf0042a853f9ac8d5acb1,
     type: 3}
   totalCharacter: 101
-  maximumNoExistedBot: 25
+  maximumNoExistedBot: 10
 --- !u!114 &5980996700914031684
 MonoBehaviour:
   m_ObjectHideFlags: 0

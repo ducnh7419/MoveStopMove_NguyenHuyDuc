@@ -4,11 +4,28 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+
+    private static CameraFollow ins;
+    public static CameraFollow Ins => ins;
+
     public Transform target;
     [SerializeField] private float smoothSpeed;
     [SerializeField] public Vector3 Offset;
+    public Camera Camera;
 
     public Transform Target { get => target; set => target = value; }
+
+     private void Awake()
+    {
+        if (ins != null && ins != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            ins = this;
+        }
+    }
 
     // Update is called once per frame
     void LateUpdate()

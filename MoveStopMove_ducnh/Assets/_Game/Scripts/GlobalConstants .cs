@@ -26,6 +26,7 @@ namespace GlobalConstants
         public const string EQUIPPED_WEAPON = "Equipped Weapon";
         public const string MASTER_VOLUME = "Master Volume";
         public const string SFX_VOLUME = "SFX Volume";
+        public const string PLAYER_NAME="Player Name";
     }
 
     public static class Anim

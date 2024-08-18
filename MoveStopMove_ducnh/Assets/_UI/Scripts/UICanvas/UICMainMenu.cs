@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using GloabalEnum;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class UICMainMenu : UICanvas
 {
    public Button BtnPlay;
    public Button BtnShopWeapon;
+   public Button btnSettings;
 
    public Button BtnShopSkin;
 
@@ -15,9 +14,15 @@ public class UICMainMenu : UICanvas
       BtnPlay.onClick.AddListener(OnBtnPlayClick);
       BtnShopWeapon.onClick.AddListener(OnBtnShopWeaponClick);
       BtnShopSkin.onClick.AddListener(OnBtnShopSkinClick);
+      btnSettings.onClick.AddListener(OnBtnSettingsClick);
    }
 
-   private void OnBtnPlayClick(){
+    private void OnBtnSettingsClick()
+    {
+        UIManager.Ins.OpenUI<UICMainMenuSettings>();
+    }
+
+    private void OnBtnPlayClick(){
       SoundManager.Ins.PlaySFX(ESound.CLICK);
       GameManager.Ins.ChangeState(GameManager.State.StartGame);
    }

@@ -146,7 +146,6 @@ public class GameManager : MonoBehaviour
         
         SetCameraPositionAndRotation(new Vector3(0.03f,20.4f,-24.9f),Quaternion.Euler(40f,0,0));
         UIManager.Ins.CloseAll();
-        UIManager.Ins.OpenUI<UICOffScreenIndicator>();
         UICJoystick uICJoystick=UIManager.Ins.OpenUI<UICJoystick>();
         Joystick=uICJoystick.DynamicJoystick;
         LevelManager.Ins.SetController(Joystick);

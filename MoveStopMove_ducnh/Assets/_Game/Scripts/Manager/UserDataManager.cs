@@ -323,5 +323,17 @@ public class UserDataManager : MonoBehaviour
         float sfxVolume=PlayerPrefs.GetFloat(DataKey.SFX_VOLUME,1f);
         return Tuple.Create(masterVolume,sfxVolume);
     }
+
+    #region PlayerInfo
+
+    public void SavePlayerName(string name){
+        PlayerPrefs.SetString(DataKey.PLAYER_NAME,name);
+        player.SetName(name);
+    }
+
+    public string GetPlayerName(){
+        return PlayerPrefs.GetString(DataKey.PLAYER_NAME);
+    }
+    #endregion
     
 }

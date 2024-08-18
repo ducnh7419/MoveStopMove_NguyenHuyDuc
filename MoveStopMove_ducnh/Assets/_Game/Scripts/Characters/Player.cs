@@ -23,6 +23,7 @@ public class Player : Character
         if (Joystick.Horizontal != 0 || Joystick.Vertical != 0)
         {
             Moving();
+            // rb.MovePosition(rb.position + speed * Time.deltaTime * new Vector3(Joystick.Direction.x,0,Joystick.Direction.y));
             rb.velocity = new Vector3(Joystick.Horizontal * speed * Time.fixedDeltaTime, 0, Joystick.Vertical * speed * Time.fixedDeltaTime);
             TF.rotation = Quaternion.LookRotation(rb.velocity);
         }
