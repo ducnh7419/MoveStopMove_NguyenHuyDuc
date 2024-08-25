@@ -16,7 +16,7 @@ public class TargetIndicator : GameUnit
     [SerializeField] CanvasGroup canvasGroup;
 
     Transform target;
-    Vector3 screenHalf = new Vector2(Screen.width, Screen.height) / 2;
+    private Vector3 screenHalf;
 
     Vector3 viewPoint;
 
@@ -26,9 +26,13 @@ public class TargetIndicator : GameUnit
     Vector2 viewPointInCameraX = new Vector2(0.075f, 0.925f);
     Vector2 viewPointInCameraY = new Vector2(0.05f, 0.95f);
 
-    Camera Camera => CameraFollow.Ins.Camera;
+    private Camera Camera => CameraFollow.Ins.Camera;
 
     private bool IsInCamera => viewPoint.x > viewPointInCameraX.x && viewPoint.x < viewPointInCameraX.y && viewPoint.y > viewPointInCameraY.x && viewPoint.y < viewPointInCameraY.y;
+
+    private void Awake() {
+        screenHalf=new Vector2(Camera.pixelWidth, Camera.pixelHeight) / 2;
+    }
 
     private void LateUpdate()
     {
@@ -44,8 +48,11 @@ public class TargetIndicator : GameUnit
         nameTxt.gameObject.SetActive(IsInCamera);
         viewPoint.x = Mathf.Clamp(viewPoint.x, viewPointX.x, viewPointX.y);
         viewPoint.y = Mathf.Clamp(viewPoint.y, viewPointY.x, viewPointY.y);
+        Debug.Log("ViewPoint: "+viewPoint.x+","+viewPoint.y);
+        Debug.Log("Camera:"+Camera.ViewportToScreenPoint(viewPoint));
         Vector3 targetSPoint = Camera.ViewportToScreenPoint(viewPoint) - screenHalf;
         Vector3 playerSPoint = Camera.WorldToScreenPoint(UserDataManager.Ins.Player.TF.position) - screenHalf;
+        Debug.Log("player:"+playerSPoint);
         rect.anchoredPosition = targetSPoint;
         direct.up = (targetSPoint - playerSPoint).normalized;
     }

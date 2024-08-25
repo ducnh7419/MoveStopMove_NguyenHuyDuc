@@ -43,7 +43,7 @@ public class Bot : Character
         ChangeState(new IdleState());
         Score = Random.Range(0, 20);
         SetCharacterSize(Score);
-        Agent.speed = speed / 2;
+        Agent.speed = speed*Time.fixedDeltaTime;
     }
 
     public bool CanReachDestination(Vector3 dest)

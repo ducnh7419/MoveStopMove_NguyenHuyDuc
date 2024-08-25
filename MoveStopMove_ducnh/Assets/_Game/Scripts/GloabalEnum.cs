@@ -105,5 +105,11 @@ namespace GloabalEnum
         None=0,
         Ulti=1
     }
+
+    public enum EBackgroundMusic{
+        None=0,
+        InGame=1,
+        MainMenu=2
+    }
     
 }

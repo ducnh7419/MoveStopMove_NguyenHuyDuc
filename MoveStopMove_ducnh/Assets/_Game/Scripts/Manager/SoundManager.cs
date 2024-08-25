@@ -7,11 +7,11 @@ using UnityEngine.Audio;
 public class SoundManager : MonoBehaviour
 {
     private static SoundManager ins;
-    public static SoundManager Ins=>ins;
+    public static SoundManager Ins => ins;
 
     [Header("Audio Source")]
-    [SerializeField]private SFXMusic sfxSourcePrefab;
-    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private SFXMusic sfxSourcePrefab;
+    [SerializeField] private AudioSource[] backgroundMusic;
     [SerializeField] private AudioMixerGroup mixerGroup;
     public Camera MainCamera;
     [Header("Audio Clip")]
@@ -22,7 +22,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip clickSound;
     [SerializeField] private AudioClip victorySound;
     [SerializeField] private AudioClip sizeUpSound;
-    private void Awake() {
+    
+    private void Awake()
+    {
         if (ins != null && ins != this)
         {
             Destroy(this);
@@ -34,43 +36,45 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void PlaySFX(ESound eSound){
-        SFXMusic sFXMusic=SimplePool.Spawn<SFXMusic>(sfxSourcePrefab);
+    public void PlaySFX(ESound eSound)
+    {
+        SFXMusic sFXMusic = SimplePool.Spawn<SFXMusic>(sfxSourcePrefab);
         sFXMusic.OnInit(mixerGroup);
-        AudioSource sfxSource=sFXMusic.SfxSource;
-        AudioClip audioClip=null;
-        switch(eSound){
+        AudioSource sfxSource = sFXMusic.SfxSource;
+        AudioClip audioClip = null;
+        switch (eSound)
+        {
             case ESound.ATTACK:
-                audioClip=attackSound;
+                audioClip = attackSound;
                 sfxSource.PlayOneShot(attackSound);
                 break;
             case ESound.LOSE:
-                audioClip=loseSound;
+                audioClip = loseSound;
                 sfxSource.PlayOneShot(loseSound);
                 break;
             case ESound.PLAYER_DEATH:
-                audioClip=playerDeathSound;
+                audioClip = playerDeathSound;
                 sfxSource.PlayOneShot(playerDeathSound);
                 break;
             case ESound.WEAPON_HIT:
-                audioClip=weaponHitSound;
+                audioClip = weaponHitSound;
                 sfxSource.PlayOneShot(weaponHitSound);
                 break;
             case ESound.CLICK:
-                audioClip=clickSound;
+                audioClip = clickSound;
                 sfxSource.PlayOneShot(clickSound);
                 break;
             case ESound.VICTORY:
-                audioClip=victorySound;
+                audioClip = victorySound;
                 sfxSource.PlayOneShot(victorySound);
                 break;
             case ESound.SIZE_UP:
-                audioClip=sizeUpSound;
+                audioClip = sizeUpSound;
                 sfxSource.PlayOneShot(sizeUpSound);
                 break;
         }
-        if(audioClip==null) return;
-        float clipLength=audioClip.length;
+        if (audioClip == null) return;
+        float clipLength = audioClip.length;
         sFXMusic.OnDespawn(clipLength);
     }
 
@@ -79,13 +83,30 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <param name="eSound"></param>
-    public void PlaySFX(Transform target,ESound eSound){
-        if(!IsInCameraView(target)) return;
+    public void PlaySFX(Transform target, ESound eSound)
+    {
+        if (!IsInCameraView(target)) return;
         PlaySFX(eSound);
     }
 
-    
-    
+    public void PlayBackgroundMusic(EBackgroundMusic eBackgroundMusic)
+    {
+
+        switch (eBackgroundMusic)
+        {
+            case EBackgroundMusic.InGame:
+                backgroundMusic[1].Play();
+                backgroundMusic[0].Stop();
+                break;
+            case EBackgroundMusic.MainMenu:
+                backgroundMusic[0].Play();
+                backgroundMusic[1].Stop();
+                break;
+        }
+    }
+
+
+
 
     private bool IsInCameraView(Transform target)
     {

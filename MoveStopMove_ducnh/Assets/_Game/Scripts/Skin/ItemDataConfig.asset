@@ -26,7 +26,7 @@ MonoBehaviour:
   - Id: 1
     Name: Batman
     Description: 8% Move Speed
-    icon: {fileID: 1671384100, guid: 1e966d910547f75498e64c268c72f79f, type: 3}
+    icon: {fileID: -1863117467, guid: 47c8d5358d60d474388d6a7e89a221aa, type: 3}
     ItemType: 2
     EBuffType: 2
     Value: 0.08

@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using GloabalEnum;
+using TMPro;
 using UnityEngine;
 
 public class UICLose : UICResult
 {
+    public TextMeshProUGUI textLose;
+
+    protected override void  Start() {
+        base.Start();
+        textLose.SetText("You are at {0}th Place",LevelManager.Ins.GetNORemainBots()+1);
+    }
     protected override void OnEnable() {
         base.OnEnable();
         if(UserDataManager.Ins.CanPlayerBeRevived()){

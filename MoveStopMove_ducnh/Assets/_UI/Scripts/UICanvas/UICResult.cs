@@ -24,7 +24,7 @@ public class UICResult : UICanvas
     }
 
 
-    private void Start() {
+    protected virtual void Start() {
         btnAds.onClick.AddListener(OnAdsClick);
         btnRetry.onClick.AddListener(OnBtnRetryClicked);
         btnMainMenu.onClick.AddListener(OnBtnMainMenuClicked);

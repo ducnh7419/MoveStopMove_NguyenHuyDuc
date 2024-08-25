@@ -25,6 +25,7 @@ namespace GlobalConstants
         public const string BUDGET = "Budget";
         public const string EQUIPPED_WEAPON = "Equipped Weapon";
         public const string MASTER_VOLUME = "Master Volume";
+        public const string BG_VOLUME = "Background Volume";
         public const string SFX_VOLUME = "SFX Volume";
         public const string PLAYER_NAME="Player Name";
     }

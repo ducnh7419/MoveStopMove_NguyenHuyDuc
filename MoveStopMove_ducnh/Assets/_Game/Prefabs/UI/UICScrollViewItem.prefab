@@ -209,11 +209,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef67d0d2fd214d45b938e4719029e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  Id: 0
   Button: {fileID: 2251790103046719348}
   ImgSelect: {fileID: 2193980201626524564}
   ImgIcon: {fileID: 5925080847426064998}
   ImgLock: {fileID: 4607158825990637092}
+  EItemState: 0
+  EItemType: 0
+  IsEquipped: 0
 --- !u!1 &7177066587579679012
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +358,7 @@ RectTransform:
   m_GameObject: {fileID: 7787092890575983132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8746015899626259424}
@@ -393,9 +396,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ae8a5bdf1b3a4f646b47c8aeebd9d598, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
