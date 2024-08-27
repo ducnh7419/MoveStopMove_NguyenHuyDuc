@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip sizeUpSound;
 
     private static EBackgroundMusic currentBgMusic=EBackgroundMusic.MainMenu;
+    public bool IsMute;
     
     private void Awake()
     {
@@ -34,6 +35,13 @@ public class SoundManager : MonoBehaviour
         else
         {
             ins = this;
+        }
+    }
+
+    public void Mute(bool isMute){
+        this.IsMute=isMute;
+        for(int i=0;i<backgroundMusic.Length;i++){
+            backgroundMusic[i].mute=isMute;
         }
     }
 
@@ -76,6 +84,7 @@ public class SoundManager : MonoBehaviour
                 break;
         }
         if (audioClip == null) return;
+        sfxSource.mute=IsMute;
         float clipLength = audioClip.length;
         sFXMusic.OnDespawn(clipLength);
     }
