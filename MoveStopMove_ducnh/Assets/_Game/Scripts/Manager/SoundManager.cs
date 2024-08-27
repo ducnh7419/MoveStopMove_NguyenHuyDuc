@@ -22,6 +22,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip clickSound;
     [SerializeField] private AudioClip victorySound;
     [SerializeField] private AudioClip sizeUpSound;
+
+    private static EBackgroundMusic currentBgMusic=EBackgroundMusic.MainMenu;
     
     private void Awake()
     {
@@ -91,7 +93,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBackgroundMusic(EBackgroundMusic eBackgroundMusic)
     {
-
+        if(currentBgMusic == eBackgroundMusic) return;
+        currentBgMusic=eBackgroundMusic;
         switch (eBackgroundMusic)
         {
             case EBackgroundMusic.InGame:

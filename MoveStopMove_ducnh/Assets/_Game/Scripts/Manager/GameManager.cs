@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.MainMenu:
                 currState=State.MainMenu;
+                SoundManager.Ins.PlayBackgroundMusic(EBackgroundMusic.MainMenu);      
                 OnMainMenu();
                 break;
             case State.SkinShop:
@@ -90,6 +91,7 @@ public class GameManager : MonoBehaviour
                 break;
             case State.StartGame:
                 currState=State.StartGame;
+                SoundManager.Ins.PlayBackgroundMusic(EBackgroundMusic.InGame);
                 OnStartGame();
                 break;
             case State.OngoingGame:

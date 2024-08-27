@@ -20,6 +20,10 @@ public class TargetIndicator : GameUnit
 
     Vector3 viewPoint;
 
+    private float referenceDPI = 96f; // DPI tham chiếu, thường là tiêu chuẩn (giả sử 160 DPI)
+    private float deviceDPI; // Lấy DPI của thiết bị hiện tại
+    float scaleFactor;
+
     Vector2 viewPointX = new Vector2(0.075f, 0.925f);
     Vector2 viewPointY = new Vector2(0.05f, 0.85f);
 
@@ -30,15 +34,19 @@ public class TargetIndicator : GameUnit
 
     private bool IsInCamera => viewPoint.x > viewPointInCameraX.x && viewPoint.x < viewPointInCameraX.y && viewPoint.y > viewPointInCameraY.x && viewPoint.y < viewPointInCameraY.y;
 
-    private void Awake() {
-        screenHalf=new Vector2(Camera.pixelWidth, Camera.pixelHeight) / 2;
+    private void Awake()
+    {
+        screenHalf = new Vector2(Camera.pixelWidth, Camera.pixelHeight) / 2;
+        deviceDPI = Screen.dpi;
+        scaleFactor = deviceDPI / referenceDPI;
     }
 
     private void LateUpdate()
     {
         viewPoint = Camera.WorldToViewportPoint(target.position);
         Vector3 direction = (target.position - UserDataManager.Ins.Player.TF.position).normalized;
-        if (!IsInCamera){
+        if (!IsInCamera)
+        {
             if (direction.z < 0)
             {
                 viewPoint.y *= -1;
@@ -48,11 +56,8 @@ public class TargetIndicator : GameUnit
         nameTxt.gameObject.SetActive(IsInCamera);
         viewPoint.x = Mathf.Clamp(viewPoint.x, viewPointX.x, viewPointX.y);
         viewPoint.y = Mathf.Clamp(viewPoint.y, viewPointY.x, viewPointY.y);
-        Debug.Log("ViewPoint: "+viewPoint.x+","+viewPoint.y);
-        Debug.Log("Camera:"+Camera.ViewportToScreenPoint(viewPoint));
         Vector3 targetSPoint = Camera.ViewportToScreenPoint(viewPoint) - screenHalf;
         Vector3 playerSPoint = Camera.WorldToScreenPoint(UserDataManager.Ins.Player.TF.position) - screenHalf;
-        Debug.Log("player:"+playerSPoint);
         rect.anchoredPosition = targetSPoint;
         direct.up = (targetSPoint - playerSPoint).normalized;
     }
@@ -61,11 +66,12 @@ public class TargetIndicator : GameUnit
     {
         SetScore(0);
         SetColor(new Color(Random.value, Random.value, Random.value, 1));
-        
+
     }
 
-    private void Update(){
-        SetAlpha((GameManager.Ins.CurrState >= GameManager.State.StartGame)?1:0);
+    private void Update()
+    {
+        SetAlpha((GameManager.Ins.CurrState >= GameManager.State.StartGame) ? 1 : 0);
     }
 
     public void TurnOn()
