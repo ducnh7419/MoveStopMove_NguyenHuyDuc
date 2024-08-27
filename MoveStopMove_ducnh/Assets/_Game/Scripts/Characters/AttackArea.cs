@@ -28,8 +28,8 @@ public class AttackArea : MonoBehaviour
       if (other.CompareTag(GlobalConstants.Tag.CHARACTER))
       {
          Character target = CacheCollider<Character>.GetCollider(other);
-         if(target.Id==character.Id) return;
          character.TurnOffNavigator();
+         if(target.Id==character.Id) return;
          character.Untarget(target);
       }
    }
